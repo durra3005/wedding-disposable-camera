@@ -203,32 +203,18 @@ let photoCount = 1;
 navigator.mediaDevices
 .getUserMedia({
 
-  video: {
-    facingMode: {
-      ideal: "environment"
-    }
-  },
-
+  navigator.mediaDevices.getUserMedia({
+  video: true,
   audio: false
-
 })
-
 .then(function(stream) {
-
   video.srcObject = stream;
-
+  video.play();
 })
-
 .catch(function(error) {
-
-  alert(
-    "Please allow camera access ♡"
-  );
-
+  alert("Camera cannot start ♡");
   console.log(error);
-
 });
-
 
 // TAKE PHOTO
 
