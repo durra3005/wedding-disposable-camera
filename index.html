@@ -200,33 +200,17 @@ let photoCount = 1;
 
 // OPEN CAMERA
 
-navigator.mediaDevices
-.getUserMedia({
-
-  video: {
-    facingMode: {
-      ideal: "environment"
-    }
-  },
-
+navigator.mediaDevices.getUserMedia({
+  video: true,
   audio: false
-
 })
-
 .then(function(stream) {
-
   video.srcObject = stream;
-
+  video.play();
 })
-
 .catch(function(error) {
-
-  alert(
-    "Please allow camera access ♡"
-  );
-
-  console.log(error);
-
+  console.log("CAMERA ERROR:", error.name, error.message);
+  alert("Camera error: " + error.name);
 });
 
 // TAKE PHOTO
