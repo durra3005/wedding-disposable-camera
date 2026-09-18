@@ -40,7 +40,8 @@ h1 {
   background: #211e1a;
   padding: 14px;
   border-radius: 4px;
-  box-shadow: 0 8px 20px rgba(60, 45, 30, 0.25);
+  box-shadow:
+    0 8px 20px rgba(60, 45, 30, 0.25);
   position: relative;
 }
 
@@ -182,10 +183,11 @@ const photoNumber =
 document.getElementById("photoNumber");
 
 let photoCount = 1;
+
 let currentStream = null;
 
 /*
-   Start with back camera
+   Start with BACK camera
 */
 let currentCamera = "environment";
 
@@ -232,13 +234,8 @@ async function openCamera(cameraType) {
 
 
     /*
-       FRONT CAMERA ONLY
-       
-       Safari/iPhone may show
-       the front camera mirrored.
-
-       We reverse it here so the
-       PREVIEW looks normal.
+       FRONT CAMERA = MIRROR
+       BACK CAMERA = NORMAL
     */
 
     if (cameraType === "user") {
@@ -247,10 +244,6 @@ async function openCamera(cameraType) {
         "scaleX(-1)";
 
     } else {
-
-      /*
-         BACK CAMERA stays normal.
-      */
 
       video.style.transform =
         "scaleX(1)";
@@ -332,14 +325,9 @@ snap.addEventListener(
 
 
     /*
-       FRONT CAMERA
+       FRONT CAMERA = MIRROR PHOTO
 
-       Preview is mirrored with
-       CSS so it looks normal.
-
-       Therefore we ALSO mirror
-       the canvas to make the final
-       photo normal.
+       BACK CAMERA = NORMAL PHOTO
     */
 
     if (
@@ -369,11 +357,6 @@ snap.addEventListener(
       context.restore();
 
     } else {
-
-      /*
-         BACK CAMERA:
-         normal drawing
-      */
 
       context.drawImage(
         video,
