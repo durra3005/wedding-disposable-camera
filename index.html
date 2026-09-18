@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Our Wedding Camera</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -17,8 +20,58 @@ body {
   color: #3b3026;
   font-family: Georgia, serif;
   text-align: center;
-  padding: 35px 15px;
+  padding: 30px 15px;
 }
+
+/* LOADING / WELCOME SCREEN */
+
+#welcome {
+  position: fixed;
+  inset: 0;
+  background: #e8dfd1;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.welcome-content {
+  max-width: 420px;
+}
+
+.welcome-small {
+  font-size: 12px;
+  letter-spacing: 4px;
+  margin-bottom: 18px;
+}
+
+.welcome-title {
+  font-size: 34px;
+  font-weight: normal;
+  margin: 0 0 15px;
+}
+
+.welcome-text {
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.open-camera {
+  background: #332d26;
+  color: #f3eadf;
+  border: none;
+  padding: 15px 28px;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+/* MAIN */
 
 h1 {
   font-size: 32px;
@@ -40,8 +93,7 @@ h1 {
   background: #211e1a;
   padding: 14px;
   border-radius: 4px;
-  box-shadow:
-    0 8px 20px rgba(60, 45, 30, 0.25);
+  box-shadow: 0 8px 20px rgba(60, 45, 30, 0.25);
   position: relative;
 }
 
@@ -53,6 +105,11 @@ h1 {
   font-size: 10px;
   letter-spacing: 4px;
   padding: 3px 0 12px;
+}
+
+.video-wrapper {
+  position: relative;
+  overflow: hidden;
 }
 
 video,
@@ -67,13 +124,55 @@ canvas {
   display: none;
 }
 
+/* FLASH */
+
+.flash {
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.flash.active {
+  animation: cameraFlash 0.35s ease-out;
+}
+
+@keyframes cameraFlash {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* SAVING */
+
+.status {
+  min-height: 20px;
+  margin-top: 10px;
+  color: #d8c8b3;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
 .photo-number {
   color: #d8c8b3;
-  margin-top: 12px;
+  margin-top: 8px;
   font-family: Arial, sans-serif;
   font-size: 12px;
   letter-spacing: 2px;
 }
+
+/* BUTTONS */
 
 button {
   margin: 18px 5px 5px;
@@ -114,100 +213,184 @@ button {
 button:active {
   transform: scale(0.96);
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  body {
+    padding: 22px 10px;
+  }
+
+  h1 {
+    font-size: 27px;
+  }
+
+  .camera-box {
+    padding: 10px;
+  }
+
+  button {
+    padding: 13px 18px;
+    font-size: 13px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- WELCOME SCREEN -->
+
+<div id="welcome">
+
+  <div class="welcome-content">
+
+    <div class="welcome-small">
+      26 · 09 · 2026
+    </div>
+
+    <div class="welcome-title">
+      Our Wedding Camera
+    </div>
+
+    <div class="welcome-text">
+      Capture a little memory<br>
+      from your eyes ♡
+    </div>
+
+    <button class="open-camera" id="openCameraButton">
+      OPEN CAMERA
+    </button>
+
+  </div>
+
+</div>
+
+
 <h1>Our Wedding Camera</h1>
 
 <div class="subtitle">
-Capture a little memory from your eyes ♡
+  Capture a little memory from your eyes ♡
 </div>
+
 
 <div class="camera-box">
 
-<video
-id="camera"
-autoplay
-playsinline
-muted>
-</video>
+  <div class="video-wrapper">
 
-<canvas id="photo"></canvas>
+    <video
+      id="camera"
+      autoplay
+      playsinline
+      muted>
+    </video>
 
-<div class="photo-number">
-PHOTO
-<span id="photoNumber">001</span>
+    <canvas id="photo"></canvas>
+
+    <div class="flash" id="flash"></div>
+
+  </div>
+
+
+  <div class="status" id="status"></div>
+
+
+  <div class="photo-number">
+
+    PHOTO
+    <span id="photoNumber">001</span>
+
+  </div>
+
+
+  <button id="flip">
+    ↔ FLIP CAMERA
+  </button>
+
+  <button id="snap">
+    📸 TAKE PHOTO
+  </button>
+
+  <button id="retake">
+    ↩ RETAKE
+  </button>
+
+  <button id="keep">
+    ♡ KEEP PHOTO
+  </button>
+
 </div>
 
-<button id="flip">
-↔ FLIP CAMERA
-</button>
-
-<button id="snap">
-📸 TAKE PHOTO
-</button>
-
-<button id="retake">
-↩ RETAKE
-</button>
-
-<button id="keep">
-♡ KEEP PHOTO
-</button>
-
-</div>
 
 <script>
 
+/* ELEMENTS */
+
 const video =
-document.getElementById("camera");
+  document.getElementById("camera");
 
 const canvas =
-document.getElementById("photo");
+  document.getElementById("photo");
 
 const snap =
-document.getElementById("snap");
+  document.getElementById("snap");
 
 const flip =
-document.getElementById("flip");
+  document.getElementById("flip");
 
 const retake =
-document.getElementById("retake");
+  document.getElementById("retake");
 
 const keep =
-document.getElementById("keep");
+  document.getElementById("keep");
 
 const photoNumber =
-document.getElementById("photoNumber");
+  document.getElementById("photoNumber");
+
+const flash =
+  document.getElementById("flash");
+
+const status =
+  document.getElementById("status");
+
+const welcome =
+  document.getElementById("welcome");
+
+const openCameraButton =
+  document.getElementById("openCameraButton");
+
+
+/* VARIABLES */
 
 let photoCount = 1;
 
 let currentStream = null;
 
-/*
-   Start with BACK camera
-*/
 let currentCamera = "environment";
 
+let uploading = false;
 
-/* =========================
-   OPEN CAMERA
-========================= */
+
+/* OPEN CAMERA */
 
 async function openCamera(cameraType) {
-
-  /*
-     Stop previous camera
-  */
 
   if (currentStream) {
 
     currentStream
       .getTracks()
       .forEach(function(track) {
+
         track.stop();
+
       });
 
     currentStream = null;
@@ -233,10 +416,7 @@ async function openCamera(cameraType) {
     video.srcObject = stream;
 
 
-    /*
-       FRONT CAMERA = MIRROR
-       BACK CAMERA = NORMAL
-    */
+    /* FRONT CAMERA = MIRROR */
 
     if (cameraType === "user") {
 
@@ -272,182 +452,318 @@ async function openCamera(cameraType) {
 }
 
 
-/* =========================
-   START CAMERA
-========================= */
+/* OPEN CAMERA BUTTON */
 
-openCamera(currentCamera);
+openCameraButton.addEventListener(
+  "click",
+  async function() {
+
+    welcome.style.display = "none";
+
+    await openCamera(
+      currentCamera
+    );
+
+  }
+);
 
 
-/* =========================
-   FLIP CAMERA
-========================= */
+/* FLIP CAMERA */
 
 flip.addEventListener(
   "click",
   async function() {
 
     if (
-      currentCamera === "environment"
+      currentCamera ===
+      "environment"
     ) {
 
       currentCamera = "user";
 
     } else {
 
-      currentCamera = "environment";
+      currentCamera =
+        "environment";
 
     }
 
-
-    await openCamera(currentCamera);
+    await openCamera(
+      currentCamera
+    );
 
   }
 );
 
 
-/* =========================
-   TAKE PHOTO
-========================= */
+/* SHUTTER SOUND */
+
+function playShutterSound() {
+
+  const AudioContext =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+  if (!AudioContext) return;
+
+  const audio =
+    new AudioContext();
+
+  const oscillator =
+    audio.createOscillator();
+
+  const gain =
+    audio.createGain();
+
+
+  oscillator.type = "square";
+
+  oscillator.frequency.setValueAtTime(
+    900,
+    audio.currentTime
+  );
+
+  oscillator.frequency.exponentialRampToValueAtTime(
+    250,
+    audio.currentTime + 0.08
+  );
+
+
+  gain.gain.setValueAtTime(
+    0.12,
+    audio.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audio.currentTime + 0.1
+  );
+
+
+  oscillator.connect(gain);
+
+  gain.connect(audio.destination);
+
+  oscillator.start();
+
+  oscillator.stop(
+    audio.currentTime + 0.1
+  );
+
+}
+
+
+/* TAKE PHOTO */
 
 snap.addEventListener(
   "click",
   function() {
 
-    canvas.width =
-      video.videoWidth;
-
-    canvas.height =
-      video.videoHeight;
-
-    const context =
-      canvas.getContext("2d");
-
-
-    /*
-       FRONT CAMERA = MIRROR PHOTO
-
-       BACK CAMERA = NORMAL PHOTO
-    */
-
     if (
-      currentCamera === "user"
-    ) {
-
-      context.save();
-
-      context.translate(
-        canvas.width,
-        0
-      );
-
-      context.scale(
-        -1,
-        1
-      );
-
-      context.drawImage(
-        video,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-      context.restore();
-
-    } else {
-
-      context.drawImage(
-        video,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-    }
+      snap.disabled
+    ) return;
 
 
-    /* =====================
-       DISPOSABLE FILM EFFECT
-    ===================== */
-
-    const imageData =
-      context.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-    const pixels =
-      imageData.data;
+    snap.disabled = true;
 
 
-    for (
-      let i = 0;
-      i < pixels.length;
-      i += 4
-    ) {
+    /* FLASH */
 
-      pixels[i] =
-        Math.min(
-          255,
-          pixels[i] * 1.06 + 8
-        );
+    flash.classList.remove(
+      "active"
+    );
 
-      pixels[i + 1] =
-        Math.min(
-          255,
-          pixels[i + 1] * 1.01 + 3
-        );
+    void flash.offsetWidth;
 
-      pixels[i + 2] =
-        Math.min(
-          255,
-          pixels[i + 2] * 0.94
-        );
-
-    }
-
-
-    context.putImageData(
-      imageData,
-      0,
-      0
+    flash.classList.add(
+      "active"
     );
 
 
-    /*
-       Show captured photo
-    */
+    /* SHUTTER */
 
-    video.style.display =
-      "none";
+    playShutterSound();
 
-    canvas.style.display =
-      "block";
 
-    snap.style.display =
-      "none";
+    setTimeout(
+      function() {
 
-    flip.style.display =
-      "none";
 
-    retake.style.display =
-      "inline-block";
+        canvas.width =
+          video.videoWidth;
 
-    keep.style.display =
-      "inline-block";
+        canvas.height =
+          video.videoHeight;
+
+
+        const context =
+          canvas.getContext("2d");
+
+
+        /* FRONT CAMERA = MIRROR */
+
+        if (
+          currentCamera === "user"
+        ) {
+
+          context.save();
+
+          context.translate(
+            canvas.width,
+            0
+          );
+
+          context.scale(
+            -1,
+            1
+          );
+
+          context.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+
+          context.restore();
+
+
+        } else {
+
+
+          /* BACK CAMERA = NORMAL */
+
+          context.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+
+        }
+
+
+        /* FILM EFFECT */
+
+        const imageData =
+          context.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+
+
+        const pixels =
+          imageData.data;
+
+
+        for (
+          let i = 0;
+          i < pixels.length;
+          i += 4
+        ) {
+
+          pixels[i] =
+            Math.min(
+              255,
+              pixels[i] * 1.06 + 8
+            );
+
+          pixels[i + 1] =
+            Math.min(
+              255,
+              pixels[i + 1] * 1.01 + 3
+            );
+
+          pixels[i + 2] =
+            Math.min(
+              255,
+              pixels[i + 2] * 0.94
+            );
+
+        }
+
+
+        context.putImageData(
+          imageData,
+          0,
+          0
+        );
+
+
+        /* DATE STAMP */
+
+        context.save();
+
+
+        context.font =
+          "bold 22px Arial";
+
+        context.fillStyle =
+          "rgba(255,255,255,0.85)";
+
+        context.textAlign =
+          "right";
+
+        context.shadowColor =
+          "rgba(0,0,0,0.5)";
+
+        context.shadowBlur = 3;
+
+
+        context.fillText(
+          "26 · 09 · 2026",
+          canvas.width - 25,
+          canvas.height - 25
+        );
+
+
+        context.restore();
+
+
+        /* SHOW PHOTO */
+
+        video.style.display =
+          "none";
+
+        canvas.style.display =
+          "block";
+
+
+        snap.style.display =
+          "none";
+
+        flip.style.display =
+          "none";
+
+
+        retake.style.display =
+          "inline-block";
+
+        keep.style.display =
+          "inline-block";
+
+
+        status.textContent =
+          "READY TO KEEP ♡";
+
+
+        snap.disabled =
+          false;
+
+
+      },
+      180
+    );
 
   }
 );
 
 
-/* =========================
-   RETAKE
-========================= */
+/* RETAKE */
 
 retake.addEventListener(
   "click",
@@ -459,11 +775,13 @@ retake.addEventListener(
     video.style.display =
       "block";
 
+
     snap.style.display =
       "inline-block";
 
     flip.style.display =
       "inline-block";
+
 
     retake.style.display =
       "none";
@@ -471,17 +789,39 @@ retake.addEventListener(
     keep.style.display =
       "none";
 
+
+    status.textContent =
+      "";
+
+
+    snap.disabled =
+      false;
+
   }
 );
 
 
-/* =========================
-   KEEP PHOTO
-========================= */
+/* KEEP PHOTO */
 
 keep.addEventListener(
   "click",
   async function() {
+
+    /* PREVENT DOUBLE UPLOAD */
+
+    if (uploading) return;
+
+
+    uploading = true;
+
+    keep.disabled = true;
+
+    retake.disabled = true;
+
+
+    status.textContent =
+      "SAVING... ♡";
+
 
     const image =
       canvas.toDataURL(
@@ -492,18 +832,24 @@ keep.addEventListener(
 
     try {
 
+
       const response =
         await fetch(
+
           "https://script.google.com/macros/s/AKfycbwEi8edo-f36QLQWluoDxqsvzHZ7udcGercX9qvRVIQrCwE5PvW9V5tDL27DSbGKo2S/exec",
+
           {
 
             method: "POST",
 
             body: JSON.stringify({
+
               image: image
+
             })
 
           }
+
         );
 
 
@@ -511,11 +857,13 @@ keep.addEventListener(
         await response.json();
 
 
-      if (result.success) {
+      if (
+        result.success
+      ) {
 
-        alert(
-          "♡ PHOTO SAVED TO WEDDING ALBUM!"
-        );
+
+        status.textContent =
+          "SAVED ♡";
 
 
         photoCount++;
@@ -523,44 +871,93 @@ keep.addEventListener(
 
         photoNumber.textContent =
           String(photoCount)
-            .padStart(3, "0");
+          .padStart(
+            3,
+            "0"
+          );
 
 
-        canvas.style.display =
-          "none";
+        setTimeout(
+          function() {
 
-        video.style.display =
-          "block";
 
-        snap.style.display =
-          "inline-block";
+            canvas.style.display =
+              "none";
 
-        flip.style.display =
-          "inline-block";
+            video.style.display =
+              "block";
 
-        retake.style.display =
-          "none";
 
-        keep.style.display =
-          "none";
+            snap.style.display =
+              "inline-block";
+
+            flip.style.display =
+              "inline-block";
+
+
+            retake.style.display =
+              "none";
+
+            keep.style.display =
+              "none";
+
+
+            keep.disabled =
+              false;
+
+            retake.disabled =
+              false;
+
+            uploading =
+              false;
+
+
+            status.textContent =
+              "";
+
+
+          },
+          700
+        );
 
 
       } else {
 
-        alert(
-          "Upload failed 😭"
-        );
+
+        status.textContent =
+          "UPLOAD FAILED 😭";
+
+
+        keep.disabled =
+          false;
+
+        retake.disabled =
+          false;
+
+        uploading =
+          false;
 
       }
 
 
     } catch (error) {
 
-      alert(
-        "Upload failed. Please try again."
-      );
 
       console.error(error);
+
+
+      status.textContent =
+        "UPLOAD FAILED — TRY AGAIN";
+
+
+      keep.disabled =
+        false;
+
+      retake.disabled =
+        false;
+
+      uploading =
+        false;
 
     }
 
