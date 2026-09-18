@@ -200,20 +200,21 @@ let photoCount = 1;
 
 // OPEN CAMERA
 
-navigator.mediaDevices
-.getUserMedia({
-
-  navigator.mediaDevices.getUserMedia({
-  video: true,
+navigator.mediaDevices.getUserMedia({
+  video: {
+    facingMode: "user"
+  },
   audio: false
 })
 .then(function(stream) {
   video.srcObject = stream;
+  video.setAttribute("playsinline", "");
+  video.muted = true;
   video.play();
 })
 .catch(function(error) {
-  alert("Camera cannot start ♡");
-  console.log(error);
+  console.log("CAMERA ERROR:", error);
+  alert("Camera error: " + error.name);
 });
 
 // TAKE PHOTO
