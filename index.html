@@ -233,33 +233,77 @@ navigator.mediaDevices
 // TAKE PHOTO
 
 snap.addEventListener(
-"click",
-function() {
+  "click",
+  function() {
 
-  canvas.width =
-  video.videoWidth;
+    canvas.width =
+      video.videoWidth;
 
-  canvas.height =
-  video.videoHeight;
+    canvas.height =
+      video.videoHeight;
 
+    const context =
+      canvas.getContext("2d");
 
-  const context =
-  canvas.getContext("2d");
+    // Ambil gambar dari kamera
+    context.drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
 
+    // Disposable film effect
+    const imageData =
+      context.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
 
-  context.drawImage(
+    const pixels =
+      imageData.data;
 
-    video,
+    for (let i = 0; i < pixels.length; i += 4) {
 
-    0,
+      // Warm vintage tone
+      pixels[i] =
+        Math.min(255, pixels[i] * 1.06 + 8);
 
-    0,
+      pixels[i + 1] =
+        Math.min(255, pixels[i + 1] * 1.01 + 3);
 
-    canvas.width,
+      pixels[i + 2] =
+        Math.min(255, pixels[i + 2] * 0.94);
 
-    canvas.height
+    }
 
-  );
+    context.putImageData(
+      imageData,
+      0,
+      0
+    );
+
+    // Tunjukkan gambar yang dah ditangkap
+    video.style.display =
+      "none";
+
+    canvas.style.display =
+      "block";
+
+    snap.style.display =
+      "none";
+
+    retake.style.display =
+      "inline-block";
+
+    keep.style.display =
+      "inline-block";
+
+  }
+);
 
 
   video.style.display =
