@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Wedding Camera</title>
+
 <style>
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -17,17 +19,20 @@ body {
   text-align: center;
   padding: 35px 15px;
 }
+
 h1 {
   font-size: 32px;
   font-weight: normal;
   letter-spacing: 1px;
   margin: 5px 0 8px;
 }
+
 .subtitle {
   font-size: 14px;
   font-style: italic;
   margin-bottom: 25px;
 }
+
 .camera-box {
   width: 100%;
   max-width: 520px;
@@ -38,6 +43,7 @@ h1 {
   box-shadow: 0 8px 20px rgba(60, 45, 30, 0.25);
   position: relative;
 }
+
 .camera-box::before {
   content: "WEDDING FILM";
   display: block;
@@ -47,6 +53,7 @@ h1 {
   letter-spacing: 4px;
   padding: 3px 0 12px;
 }
+
 video,
 canvas {
   width: 100%;
@@ -54,9 +61,18 @@ canvas {
   border-radius: 2px;
   background: #111;
 }
+
+/* IMPORTANT:
+   Camera preview is NEVER mirrored.
+*/
+video {
+  transform: none !important;
+}
+
 canvas {
   display: none;
 }
+
 .photo-number {
   color: #d8c8b3;
   margin-top: 12px;
@@ -64,6 +80,7 @@ canvas {
   font-size: 12px;
   letter-spacing: 2px;
 }
+
 button {
   margin: 18px 5px 5px;
   padding: 14px 25px;
@@ -74,174 +91,251 @@ button {
   letter-spacing: 1px;
   cursor: pointer;
 }
+
 #snap {
   background: #332d26;
   color: #f3eadf;
 }
+
 #flip {
   background: #d7c9b7;
   color: #3b3026;
 }
+
 #retake {
   background: #d7c9b7;
   color: #3b3026;
 }
+
 #keep {
   background: #f3eadf;
   color: #3b3026;
 }
+
 #retake,
 #keep {
   display: none;
 }
+
 button:active {
   transform: scale(0.96);
 }
 </style>
 </head>
+
 <body>
+
 <h1>Our Wedding Camera</h1>
+
 <div class="subtitle">
 Capture a little memory from your eyes ♡
 </div>
+
 <div class="camera-box">
+
 <video
 id="camera"
 autoplay
 playsinline
 muted>
 </video>
+
 <canvas id="photo"></canvas>
+
 <div class="photo-number">
 PHOTO
 <span id="photoNumber">001</span>
 </div>
+
 <button id="flip">
 ↔ FLIP CAMERA
 </button>
+
 <button id="snap">
 📸 TAKE PHOTO
 </button>
+
 <button id="retake">
 ↩ RETAKE
 </button>
+
 <button id="keep">
 ♡ KEEP PHOTO
 </button>
+
 </div>
+
 <script>
+
 const video =
 document.getElementById("camera");
+
 const canvas =
 document.getElementById("photo");
+
 const snap =
 document.getElementById("snap");
+
 const flip =
 document.getElementById("flip");
+
 const retake =
 document.getElementById("retake");
+
 const keep =
 document.getElementById("keep");
+
 const photoNumber =
 document.getElementById("photoNumber");
+
 let photoCount = 1;
+
 let currentStream = null;
+
+/*
+   Start with BACK camera
+*/
 let currentCamera = "environment";
+
+
 /* =========================
    OPEN CAMERA
 ========================= */
-function openCamera(facingMode) {
+
+async function openCamera(cameraType) {
+
+  /*
+     Stop previous camera
+  */
   if (currentStream) {
+
     currentStream
       .getTracks()
       .forEach(function(track) {
         track.stop();
       });
+
+    currentStream = null;
   }
-  navigator.mediaDevices
-    .getUserMedia({
-      video: {
-        facingMode: {
-          exact: facingMode
-        }
-      },
-      audio: false
-    })
-    .then(function(stream) {
-      currentStream = stream;
-      video.srcObject = stream;
-      video.play();
-      /* NEVER MIRROR SELFIE */
-      video.style.transform = "scaleX(1)";
-    })
-    .catch(function(error) {
-      console.log(
-        "CAMERA ERROR:",
-        error.name,
-        error.message
-      );
-      /*
-      If the requested camera
-      is unavailable, use normal camera.
-      */
-      navigator.mediaDevices
-        .getUserMedia({
-          video: true,
-          audio: false
-        })
-        .then(function(stream) {
-          currentStream = stream;
-          video.srcObject = stream;
-          video.play();
-          /* NEVER MIRROR */
-          video.style.transform = "scaleX(1)";
-        })
-        .catch(function(error) {
-          alert(
-            "Camera error: " +
-            error.name
-          );
-        });
-    });
+
+
+  try {
+
+    const stream =
+      await navigator.mediaDevices.getUserMedia({
+
+        video: {
+          facingMode: cameraType
+        },
+
+        audio: false
+
+      });
+
+
+    currentStream = stream;
+
+    video.srcObject = stream;
+
+    /*
+       NEVER MIRROR CAMERA
+       Both front and back stay normal.
+    */
+    video.style.transform = "none";
+
+    await video.play();
+
+
+  } catch (error) {
+
+    console.log(
+      "CAMERA ERROR:",
+      error.name,
+      error.message
+    );
+
+    alert(
+      "Camera error: " +
+      error.name
+    );
+
+  }
+
 }
+
+
 /* =========================
    START CAMERA
 ========================= */
+
 openCamera(currentCamera);
+
+
 /* =========================
    FLIP CAMERA
 ========================= */
+
 flip.addEventListener(
   "click",
-  function() {
+  async function() {
+
+    /*
+       Change camera
+    */
+
     if (
       currentCamera === "environment"
     ) {
+
       currentCamera = "user";
+
     } else {
+
       currentCamera = "environment";
+
     }
-    openCamera(currentCamera);
+
+
+    /*
+       Open the other camera
+    */
+
+    await openCamera(currentCamera);
+
   }
 );
+
+
 /* =========================
    TAKE PHOTO
 ========================= */
+
 snap.addEventListener(
   "click",
   function() {
+
+    /*
+       Make canvas same size
+       as camera
+    */
+
     canvas.width =
       video.videoWidth;
+
     canvas.height =
       video.videoHeight;
+
+
     const context =
       canvas.getContext("2d");
+
+
     /*
-    IMPORTANT:
-    No scaleX(-1).
-    This means selfie photos
-    stay NON-MIRRORED.
+       IMPORTANT:
+       No scaleX(-1).
+       Therefore selfie is NOT mirrored.
     */
+
     context.drawImage(
       video,
       0,
@@ -249,7 +343,12 @@ snap.addEventListener(
       canvas.width,
       canvas.height
     );
-    /* DISPOSABLE FILM EFFECT */
+
+
+    /* =====================
+       DISPOSABLE FILM EFFECT
+    ===================== */
+
     const imageData =
       context.getImageData(
         0,
@@ -257,125 +356,194 @@ snap.addEventListener(
         canvas.width,
         canvas.height
       );
+
     const pixels =
       imageData.data;
+
+
     for (
       let i = 0;
       i < pixels.length;
       i += 4
     ) {
+
       pixels[i] =
         Math.min(
           255,
           pixels[i] * 1.06 + 8
         );
+
       pixels[i + 1] =
         Math.min(
           255,
           pixels[i + 1] * 1.01 + 3
         );
+
       pixels[i + 2] =
         Math.min(
           255,
           pixels[i + 2] * 0.94
         );
+
     }
+
+
     context.putImageData(
       imageData,
       0,
       0
     );
+
+
+    /*
+       Show captured photo
+    */
+
     video.style.display =
       "none";
+
     canvas.style.display =
       "block";
+
     snap.style.display =
       "none";
+
     flip.style.display =
       "none";
+
     retake.style.display =
       "inline-block";
+
     keep.style.display =
       "inline-block";
+
   }
 );
+
+
 /* =========================
    RETAKE
 ========================= */
+
 retake.addEventListener(
   "click",
   function() {
+
     canvas.style.display =
       "none";
+
     video.style.display =
       "block";
+
     snap.style.display =
       "inline-block";
+
     flip.style.display =
       "inline-block";
+
     retake.style.display =
       "none";
+
     keep.style.display =
       "none";
+
   }
 );
+
+
 /* =========================
    KEEP PHOTO
 ========================= */
+
 keep.addEventListener(
   "click",
   async function() {
+
     const image =
       canvas.toDataURL(
         "image/jpeg",
         0.8
       );
+
+
     try {
+
       const response =
         await fetch(
           "https://script.google.com/macros/s/AKfycbwEi8edo-f36QLQWluoDxqsvzHZ7udcGercX9qvRVIQrCwE5PvW9V5tDL27DSbGKo2S/exec",
           {
+
             method: "POST",
+
             body: JSON.stringify({
               image: image
             })
+
           }
         );
+
+
       const result =
         await response.json();
+
+
       if (result.success) {
+
         alert(
           "♡ PHOTO SAVED TO WEDDING ALBUM!"
         );
+
+
         photoCount++;
+
+
         photoNumber.textContent =
           String(photoCount)
             .padStart(3, "0");
+
+
         canvas.style.display =
           "none";
+
         video.style.display =
           "block";
+
         snap.style.display =
           "inline-block";
+
         flip.style.display =
           "inline-block";
+
         retake.style.display =
           "none";
+
         keep.style.display =
           "none";
+
+
       } else {
+
         alert(
           "Upload failed 😭"
         );
+
       }
+
+
     } catch (error) {
+
       alert(
         "Upload failed. Please try again."
       );
+
       console.error(error);
+
     }
+
   }
 );
+
 </script>
+
 </body>
 </html>
