@@ -360,7 +360,7 @@ button:disabled {
 
 
   <!-- ========================= -->
-  <!-- ALBUM -->
+  <!-- WEDDING ALBUM -->
   <!-- ========================= -->
 
   <div class="album-section">
@@ -421,7 +421,7 @@ button:disabled {
 // =====================================
 
 const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwEi8edo-f36QLQWluoDxqsvzHZ7udcGercX9qvRVIQrCwE5PvW9V5tDL27DSbGKo2S/exec";
+  "https://script.google.com/macros/s/AKfycbybxe4TYDnv9xh73jQ1UVJeSxJ-q3EmX-PTqh0tCbSXsxrd_XKVD3mFhF2-ncaWfnbm/exec";
 
 
 // =====================================
@@ -532,9 +532,6 @@ async function openCamera(cameraType) {
 
     video.srcObject = stream;
 
-
-    // FRONT CAMERA = MIRROR
-    // BACK CAMERA = NORMAL
 
     if (cameraType === "user") {
 
@@ -703,8 +700,6 @@ snap.addEventListener(
     snap.disabled = true;
 
 
-    // FLASH
-
     flash.classList.remove(
       "active"
     );
@@ -715,8 +710,6 @@ snap.addEventListener(
       "active"
     );
 
-
-    // SOUND
 
     playShutterSound();
 
@@ -735,10 +728,8 @@ snap.addEventListener(
           canvas.getContext("2d");
 
 
-        // =================================
         // ORIGINAL PHOTO
         // NO FILTER
-        // =================================
 
         if (
           currentCamera === "user"
@@ -779,32 +770,24 @@ snap.addEventListener(
         }
 
 
-        // =================================
         // DATE STAMP
-        // =================================
 
         context.save();
-
 
         context.font =
           "bold 22px Arial";
 
-
         context.fillStyle =
           "rgba(255,255,255,0.85)";
-
 
         context.textAlign =
           "right";
 
-
         context.shadowColor =
           "rgba(0,0,0,0.5)";
 
-
         context.shadowBlur =
           3;
-
 
         context.fillText(
           "26 · 09 · 2026",
@@ -812,20 +795,14 @@ snap.addEventListener(
           canvas.height - 25
         );
 
-
         context.restore();
 
-
-        // =================================
-        // SHOW PHOTO
-        // =================================
 
         video.style.display =
           "none";
 
         canvas.style.display =
           "block";
-
 
         snap.style.display =
           "none";
@@ -839,10 +816,8 @@ snap.addEventListener(
         keep.style.display =
           "inline-block";
 
-
         status.textContent =
           "READY TO KEEP ♡";
-
 
         snap.disabled = false;
 
@@ -869,13 +844,11 @@ retake.addEventListener(
     video.style.display =
       "block";
 
-
     snap.style.display =
       "inline-block";
 
     flip.style.display =
       "inline-block";
-
 
     retake.style.display =
       "none";
@@ -883,10 +856,8 @@ retake.addEventListener(
     keep.style.display =
       "none";
 
-
     status.textContent =
       "";
-
 
     snap.disabled = false;
 
@@ -901,8 +872,6 @@ retake.addEventListener(
 keep.addEventListener(
   "click",
   async function() {
-
-    // PREVENT DOUBLE UPLOAD
 
     if (uploading) return;
 
@@ -960,8 +929,7 @@ keep.addEventListener(
             .padStart(3, "0");
 
 
-        // REFRESH ALBUM
-        // SO NEW PHOTO CAN APPEAR
+        // Refresh album
 
         loadAlbum();
 
@@ -975,13 +943,11 @@ keep.addEventListener(
             video.style.display =
               "block";
 
-
             snap.style.display =
               "inline-block";
 
             flip.style.display =
               "inline-block";
-
 
             retake.style.display =
               "none";
@@ -989,13 +955,11 @@ keep.addEventListener(
             keep.style.display =
               "none";
 
-
             keep.disabled = false;
 
             retake.disabled = false;
 
             uploading = false;
-
 
             status.textContent =
               "";
@@ -1010,7 +974,6 @@ keep.addEventListener(
         status.textContent =
           "UPLOAD FAILED 😭";
 
-
         keep.disabled = false;
 
         retake.disabled = false;
@@ -1024,10 +987,8 @@ keep.addEventListener(
 
       console.error(error);
 
-
       status.textContent =
         "UPLOAD FAILED — TRY AGAIN";
-
 
       keep.disabled = false;
 
@@ -1130,7 +1091,6 @@ async function loadAlbum() {
 
     console.error(error);
 
-
     albumStatus.textContent =
       "Unable to load album.";
 
@@ -1150,10 +1110,8 @@ albumButton.addEventListener(
     album.style.display =
       "block";
 
-
     albumButton.style.display =
       "none";
-
 
     await loadAlbum();
 
@@ -1171,7 +1129,6 @@ backCamera.addEventListener(
 
     album.style.display =
       "none";
-
 
     albumButton.style.display =
       "inline-block";
