@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Our Wedding Camera</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+
+  margin: 0;
+
+  min-height: 100vh;
+
+  background: #eee7dc;
+
+  color: #3d342b;
+
+  font-family: Georgia, serif;
+
+  text-align: center;
+
+  padding: 30px 15px;
+
+}
+
+h1 {
+
+  font-size: 30px;
+
+  font-weight: normal;
+
+  margin-bottom: 8px;
+
+}
+
+.subtitle {
+
+  font-size: 15px;
+
+  margin-bottom: 25px;
+
+}
+
+.camera-box {
+
+  width: 100%;
+
+  max-width: 500px;
+
+  margin: auto;
+
+  background: #292521;
+
+  padding: 10px;
+
+  border-radius: 15px;
+
+}
+
+video,
+canvas {
+
+  width: 100%;
+
+  display: block;
+
+  border-radius: 8px;
+
+  background: black;
+
+}
+
+canvas {
+
+  display: none;
+
+}
+
+.photo-number {
+
+  color: #eee7dc;
+
+  margin-top: 10px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 13px;
+
+}
+
+button {
+
+  margin: 18px 5px 5px;
+
+  padding: 14px 24px;
+
+  border: none;
+
+  border-radius: 30px;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+}
+
+#snap {
+
+  background: #f5eee3;
+
+  color: #3d342b;
+
+}
+
+#retake,
+#keep {
+
+  display: none;
+
+}
+
+#retake {
+
+  background: #ddd1c1;
+
+}
+
+#keep {
+
+  background: #f5eee3;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<h1>Our Wedding Camera</h1>
+
+<div class="subtitle">
+
+Capture a little memory from your eyes ♡
+
+</div>
+
+
+<div class="camera-box">
+
+<video
+id="camera"
+autoplay
+playsinline>
+</video>
+
+<canvas id="photo"></canvas>
+
+
+<div class="photo-number">
+
+PHOTO
+<span id="photoNumber">001</span>
+
+</div>
+
+
+<button id="snap">
+
+📸 TAKE PHOTO
+
+</button>
+
+
+<button id="retake">
+
+↩ RETAKE
+
+</button>
+
+
+<button id="keep">
+
+♡ KEEP PHOTO
+
+</button>
+
+</div>
+
+
+<script>
+
+const video =
+document.getElementById("camera");
+
+const canvas =
+document.getElementById("photo");
+
+const snap =
+document.getElementById("snap");
+
+const retake =
+document.getElementById("retake");
+
+const keep =
+document.getElementById("keep");
+
+const photoNumber =
+document.getElementById("photoNumber");
+
+
+let photoCount = 1;
+
+
+// OPEN CAMERA
+
+navigator.mediaDevices
+.getUserMedia({
+
+  video: {
+    facingMode: {
+      ideal: "environment"
+    }
+  },
+
+  audio: false
+
+})
+
+.then(function(stream) {
+
+  video.srcObject = stream;
+
+})
+
+.catch(function(error) {
+
+  alert(
+    "Please allow camera access ♡"
+  );
+
+  console.log(error);
+
+});
+
+
+// TAKE PHOTO
+
+snap.addEventListener(
+"click",
+function() {
+
+  canvas.width =
+  video.videoWidth;
+
+  canvas.height =
+  video.videoHeight;
+
+
+  const context =
+  canvas.getContext("2d");
+
+
+  context.drawImage(
+
+    video,
+
+    0,
+
+    0,
+
+    canvas.width,
+
+    canvas.height
+
+  );
+
+
+  video.style.display =
+  "none";
+
+  canvas.style.display =
+  "block";
+
+
+  snap.style.display =
+  "none";
+
+  retake.style.display =
+  "inline-block";
+
+  keep.style.display =
+  "inline-block";
+
+});
+
+
+// RETAKE
+
+retake.addEventListener(
+"click",
+function() {
+
+  canvas.style.display =
+  "none";
+
+  video.style.display =
+  "block";
+
+
+  snap.style.display =
+  "inline-block";
+
+  retake.style.display =
+  "none";
+
+  keep.style.display =
+  "none";
+
+});
+
+
+// KEEP PHOTO
+
+keep.addEventListener(
+"click",
+function() {
+
+  const image =
+  canvas.toDataURL(
+    "image/jpeg",
+    0.9
+  );
+
+
+  const link =
+  document.createElement("a");
+
+
+  link.href = image;
+
+
+  link.download =
+  "wedding-photo-" +
+  photoNumber.textContent +
+  ".jpg";
+
+
+  link.click();
+
+
+  photoCount++;
+
+
+  photoNumber.textContent =
+  String(photoCount)
+  .padStart(3, "0");
+
+
+  canvas.style.display =
+  "none";
+
+  video.style.display =
+  "block";
+
+
+  snap.style.display =
+  "inline-block";
+
+  retake.style.display =
+  "none";
+
+  keep.style.display =
+  "none";
+
+});
+
+</script>
+
+</body>
+
+</html>
