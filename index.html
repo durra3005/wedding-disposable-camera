@@ -62,13 +62,6 @@ canvas {
   background: #111;
 }
 
-/* IMPORTANT:
-   Camera preview is NEVER mirrored.
-*/
-video {
-  transform: none !important;
-}
-
 canvas {
   display: none;
 }
@@ -189,11 +182,10 @@ const photoNumber =
 document.getElementById("photoNumber");
 
 let photoCount = 1;
-
 let currentStream = null;
 
 /*
-   Start with BACK camera
+   Start with back camera
 */
 let currentCamera = "environment";
 
@@ -207,6 +199,7 @@ async function openCamera(cameraType) {
   /*
      Stop previous camera
   */
+
   if (currentStream) {
 
     currentStream
@@ -237,11 +230,33 @@ async function openCamera(cameraType) {
 
     video.srcObject = stream;
 
+
     /*
-       NEVER MIRROR CAMERA
-       Both front and back stay normal.
+       FRONT CAMERA ONLY
+       
+       Safari/iPhone may show
+       the front camera mirrored.
+
+       We reverse it here so the
+       PREVIEW looks normal.
     */
-    video.style.transform = "none";
+
+    if (cameraType === "user") {
+
+      video.style.transform =
+        "scaleX(-1)";
+
+    } else {
+
+      /*
+         BACK CAMERA stays normal.
+      */
+
+      video.style.transform =
+        "scaleX(1)";
+
+    }
+
 
     await video.play();
 
@@ -279,10 +294,6 @@ flip.addEventListener(
   "click",
   async function() {
 
-    /*
-       Change camera
-    */
-
     if (
       currentCamera === "environment"
     ) {
@@ -295,10 +306,6 @@ flip.addEventListener(
 
     }
 
-
-    /*
-       Open the other camera
-    */
 
     await openCamera(currentCamera);
 
@@ -314,35 +321,69 @@ snap.addEventListener(
   "click",
   function() {
 
-    /*
-       Make canvas same size
-       as camera
-    */
-
     canvas.width =
       video.videoWidth;
 
     canvas.height =
       video.videoHeight;
 
-
     const context =
       canvas.getContext("2d");
 
 
     /*
-       IMPORTANT:
-       No scaleX(-1).
-       Therefore selfie is NOT mirrored.
+       FRONT CAMERA
+
+       Preview is mirrored with
+       CSS so it looks normal.
+
+       Therefore we ALSO mirror
+       the canvas to make the final
+       photo normal.
     */
 
-    context.drawImage(
-      video,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
+    if (
+      currentCamera === "user"
+    ) {
+
+      context.save();
+
+      context.translate(
+        canvas.width,
+        0
+      );
+
+      context.scale(
+        -1,
+        1
+      );
+
+      context.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      context.restore();
+
+    } else {
+
+      /*
+         BACK CAMERA:
+         normal drawing
+      */
+
+      context.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+    }
 
 
     /* =====================
