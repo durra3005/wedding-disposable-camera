@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Mari Menggamit Kenangan Bersama</title>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
@@ -28,8 +25,6 @@
       padding: 30px 20px 50px;
     }
 
-    /* WELCOME */
-
     #welcome {
       min-height: 100vh;
       display: flex;
@@ -43,6 +38,36 @@
       font-size: 15px;
       letter-spacing: 4px;
       margin-bottom: 25px;
+    }
+
+    .names {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      margin-bottom: 28px;
+      direction: ltr;
+    }
+
+    .names > div:not(.heart) {
+      text-align: center;
+    }
+
+    .arabic {
+      font-size: 42px;
+      line-height: 1;
+      margin-bottom: 7px;
+      font-family: "Times New Roman", serif;
+    }
+
+    .name {
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .heart {
+      font-size: 20px;
+      margin-top: -10px;
     }
 
     h1 {
@@ -77,8 +102,6 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
-
-    /* CAMERA */
 
     #main {
       display: none;
@@ -158,13 +181,9 @@
       letter-spacing: 2px;
     }
 
-    /* ALBUM BUTTON */
-
     .album-button-wrapper {
       margin-top: 35px;
     }
-
-    /* ALBUM */
 
     #album {
       display: none;
@@ -205,7 +224,6 @@
     }
 
     @media (max-width: 380px) {
-
       .page {
         padding-left: 15px;
         padding-right: 15px;
@@ -222,21 +240,33 @@
       button {
         padding: 12px 17px;
       }
-
     }
-
   </style>
 </head>
 
-
 <body>
 
-  <!-- WELCOME -->
-
+  <!-- WELCOME PAGE -->
   <section id="welcome">
 
     <div class="date">
       26 · 09 · 2026
+    </div>
+
+    <div class="names">
+
+      <div>
+        <div class="arabic">ف</div>
+        <div class="name">Faris</div>
+      </div>
+
+      <div class="heart">♡</div>
+
+      <div>
+        <div class="arabic">م</div>
+        <div class="name">Mira</div>
+      </div>
+
     </div>
 
     <h1>
@@ -255,14 +285,12 @@
   </section>
 
 
-  <!-- MAIN CAMERA -->
-
+  <!-- CAMERA PAGE -->
   <main id="main" class="page">
 
     <h2 class="camera-title">
       Bingkai Mempelai
     </h2>
-
 
     <div class="camera-box">
 
@@ -312,16 +340,13 @@
 
 
     <div class="album-button-wrapper">
-
       <button id="albumButton">
         WEDDING ALBUM ♡
       </button>
-
     </div>
 
 
-    <!-- ALBUM -->
-
+    <!-- WEDDING ALBUM -->
     <section id="album">
 
       <h2 class="album-title">
@@ -345,17 +370,9 @@
 
   <script>
 
-    /* =========================
-       APPS SCRIPT URL
-    ========================= */
-
     const SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbxYIr46zDLHnF9EDA59pMpEVZAfPxhd_gA8YZmA36KapT-FQm-YySa4vGogaWu7q6kE/exec";
 
-
-    /* =========================
-       ELEMENTS
-    ========================= */
 
     const welcome =
       document.getElementById("welcome");
@@ -409,10 +426,6 @@
       document.getElementById("backCamera");
 
 
-    /* =========================
-       CAMERA VARIABLES
-    ========================= */
-
     let currentStream = null;
 
     let currentCamera = "environment";
@@ -421,10 +434,6 @@
 
     let uploading = false;
 
-
-    /* =========================
-       OPEN CAMERA
-    ========================= */
 
     async function openCamera(cameraType) {
 
@@ -458,8 +467,6 @@
 
         video.srcObject = stream;
 
-
-        /* MIRROR FRONT CAMERA */
 
         if (cameraType === "user") {
 
@@ -495,10 +502,6 @@
     }
 
 
-    /* =========================
-       OPEN CAMERA BUTTON
-    ========================= */
-
     openCameraButton.addEventListener(
       "click",
       async function() {
@@ -513,39 +516,27 @@
     );
 
 
-    /* =========================
-       FLIP CAMERA
-    ========================= */
-
     flip.addEventListener(
       "click",
       async function() {
 
         if (
-          currentCamera ===
-          "environment"
+          currentCamera === "environment"
         ) {
 
           currentCamera = "user";
 
         } else {
 
-          currentCamera =
-            "environment";
+          currentCamera = "environment";
 
         }
 
-        await openCamera(
-          currentCamera
-        );
+        await openCamera(currentCamera);
 
       }
     );
 
-
-    /* =========================
-       SHUTTER SOUND
-    ========================= */
 
     function playShutterSound() {
 
@@ -569,18 +560,15 @@
       oscillator.type =
         "square";
 
-
       oscillator.frequency.setValueAtTime(
         900,
         audio.currentTime
       );
 
-
-      oscillator.frequency
-        .exponentialRampToValueAtTime(
-          250,
-          audio.currentTime + 0.08
-        );
+      oscillator.frequency.exponentialRampToValueAtTime(
+        250,
+        audio.currentTime + 0.08
+      );
 
 
       gain.gain.setValueAtTime(
@@ -588,19 +576,15 @@
         audio.currentTime
       );
 
-
-      gain.gain
-        .exponentialRampToValueAtTime(
-          0.001,
-          audio.currentTime + 0.1
-        );
+      gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        audio.currentTime + 0.1
+      );
 
 
       oscillator.connect(gain);
 
-      gain.connect(
-        audio.destination
-      );
+      gain.connect(audio.destination);
 
 
       oscillator.start();
@@ -612,10 +596,6 @@
     }
 
 
-    /* =========================
-       TAKE PHOTO
-    ========================= */
-
     snap.addEventListener(
       "click",
       function() {
@@ -625,20 +605,12 @@
         snap.disabled = true;
 
 
-        /* FLASH */
-
-        flash.classList.remove(
-          "active"
-        );
+        flash.classList.remove("active");
 
         void flash.offsetWidth;
 
-        flash.classList.add(
-          "active"
-        );
+        flash.classList.add("active");
 
-
-        /* SOUND */
 
         playShutterSound();
 
@@ -657,11 +629,8 @@
               canvas.getContext("2d");
 
 
-            /* FRONT CAMERA */
-
             if (
-              currentCamera ===
-              "user"
+              currentCamera === "user"
             ) {
 
               context.save();
@@ -686,10 +655,7 @@
 
               context.restore();
 
-
             } else {
-
-              /* BACK CAMERA */
 
               context.drawImage(
                 video,
@@ -701,8 +667,6 @@
 
             }
 
-
-            /* DATE STAMP */
 
             context.save();
 
@@ -731,8 +695,6 @@
             context.restore();
 
 
-            /* SHOW PHOTO */
-
             video.style.display =
               "none";
 
@@ -751,10 +713,8 @@
             keep.style.display =
               "inline-block";
 
-
             status.textContent =
               "READY TO KEEP ♡";
-
 
             snap.disabled = false;
 
@@ -765,10 +725,6 @@
       }
     );
 
-
-    /* =========================
-       RETAKE
-    ========================= */
 
     retake.addEventListener(
       "click",
@@ -792,8 +748,7 @@
         keep.style.display =
           "none";
 
-        status.textContent =
-          "";
+        status.textContent = "";
 
         snap.disabled = false;
 
@@ -801,23 +756,17 @@
     );
 
 
-    /* =========================
-       KEEP / UPLOAD
-    ========================= */
-
     keep.addEventListener(
       "click",
       async function() {
 
         if (uploading) return;
 
-
         uploading = true;
 
         keep.disabled = true;
 
         retake.disabled = true;
-
 
         status.textContent =
           "SAVING... ♡";
@@ -837,7 +786,6 @@
               SCRIPT_URL,
               {
                 method: "POST",
-
                 body: JSON.stringify({
                   image: image
                 })
@@ -857,13 +805,10 @@
 
             photoCount++;
 
-
             photoNumber.textContent =
               String(photoCount)
                 .padStart(3, "0");
 
-
-            /* REFRESH ALBUM */
 
             await loadAlbum();
 
@@ -889,18 +834,13 @@
                 keep.style.display =
                   "none";
 
+                keep.disabled = false;
 
-                keep.disabled =
-                  false;
+                retake.disabled = false;
 
-                retake.disabled =
-                  false;
+                uploading = false;
 
-                uploading =
-                  false;
-
-                status.textContent =
-                  "";
+                status.textContent = "";
 
               },
               700
@@ -912,14 +852,11 @@
             status.textContent =
               "UPLOAD FAILED 😭";
 
-            keep.disabled =
-              false;
+            keep.disabled = false;
 
-            retake.disabled =
-              false;
+            retake.disabled = false;
 
-            uploading =
-              false;
+            uploading = false;
 
           }
 
@@ -931,25 +868,17 @@
           status.textContent =
             "UPLOAD FAILED — TRY AGAIN";
 
+          keep.disabled = false;
 
-          keep.disabled =
-            false;
+          retake.disabled = false;
 
-          retake.disabled =
-            false;
-
-          uploading =
-            false;
+          uploading = false;
 
         }
 
       }
     );
 
-
-    /* =========================
-       LOAD WEDDING ALBUM
-    ========================= */
 
     async function loadAlbum() {
 
@@ -981,8 +910,7 @@
         }
 
 
-        albumGrid.innerHTML =
-          "";
+        albumGrid.innerHTML = "";
 
 
         if (
@@ -1007,26 +935,18 @@
           function(photo) {
 
             const image =
-              document.createElement(
-                "img"
-              );
-
+              document.createElement("img");
 
             image.src =
               photo.url;
 
-
             image.alt =
               "Wedding memory";
-
 
             image.loading =
               "lazy";
 
-
-            albumGrid.appendChild(
-              image
-            );
+            albumGrid.appendChild(image);
 
           }
         );
@@ -1044,10 +964,6 @@
     }
 
 
-    /* =========================
-       OPEN ALBUM
-    ========================= */
-
     albumButton.addEventListener(
       "click",
       async function() {
@@ -1058,9 +974,7 @@
         albumButton.style.display =
           "none";
 
-
         await loadAlbum();
-
 
         album.scrollIntoView({
           behavior: "smooth"
@@ -1069,10 +983,6 @@
       }
     );
 
-
-    /* =========================
-       BACK TO CAMERA
-    ========================= */
 
     backCamera.addEventListener(
       "click",
@@ -1083,7 +993,6 @@
 
         albumButton.style.display =
           "inline-block";
-
 
         window.scrollTo({
           top: 0,
@@ -1096,5 +1005,4 @@
   </script>
 
 </body>
-
-</html></html>
+</html></html></html>
