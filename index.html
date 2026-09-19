@@ -6,6 +6,11 @@
 
   <title>Mari Menggamit Kenangan Bersama</title>
 
+  <!-- Arabic Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -25,8 +30,6 @@
       margin: auto;
       padding: 30px 20px 50px;
     }
-
-    /* WELCOME */
 
     #welcome {
       min-height: 100vh;
@@ -85,8 +88,6 @@
       margin-bottom: 35px;
     }
 
-    /* BUTTON */
-
     button {
       font-family: Georgia, "Times New Roman", serif;
       border: 1px solid #6e5b4d;
@@ -107,8 +108,6 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
-
-    /* MAIN */
 
     #main {
       display: none;
@@ -139,8 +138,6 @@
       display: none;
     }
 
-    /* FLASH */
-
     .flash {
       position: absolute;
       inset: 0;
@@ -163,8 +160,6 @@
         opacity: 0;
       }
     }
-
-    /* CONTROLS */
 
     .controls {
       margin-top: 20px;
@@ -191,8 +186,6 @@
       font-size: 13px;
       letter-spacing: 2px;
     }
-
-    /* GALLERY */
 
     .album-button-wrapper {
       margin-top: 35px;
@@ -230,15 +223,83 @@
       display: block;
       background: #e9e3db;
       border-radius: 2px;
+      cursor: pointer;
     }
 
     #backCamera {
       margin-top: 25px;
     }
 
-    /* MOBILE */
+    /* FULLSCREEN PHOTO VIEWER */
+
+    #photoViewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.94);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-y;
+    }
+
+    #photoViewer.active {
+      display: flex;
+    }
+
+    #viewerImage {
+      max-width: 94vw;
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    #closeViewer {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 32px;
+      line-height: 42px;
+      letter-spacing: 0;
+    }
+
+    #previousPhoto,
+    #nextPhoto {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 60px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+
+    #previousPhoto {
+      left: 5px;
+    }
+
+    #nextPhoto {
+      right: 5px;
+    }
 
     @media (max-width: 380px) {
+
       .page {
         padding-left: 15px;
         padding-right: 15px;
@@ -259,710 +320,799 @@
       .arabic {
         font-size: 42px;
       }
+
+      #viewerImage {
+        max-width: 96vw;
+        max-height: 84vh;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- WELCOME PAGE -->
+<section id="welcome">
 
-  <section id="welcome">
+  <div class="date">
+    26 · 09 · 2026
+  </div>
 
-    <div class="date">
-      26 · 09 · 2026
-    </div>
+  <div class="names">
 
-    <div class="names">
-
-      <div class="person">
-        <div class="arabic">
-          ف
-        </div>
-
-        <div class="name">
-          Faris
-        </div>
+    <div class="person">
+      <div class="arabic">
+        ف
       </div>
 
-      <div class="heart">
-        ♡
+      <div class="name">
+        Faris
       </div>
-
-      <div class="person">
-        <div class="arabic">
-          م
-        </div>
-
-        <div class="name">
-          Mira
-        </div>
-      </div>
-
     </div>
 
-    <h1>
-      Mari Menggamit Kenangan Bersama
-    </h1>
-
-    <div class="subtitle">
-      Capture a little memory<br>
-      from your eyes ♡
+    <div class="heart">
+      ♡
     </div>
 
-    <button id="openCameraButton">
-      OPEN CAMERA
+    <div class="person">
+      <div class="arabic">
+        م
+      </div>
+
+      <div class="name">
+        Mira
+      </div>
+    </div>
+
+  </div>
+
+  <h1>
+    Mari Menggamit Kenangan Bersama
+  </h1>
+
+  <div class="subtitle">
+    Capture a little memory<br>
+    from your eyes ♡
+  </div>
+
+  <button id="openCameraButton">
+    OPEN CAMERA
+  </button>
+
+</section>
+
+
+<main id="main" class="page">
+
+  <h2 class="camera-title">
+    Bingkai Mempelai
+  </h2>
+
+  <div class="camera-box">
+
+    <video
+      id="video"
+      autoplay
+      playsinline>
+    </video>
+
+    <canvas id="canvas"></canvas>
+
+    <div
+      id="flash"
+      class="flash">
+    </div>
+
+  </div>
+
+
+  <div class="controls">
+
+    <button id="snap">
+      TAKE PHOTO
+    </button>
+
+    <button id="flip">
+      FLIP CAMERA
+    </button>
+
+    <button id="retake">
+      RETAKE
+    </button>
+
+    <button id="keep">
+      UPLOAD ♡
+    </button>
+
+  </div>
+
+
+  <div id="status"></div>
+
+
+  <div class="counter">
+    PHOTO
+    <span id="photoNumber">
+      001
+    </span>
+  </div>
+
+
+  <div class="album-button-wrapper">
+
+    <button id="albumButton">
+      VIEW GALLERY ♡
+    </button>
+
+  </div>
+
+
+  <section id="album">
+
+    <h2 class="album-title">
+      View Gallery ♡
+    </h2>
+
+    <div id="albumStatus">
+      Loading memories ♡
+    </div>
+
+    <div id="albumGrid"></div>
+
+    <button id="backCamera">
+      BACK TO CAMERA
     </button>
 
   </section>
 
+</main>
 
-  <!-- CAMERA PAGE -->
 
-  <main id="main" class="page">
+<div id="photoViewer">
 
-    <h2 class="camera-title">
-      Bingkai Mempelai
-    </h2>
+  <button id="closeViewer">
+    ×
+  </button>
 
+  <button id="previousPhoto">
+    ‹
+  </button>
 
-    <div class="camera-box">
+  <img
+    id="viewerImage"
+    alt="Wedding memory"
+    draggable="false">
 
-      <video
-        id="video"
-        autoplay
-        playsinline>
-      </video>
+  <button id="nextPhoto">
+    ›
+  </button>
 
-      <canvas id="canvas"></canvas>
+</div>
 
-      <div
-        id="flash"
-        class="flash">
-      </div>
 
-    </div>
+<script>
 
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxYIr46zDLHnF9EDA59pMpEVZAfPxhd_gA8YZmA36KapT-FQm-YySa4vGogaWu7q6kE/exec";
 
-    <!-- CAMERA BUTTONS -->
 
-    <div class="controls">
+const welcome =
+  document.getElementById("welcome");
 
-      <button id="snap">
-        TAKE PHOTO
-      </button>
+const main =
+  document.getElementById("main");
 
-      <button id="flip">
-        FLIP CAMERA
-      </button>
+const openCameraButton =
+  document.getElementById("openCameraButton");
 
-      <button id="retake">
-        RETAKE
-      </button>
+const video =
+  document.getElementById("video");
 
-      <button id="keep">
-        UPLOAD ♡
-      </button>
+const canvas =
+  document.getElementById("canvas");
 
-    </div>
+const snap =
+  document.getElementById("snap");
 
+const flip =
+  document.getElementById("flip");
 
-    <div id="status"></div>
+const retake =
+  document.getElementById("retake");
 
+const keep =
+  document.getElementById("keep");
 
-    <!-- PHOTO COUNTER -->
+const flash =
+  document.getElementById("flash");
 
-    <div class="counter">
-      PHOTO
-      <span id="photoNumber">
-        001
-      </span>
-    </div>
+const status =
+  document.getElementById("status");
 
+const photoNumber =
+  document.getElementById("photoNumber");
 
-    <!-- VIEW GALLERY -->
+const albumButton =
+  document.getElementById("albumButton");
 
-    <div class="album-button-wrapper">
+const album =
+  document.getElementById("album");
 
-      <button id="albumButton">
-        VIEW GALLERY ♡
-      </button>
+const albumGrid =
+  document.getElementById("albumGrid");
 
-    </div>
+const albumStatus =
+  document.getElementById("albumStatus");
 
+const backCamera =
+  document.getElementById("backCamera");
 
-    <!-- GALLERY -->
+const photoViewer =
+  document.getElementById("photoViewer");
 
-    <section id="album">
+const viewerImage =
+  document.getElementById("viewerImage");
 
-      <h2 class="album-title">
-        View Gallery ♡
-      </h2>
+const closeViewer =
+  document.getElementById("closeViewer");
 
-      <div id="albumStatus">
-        Loading memories ♡
-      </div>
+const previousPhoto =
+  document.getElementById("previousPhoto");
 
-      <div id="albumGrid"></div>
+const nextPhoto =
+  document.getElementById("nextPhoto");
 
-      <button id="backCamera">
-        BACK TO CAMERA
-      </button>
 
-    </section>
+let currentStream = null;
 
-  </main>
+let currentCamera =
+  "environment";
 
+let photoCount = 1;
 
-  <script>
+let uploading = false;
 
-    /* GOOGLE APPS SCRIPT */
+let galleryPhotos = [];
 
-    const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbxYIr46zDLHnF9EDA59pMpEVZAfPxhd_gA8YZmA36KapT-FQm-YySa4vGogaWu7q6kE/exec";
+let currentPhotoIndex = 0;
 
 
-    /* ELEMENTS */
+/* =========================
+   CAMERA
+========================= */
 
-    const welcome =
-      document.getElementById("welcome");
+async function openCamera(cameraType) {
 
-    const main =
-      document.getElementById("main");
+  if (currentStream) {
 
-    const openCameraButton =
-      document.getElementById("openCameraButton");
+    currentStream
+      .getTracks()
+      .forEach(function(track) {
 
-    const video =
-      document.getElementById("video");
+        track.stop();
 
-    const canvas =
-      document.getElementById("canvas");
+      });
 
-    const snap =
-      document.getElementById("snap");
+    currentStream = null;
+  }
 
-    const flip =
-      document.getElementById("flip");
 
-    const retake =
-      document.getElementById("retake");
+  try {
 
-    const keep =
-      document.getElementById("keep");
+    const stream =
+      await navigator.mediaDevices
+        .getUserMedia({
 
-    const flash =
-      document.getElementById("flash");
+          video: {
+            facingMode: cameraType
+          },
 
-    const status =
-      document.getElementById("status");
+          audio: false
 
-    const photoNumber =
-      document.getElementById("photoNumber");
+        });
 
-    const albumButton =
-      document.getElementById("albumButton");
 
-    const album =
-      document.getElementById("album");
+    currentStream =
+      stream;
 
-    const albumGrid =
-      document.getElementById("albumGrid");
+    video.srcObject =
+      stream;
 
-    const albumStatus =
-      document.getElementById("albumStatus");
 
-    const backCamera =
-      document.getElementById("backCamera");
+    if (cameraType === "user") {
 
+      video.style.transform =
+        "scaleX(-1)";
 
-    /* CAMERA VARIABLES */
+    } else {
 
-    let currentStream = null;
-
-    let currentCamera = "environment";
-
-    let photoCount = 1;
-
-    let uploading = false;
-
-
-    /* OPEN CAMERA */
-
-    async function openCamera(cameraType) {
-
-      if (currentStream) {
-
-        currentStream
-          .getTracks()
-          .forEach(function(track) {
-
-            track.stop();
-
-          });
-
-        currentStream = null;
-      }
-
-
-      try {
-
-        const stream =
-          await navigator.mediaDevices.getUserMedia({
-
-            video: {
-              facingMode: cameraType
-            },
-
-            audio: false
-
-          });
-
-
-        currentStream = stream;
-
-        video.srcObject = stream;
-
-
-        /* MIRROR FRONT CAMERA */
-
-        if (cameraType === "user") {
-
-          video.style.transform =
-            "scaleX(-1)";
-
-        } else {
-
-          video.style.transform =
-            "scaleX(1)";
-
-        }
-
-
-        await video.play();
-
-
-      } catch (error) {
-
-        console.log(
-          "CAMERA ERROR:",
-          error.name,
-          error.message
-        );
-
-        alert(
-          "Camera error: " +
-          error.name
-        );
-
-      }
+      video.style.transform =
+        "scaleX(1)";
 
     }
 
 
-    /* OPEN CAMERA BUTTON */
+    await video.play();
 
-    openCameraButton.addEventListener(
-      "click",
-      async function() {
 
-        welcome.style.display = "none";
+  } catch (error) {
 
-        main.style.display = "block";
-
-        await openCamera(currentCamera);
-
-      }
+    console.log(
+      "CAMERA ERROR:",
+      error.name,
+      error.message
     );
 
-
-    /* FLIP CAMERA */
-
-    flip.addEventListener(
-      "click",
-      async function() {
-
-        if (
-          currentCamera === "environment"
-        ) {
-
-          currentCamera = "user";
-
-        } else {
-
-          currentCamera = "environment";
-
-        }
-
-        await openCamera(currentCamera);
-
-      }
+    alert(
+      "Camera error: " +
+      error.name
     );
 
+  }
 
-    /* SHUTTER SOUND */
-
-    function playShutterSound() {
-
-      const AudioContext =
-        window.AudioContext ||
-        window.webkitAudioContext;
-
-      if (!AudioContext) return;
+}
 
 
-      const audio =
-        new AudioContext();
+/* =========================
+   OPEN CAMERA
+========================= */
+
+openCameraButton.addEventListener(
+  "click",
+  async function() {
+
+    welcome.style.display =
+      "none";
+
+    main.style.display =
+      "block";
+
+    await openCamera(
+      currentCamera
+    );
+
+  }
+);
 
 
-      const oscillator =
-        audio.createOscillator();
+/* =========================
+   FLIP CAMERA
+========================= */
 
+flip.addEventListener(
+  "click",
+  async function() {
 
-      const gain =
-        audio.createGain();
+    if (
+      currentCamera ===
+      "environment"
+    ) {
 
+      currentCamera =
+        "user";
 
-      oscillator.type =
-        "square";
+    } else {
 
-
-      oscillator.frequency.setValueAtTime(
-        900,
-        audio.currentTime
-      );
-
-
-      oscillator.frequency.exponentialRampToValueAtTime(
-        250,
-        audio.currentTime + 0.08
-      );
-
-
-      gain.gain.setValueAtTime(
-        0.12,
-        audio.currentTime
-      );
-
-
-      gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        audio.currentTime + 0.1
-      );
-
-
-      oscillator.connect(gain);
-
-      gain.connect(audio.destination);
-
-
-      oscillator.start();
-
-      oscillator.stop(
-        audio.currentTime + 0.1
-      );
+      currentCamera =
+        "environment";
 
     }
 
+    await openCamera(
+      currentCamera
+    );
 
-    /* TAKE PHOTO */
+  }
+);
 
-    snap.addEventListener(
-      "click",
+
+/* =========================
+   SHUTTER SOUND
+========================= */
+
+function playShutterSound() {
+
+  const AudioContext =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+
+  if (!AudioContext) return;
+
+
+  const audio =
+    new AudioContext();
+
+  const oscillator =
+    audio.createOscillator();
+
+  const gain =
+    audio.createGain();
+
+
+  oscillator.type =
+    "square";
+
+
+  oscillator.frequency.setValueAtTime(
+    900,
+    audio.currentTime
+  );
+
+
+  oscillator.frequency.exponentialRampToValueAtTime(
+    250,
+    audio.currentTime + 0.08
+  );
+
+
+  gain.gain.setValueAtTime(
+    0.12,
+    audio.currentTime
+  );
+
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audio.currentTime + 0.1
+  );
+
+
+  oscillator.connect(gain);
+
+  gain.connect(
+    audio.destination
+  );
+
+
+  oscillator.start();
+
+  oscillator.stop(
+    audio.currentTime + 0.1
+  );
+
+}
+
+
+/* =========================
+   TAKE PHOTO
+========================= */
+
+snap.addEventListener(
+  "click",
+  function() {
+
+    if (snap.disabled) return;
+
+    snap.disabled = true;
+
+
+    flash.classList.remove(
+      "active"
+    );
+
+    void flash.offsetWidth;
+
+    flash.classList.add(
+      "active"
+    );
+
+
+    playShutterSound();
+
+
+    setTimeout(
       function() {
 
-        if (snap.disabled) return;
+        canvas.width =
+          video.videoWidth;
 
-        snap.disabled = true;
+        canvas.height =
+          video.videoHeight;
 
 
-        /* FLASH */
+        const context =
+          canvas.getContext("2d");
 
-        flash.classList.remove(
-          "active"
+
+        /* FRONT CAMERA MIRROR */
+
+        if (
+          currentCamera ===
+          "user"
+        ) {
+
+          context.save();
+
+          context.translate(
+            canvas.width,
+            0
+          );
+
+          context.scale(
+            -1,
+            1
+          );
+
+
+          context.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+
+
+          context.restore();
+
+
+        } else {
+
+          context.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+
+        }
+
+
+        /* =========================
+           WEDDING STAMP
+        ========================= */
+
+        context.save();
+
+
+        context.textAlign =
+          "right";
+
+
+        context.fillStyle =
+          "rgba(255,255,255,0.94)";
+
+
+        context.shadowColor =
+          "rgba(0,0,0,0.5)";
+
+
+        context.shadowBlur =
+          3;
+
+
+        /* FA
+           TRUE ARABIC FONT */
+
+        context.font =
+          "28px 'Amiri', serif";
+
+
+        context.fillText(
+          "ف",
+          canvas.width - 58,
+          canvas.height - 43
         );
 
-        void flash.offsetWidth;
 
-        flash.classList.add(
-          "active"
+        /* SMALL LOVE */
+
+        context.font =
+          "11px Georgia, serif";
+
+
+        context.fillText(
+          "♡",
+          canvas.width - 38,
+          canvas.height - 43
         );
 
 
-        /* SOUND */
+        /* MIM
+           TRUE ARABIC FONT */
 
-        playShutterSound();
+        context.font =
+          "28px 'Amiri', serif";
+
+
+        context.fillText(
+          "م",
+          canvas.width - 25,
+          canvas.height - 43
+        );
+
+
+        /* =========================
+           VINTAGE DATE
+        ========================= */
+
+        context.font =
+          "8px 'Times New Roman', serif";
+
+
+        context.fillStyle =
+          "rgba(255,255,255,0.72)";
+
+
+        context.fillText(
+          "26 · 09 · 2026",
+          canvas.width - 25,
+          canvas.height - 24
+        );
+
+
+        context.restore();
+
+
+        /* SHOW CAPTURED PHOTO */
+
+        video.style.display =
+          "none";
+
+        canvas.style.display =
+          "block";
+
+
+        snap.style.display =
+          "none";
+
+        flip.style.display =
+          "none";
+
+        retake.style.display =
+          "inline-block";
+
+        keep.style.display =
+          "inline-block";
+
+
+        status.textContent =
+          "READY TO UPLOAD ♡";
+
+
+        snap.disabled =
+          false;
+
+
+      },
+      180
+    );
+
+  }
+);
+
+
+/* =========================
+   RETAKE
+========================= */
+
+retake.addEventListener(
+  "click",
+  function() {
+
+    canvas.style.display =
+      "none";
+
+    video.style.display =
+      "block";
+
+
+    snap.style.display =
+      "inline-block";
+
+    flip.style.display =
+      "inline-block";
+
+
+    retake.style.display =
+      "none";
+
+    keep.style.display =
+      "none";
+
+
+    status.textContent =
+      "";
+
+
+    snap.disabled =
+      false;
+
+  }
+);
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+keep.addEventListener(
+  "click",
+  async function() {
+
+    if (uploading) return;
+
+
+    uploading = true;
+
+    keep.disabled =
+      true;
+
+    retake.disabled =
+      true;
+
+
+    status.textContent =
+      "SAVING... ♡";
+
+
+    const image =
+      canvas.toDataURL(
+        "image/jpeg",
+        0.8
+      );
+
+
+    try {
+
+      const response =
+        await fetch(
+          SCRIPT_URL,
+          {
+            method: "POST",
+
+            body:
+              JSON.stringify({
+                image: image
+              })
+          }
+        );
+
+
+      const result =
+        await response.json();
+
+
+      if (result.success) {
+
+        status.textContent =
+          "SAVED ♡";
+
+
+        photoCount++;
+
+
+        photoNumber.textContent =
+          String(photoCount)
+            .padStart(3, "0");
+
+
+        await loadAlbum();
 
 
         setTimeout(
           function() {
 
-            canvas.width =
-              video.videoWidth;
-
-            canvas.height =
-              video.videoHeight;
-
-
-            const context =
-              canvas.getContext("2d");
-
-
-            /* FRONT CAMERA MIRROR */
-
-            if (
-              currentCamera === "user"
-            ) {
-
-              context.save();
-
-              context.translate(
-                canvas.width,
-                0
-              );
-
-              context.scale(
-                -1,
-                1
-              );
-
-              context.drawImage(
-                video,
-                0,
-                0,
-                canvas.width,
-                canvas.height
-              );
-
-              context.restore();
-
-
-            } else {
-
-              context.drawImage(
-                video,
-                0,
-                0,
-                canvas.width,
-                canvas.height
-              );
-
-            }
-
-
-            /* DATE STAMP */
-
-            context.save();
-
-            context.font =
-              "bold 22px Arial";
-
-            context.fillStyle =
-              "rgba(255,255,255,0.85)";
-
-            context.textAlign =
-              "right";
-
-            context.shadowColor =
-              "rgba(0,0,0,0.5)";
-
-            context.shadowBlur = 3;
-
-
-            context.fillText(
-              "26 · 09 · 2026",
-              canvas.width - 25,
-              canvas.height - 25
-            );
-
-
-            context.restore();
-
-
-            /* SHOW PHOTO */
-
-            video.style.display =
+            canvas.style.display =
               "none";
 
-            canvas.style.display =
+            video.style.display =
               "block";
 
 
             snap.style.display =
-              "none";
+              "inline-block";
 
             flip.style.display =
-              "none";
+              "inline-block";
 
 
             retake.style.display =
-              "inline-block";
+              "none";
 
             keep.style.display =
-              "inline-block";
-
-
-            status.textContent =
-              "READY TO UPLOAD ♡";
-
-
-            snap.disabled = false;
-
-          },
-          180
-        );
-
-      }
-    );
-
-
-    /* RETAKE */
-
-    retake.addEventListener(
-      "click",
-      function() {
-
-        canvas.style.display =
-          "none";
-
-        video.style.display =
-          "block";
-
-
-        snap.style.display =
-          "inline-block";
-
-        flip.style.display =
-          "inline-block";
-
-
-        retake.style.display =
-          "none";
-
-        keep.style.display =
-          "none";
-
-
-        status.textContent =
-          "";
-
-
-        snap.disabled = false;
-
-      }
-    );
-
-
-    /* UPLOAD */
-
-    keep.addEventListener(
-      "click",
-      async function() {
-
-        if (uploading) return;
-
-
-        uploading = true;
-
-        keep.disabled = true;
-
-        retake.disabled = true;
-
-
-        status.textContent =
-          "SAVING... ♡";
-
-
-        const image =
-          canvas.toDataURL(
-            "image/jpeg",
-            0.8
-          );
-
-
-        try {
-
-          const response =
-            await fetch(
-              SCRIPT_URL,
-              {
-                method: "POST",
-
-                body: JSON.stringify({
-                  image: image
-                })
-              }
-            );
-
-
-          const result =
-            await response.json();
-
-
-          if (result.success) {
-
-            status.textContent =
-              "SAVED ♡";
-
-
-            photoCount++;
-
-
-            photoNumber.textContent =
-              String(photoCount)
-                .padStart(3, "0");
-
-
-            await loadAlbum();
-
-
-            setTimeout(
-              function() {
-
-                canvas.style.display =
-                  "none";
-
-                video.style.display =
-                  "block";
-
-
-                snap.style.display =
-                  "inline-block";
-
-                flip.style.display =
-                  "inline-block";
-
-
-                retake.style.display =
-                  "none";
-
-                keep.style.display =
-                  "none";
-
-
-                keep.disabled =
-                  false;
-
-                retake.disabled =
-                  false;
-
-
-                uploading =
-                  false;
-
-
-                status.textContent =
-                  "";
-
-              },
-              700
-            );
-
-
-          } else {
-
-            status.textContent =
-              "UPLOAD FAILED 😭";
+              "none";
 
 
             keep.disabled =
@@ -974,176 +1124,492 @@
             uploading =
               false;
 
-          }
+
+            status.textContent =
+              "";
+
+          },
+          700
+        );
 
 
-        } catch (error) {
+      } else {
 
-          console.error(error);
-
-
-          status.textContent =
-            "UPLOAD FAILED — TRY AGAIN";
+        status.textContent =
+          "UPLOAD FAILED 😭";
 
 
-          keep.disabled =
-            false;
+        keep.disabled =
+          false;
 
-          retake.disabled =
-            false;
+        retake.disabled =
+          false;
 
-          uploading =
-            false;
-
-        }
+        uploading =
+          false;
 
       }
-    );
 
 
-    /* LOAD GALLERY */
+    } catch (error) {
 
-    async function loadAlbum() {
+      console.error(error);
+
+
+      status.textContent =
+        "UPLOAD FAILED — TRY AGAIN";
+
+
+      keep.disabled =
+        false;
+
+      retake.disabled =
+        false;
+
+      uploading =
+        false;
+
+    }
+
+  }
+);
+
+
+/* =========================
+   LOAD GALLERY
+========================= */
+
+async function loadAlbum() {
+
+  albumStatus.textContent =
+    "Loading memories ♡";
+
+
+  try {
+
+    const response =
+      await fetch(
+        SCRIPT_URL +
+        "?t=" +
+        Date.now()
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (!result.success) {
 
       albumStatus.textContent =
-        "Loading memories ♡";
+        "Unable to load album.";
+
+      return;
+
+    }
 
 
-      try {
+    albumGrid.innerHTML =
+      "";
 
-        const response =
-          await fetch(
-            SCRIPT_URL +
-            "?t=" +
-            Date.now()
+
+    galleryPhotos =
+      result.photos || [];
+
+
+    if (
+      galleryPhotos.length ===
+      0
+    ) {
+
+      albumStatus.textContent =
+        "No memories yet ♡";
+
+      return;
+
+    }
+
+
+    albumStatus.textContent =
+      galleryPhotos.length +
+      " memories ♡";
+
+
+    galleryPhotos.forEach(
+      function(photo, index) {
+
+        const image =
+          document.createElement(
+            "img"
           );
 
 
-        const result =
-          await response.json();
+        image.src =
+          photo.url;
 
 
-        if (!result.success) {
-
-          albumStatus.textContent =
-            "Unable to load album.";
-
-          return;
-
-        }
+        image.alt =
+          "Wedding memory";
 
 
-        albumGrid.innerHTML = "";
+        image.loading =
+          "lazy";
 
 
-        if (
-          !result.photos ||
-          result.photos.length === 0
-        ) {
-
-          albumStatus.textContent =
-            "No memories yet ♡";
-
-          return;
-
-        }
+        image.draggable =
+          false;
 
 
-        albumStatus.textContent =
-          result.photos.length +
-          " memories ♡";
+        image.addEventListener(
+          "click",
+          function() {
 
-
-        result.photos.forEach(
-          function(photo) {
-
-            const image =
-              document.createElement("img");
-
-
-            image.src =
-              photo.url;
-
-
-            image.alt =
-              "Wedding memory";
-
-
-            image.loading =
-              "lazy";
-
-
-            albumGrid.appendChild(
-              image
+            openPhotoViewer(
+              index
             );
 
           }
         );
 
 
-      } catch (error) {
-
-        console.error(error);
-
-
-        albumStatus.textContent =
-          "Unable to load album.";
+        albumGrid.appendChild(
+          image
+        );
 
       }
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    albumStatus.textContent =
+      "Unable to load album.";
+
+  }
+
+}
+
+
+/* =========================
+   PHOTO VIEWER
+========================= */
+
+function openPhotoViewer(index) {
+
+  if (
+    galleryPhotos.length ===
+    0
+  ) return;
+
+
+  currentPhotoIndex =
+    index;
+
+
+  updateViewer();
+
+
+  photoViewer.classList.add(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+function updateViewer() {
+
+  const photo =
+    galleryPhotos[
+      currentPhotoIndex
+    ];
+
+
+  if (!photo) return;
+
+
+  viewerImage.src =
+    photo.url;
+
+
+  if (
+    galleryPhotos.length <=
+    1
+  ) {
+
+    previousPhoto.style.display =
+      "none";
+
+    nextPhoto.style.display =
+      "none";
+
+
+  } else {
+
+    previousPhoto.style.display =
+      "block";
+
+    nextPhoto.style.display =
+      "block";
+
+  }
+
+}
+
+
+function closePhotoViewer() {
+
+  photoViewer.classList.remove(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "";
+
+
+  viewerImage.src =
+    "";
+
+}
+
+
+closeViewer.addEventListener(
+  "click",
+  closePhotoViewer
+);
+
+
+/* =========================
+   NEXT PHOTO
+========================= */
+
+function showNextPhoto() {
+
+  if (
+    galleryPhotos.length <=
+    1
+  ) return;
+
+
+  currentPhotoIndex =
+    (
+      currentPhotoIndex + 1
+    ) %
+    galleryPhotos.length;
+
+
+  updateViewer();
+
+}
+
+
+nextPhoto.addEventListener(
+  "click",
+  showNextPhoto
+);
+
+
+/* =========================
+   PREVIOUS PHOTO
+========================= */
+
+function showPreviousPhoto() {
+
+  if (
+    galleryPhotos.length <=
+    1
+  ) return;
+
+
+  currentPhotoIndex =
+    (
+      currentPhotoIndex - 1 +
+      galleryPhotos.length
+    ) %
+    galleryPhotos.length;
+
+
+  updateViewer();
+
+}
+
+
+previousPhoto.addEventListener(
+  "click",
+  showPreviousPhoto
+);
+
+
+/* =========================
+   SWIPE
+========================= */
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+
+photoViewer.addEventListener(
+  "touchstart",
+  function(event) {
+
+    touchStartX =
+      event.changedTouches[0]
+        .screenX;
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+photoViewer.addEventListener(
+  "touchend",
+  function(event) {
+
+    touchEndX =
+      event.changedTouches[0]
+        .screenX;
+
+
+    const difference =
+      touchEndX -
+      touchStartX;
+
+
+    if (
+      Math.abs(difference) <
+      50
+    ) return;
+
+
+    if (
+      difference < 0
+    ) {
+
+      showNextPhoto();
+
+    } else {
+
+      showPreviousPhoto();
+
+    }
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      !photoViewer.classList.contains(
+        "active"
+      )
+    ) return;
+
+
+    if (
+      event.key ===
+      "Escape"
+    ) {
+
+      closePhotoViewer();
 
     }
 
 
-    /* VIEW GALLERY BUTTON */
+    if (
+      event.key ===
+      "ArrowRight"
+    ) {
 
-    albumButton.addEventListener(
-      "click",
-      async function() {
+      showNextPhoto();
 
-        album.style.display =
-          "block";
-
-
-        albumButton.style.display =
-          "none";
+    }
 
 
-        await loadAlbum();
+    if (
+      event.key ===
+      "ArrowLeft"
+    ) {
+
+      showPreviousPhoto();
+
+    }
+
+  }
+);
 
 
-        album.scrollIntoView({
-          behavior: "smooth"
-        });
+/* =========================
+   VIEW GALLERY
+========================= */
 
-      }
-    );
+albumButton.addEventListener(
+  "click",
+  async function() {
 
-
-    /* BACK TO CAMERA */
-
-    backCamera.addEventListener(
-      "click",
-      function() {
-
-        album.style.display =
-          "none";
+    album.style.display =
+      "block";
 
 
-        albumButton.style.display =
-          "inline-block";
+    albumButton.style.display =
+      "none";
 
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
+    await loadAlbum();
 
-      }
-    );
 
-  </script>
+    album.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+);
+
+
+/* =========================
+   BACK TO CAMERA
+========================= */
+
+backCamera.addEventListener(
+  "click",
+  function() {
+
+    album.style.display =
+      "none";
+
+
+    albumButton.style.display =
+      "inline-block";
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+);
+
+</script>
 
 </body>
-</html>
-</body>
-</html></html></html></html></html></html></html>
+</html></html></html></html></html></html></html></html>
