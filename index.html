@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Mari Menggamit Kenangan Bersama</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -25,6 +27,10 @@
       padding: 30px 20px 50px;
     }
 
+    /* =========================
+       WELCOME PAGE
+    ========================= */
+
     #welcome {
       min-height: 100vh;
       display: flex;
@@ -37,27 +43,29 @@
     .date {
       font-size: 15px;
       letter-spacing: 4px;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
+
+    /* NAMA PENGANTIN */
 
     .names {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 22px;
-      margin-bottom: 28px;
-      direction: ltr;
+      gap: 24px;
+      margin-bottom: 30px;
     }
 
-    .names > div:not(.heart) {
+    .person {
       text-align: center;
+      min-width: 55px;
     }
 
     .arabic {
-      font-size: 42px;
-      line-height: 1;
-      margin-bottom: 7px;
       font-family: "Times New Roman", serif;
+      font-size: 46px;
+      line-height: 1;
+      margin-bottom: 8px;
     }
 
     .name {
@@ -66,8 +74,8 @@
     }
 
     .heart {
-      font-size: 20px;
-      margin-top: -10px;
+      font-size: 21px;
+      margin-top: -12px;
     }
 
     h1 {
@@ -102,6 +110,10 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
+
+    /* =========================
+       CAMERA PAGE
+    ========================= */
 
     #main {
       display: none;
@@ -146,6 +158,7 @@
     }
 
     @keyframes flashEffect {
+
       0% {
         opacity: 0.95;
       }
@@ -153,6 +166,7 @@
       100% {
         opacity: 0;
       }
+
     }
 
     .controls {
@@ -180,6 +194,10 @@
       font-size: 13px;
       letter-spacing: 2px;
     }
+
+    /* =========================
+       ALBUM
+    ========================= */
 
     .album-button-wrapper {
       margin-top: 35px;
@@ -223,7 +241,12 @@
       margin-top: 25px;
     }
 
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 380px) {
+
       .page {
         padding-left: 15px;
         padding-right: 15px;
@@ -240,43 +263,80 @@
       button {
         padding: 12px 17px;
       }
+
+      .arabic {
+        font-size: 42px;
+      }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <!-- WELCOME PAGE -->
+
+  <!-- =========================
+       WELCOME PAGE
+  ========================= -->
+
   <section id="welcome">
 
     <div class="date">
       26 · 09 · 2026
     </div>
 
+
+    <!-- FARIS & MIRA -->
+
     <div class="names">
 
-      <div>
-        <div class="arabic">ف</div>
-        <div class="name">Faris</div>
+      <div class="person">
+
+        <div class="arabic">
+          ف
+        </div>
+
+        <div class="name">
+          Faris
+        </div>
+
       </div>
 
-      <div class="heart">♡</div>
 
-      <div>
-        <div class="arabic">م</div>
-        <div class="name">Mira</div>
+      <div class="heart">
+        ♡
+      </div>
+
+
+      <div class="person">
+
+        <div class="arabic">
+          م
+        </div>
+
+        <div class="name">
+          Mira
+        </div>
+
       </div>
 
     </div>
+
 
     <h1>
       Mari Menggamit Kenangan Bersama
     </h1>
 
+
     <div class="subtitle">
+
       Capture a little memory<br>
       from your eyes ♡
+
     </div>
+
 
     <button id="openCameraButton">
       OPEN CAMERA
@@ -285,12 +345,18 @@
   </section>
 
 
-  <!-- CAMERA PAGE -->
+
+  <!-- =========================
+       CAMERA
+  ========================= -->
+
   <main id="main" class="page">
+
 
     <h2 class="camera-title">
       Bingkai Mempelai
     </h2>
+
 
     <div class="camera-box">
 
@@ -300,7 +366,9 @@
         playsinline>
       </video>
 
+
       <canvas id="canvas"></canvas>
+
 
       <div
         id="flash"
@@ -310,19 +378,23 @@
     </div>
 
 
+
     <div class="controls">
 
       <button id="snap">
         TAKE PHOTO
       </button>
 
+
       <button id="flip">
         FLIP CAMERA
       </button>
 
+
       <button id="retake">
         RETAKE
       </button>
+
 
       <button id="keep">
         KEEP ♡
@@ -331,48 +403,79 @@
     </div>
 
 
+
     <div id="status"></div>
 
 
+
     <div class="counter">
-      PHOTO <span id="photoNumber">001</span>
+
+      PHOTO
+      <span id="photoNumber">
+        001
+      </span>
+
     </div>
+
 
 
     <div class="album-button-wrapper">
+
       <button id="albumButton">
         WEDDING ALBUM ♡
       </button>
+
     </div>
 
 
-    <!-- WEDDING ALBUM -->
+
+    <!-- =========================
+         WEDDING ALBUM
+    ========================= -->
+
     <section id="album">
+
 
       <h2 class="album-title">
         Wedding Album ♡
       </h2>
 
+
       <div id="albumStatus">
         Loading memories ♡
       </div>
 
+
       <div id="albumGrid"></div>
+
 
       <button id="backCamera">
         BACK TO CAMERA
       </button>
 
+
     </section>
+
 
   </main>
 
 
+
   <script>
+
+
+    /* =========================
+       GOOGLE APPS SCRIPT
+    ========================= */
 
     const SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbxYIr46zDLHnF9EDA59pMpEVZAfPxhd_gA8YZmA36KapT-FQm-YySa4vGogaWu7q6kE/exec";
 
+
+
+    /* =========================
+       ELEMENTS
+    ========================= */
 
     const welcome =
       document.getElementById("welcome");
@@ -426,6 +529,11 @@
       document.getElementById("backCamera");
 
 
+
+    /* =========================
+       CAMERA VARIABLES
+    ========================= */
+
     let currentStream = null;
 
     let currentCamera = "environment";
@@ -435,21 +543,31 @@
     let uploading = false;
 
 
+
+    /* =========================
+       OPEN CAMERA
+    ========================= */
+
     async function openCamera(cameraType) {
+
 
       if (currentStream) {
 
         currentStream
           .getTracks()
           .forEach(function(track) {
+
             track.stop();
+
           });
 
         currentStream = null;
+
       }
 
 
       try {
+
 
         const stream =
           await navigator.mediaDevices.getUserMedia({
@@ -486,39 +604,61 @@
 
       } catch (error) {
 
+
         console.log(
           "CAMERA ERROR:",
           error.name,
           error.message
         );
 
+
         alert(
           "Camera error: " +
           error.name
         );
+
 
       }
 
     }
 
 
+
+    /* =========================
+       OPEN CAMERA BUTTON
+    ========================= */
+
     openCameraButton.addEventListener(
       "click",
       async function() {
 
-        welcome.style.display = "none";
 
-        main.style.display = "block";
+        welcome.style.display =
+          "none";
 
-        await openCamera(currentCamera);
+
+        main.style.display =
+          "block";
+
+
+        await openCamera(
+          currentCamera
+        );
+
 
       }
     );
 
 
+
+    /* =========================
+       FLIP CAMERA
+    ========================= */
+
     flip.addEventListener(
       "click",
       async function() {
+
 
         if (
           currentCamera === "environment"
@@ -532,17 +672,28 @@
 
         }
 
-        await openCamera(currentCamera);
+
+        await openCamera(
+          currentCamera
+        );
+
 
       }
     );
 
 
+
+    /* =========================
+       SHUTTER SOUND
+    ========================= */
+
     function playShutterSound() {
+
 
       const AudioContext =
         window.AudioContext ||
         window.webkitAudioContext;
+
 
       if (!AudioContext) return;
 
@@ -550,8 +701,10 @@
       const audio =
         new AudioContext();
 
+
       const oscillator =
         audio.createOscillator();
+
 
       const gain =
         audio.createGain();
@@ -560,10 +713,12 @@
       oscillator.type =
         "square";
 
+
       oscillator.frequency.setValueAtTime(
         900,
         audio.currentTime
       );
+
 
       oscillator.frequency.exponentialRampToValueAtTime(
         250,
@@ -575,6 +730,7 @@
         0.12,
         audio.currentTime
       );
+
 
       gain.gain.exponentialRampToValueAtTime(
         0.001,
@@ -589,37 +745,55 @@
 
       oscillator.start();
 
+
       oscillator.stop(
         audio.currentTime + 0.1
       );
 
+
     }
 
+
+
+    /* =========================
+       TAKE PHOTO
+    ========================= */
 
     snap.addEventListener(
       "click",
       function() {
 
+
         if (snap.disabled) return;
+
 
         snap.disabled = true;
 
 
-        flash.classList.remove("active");
+        flash.classList.remove(
+          "active"
+        );
+
 
         void flash.offsetWidth;
 
-        flash.classList.add("active");
+
+        flash.classList.add(
+          "active"
+        );
 
 
         playShutterSound();
 
 
+
         setTimeout(
           function() {
 
+
             canvas.width =
               video.videoWidth;
+
 
             canvas.height =
               video.videoHeight;
@@ -629,22 +803,29 @@
               canvas.getContext("2d");
 
 
+
+            /* MIRROR FRONT CAMERA */
+
             if (
               currentCamera === "user"
             ) {
 
+
               context.save();
+
 
               context.translate(
                 canvas.width,
                 0
               );
 
+
               context.scale(
                 -1,
                 1
               );
 
+
               context.drawImage(
                 video,
                 0,
@@ -652,10 +833,13 @@
                 canvas.width,
                 canvas.height
               );
+
 
               context.restore();
 
+
             } else {
+
 
               context.drawImage(
                 video,
@@ -664,25 +848,35 @@
                 canvas.width,
                 canvas.height
               );
+
 
             }
 
 
+
+            /* DATE STAMP */
+
             context.save();
+
 
             context.font =
               "bold 22px Arial";
 
+
             context.fillStyle =
               "rgba(255,255,255,0.85)";
+
 
             context.textAlign =
               "right";
 
+
             context.shadowColor =
               "rgba(0,0,0,0.5)";
 
-            context.shadowBlur = 3;
+
+            context.shadowBlur =
+              3;
 
 
             context.fillText(
@@ -695,78 +889,115 @@
             context.restore();
 
 
+
+            /* SHOW PHOTO */
+
             video.style.display =
               "none";
+
 
             canvas.style.display =
               "block";
 
+
             snap.style.display =
               "none";
+
 
             flip.style.display =
               "none";
 
+
             retake.style.display =
               "inline-block";
+
 
             keep.style.display =
               "inline-block";
 
+
             status.textContent =
               "READY TO KEEP ♡";
 
+
             snap.disabled = false;
+
 
           },
           180
         );
 
+
       }
     );
 
+
+
+    /* =========================
+       RETAKE
+    ========================= */
 
     retake.addEventListener(
       "click",
       function() {
 
+
         canvas.style.display =
           "none";
+
 
         video.style.display =
           "block";
 
+
         snap.style.display =
           "inline-block";
+
 
         flip.style.display =
           "inline-block";
 
+
         retake.style.display =
           "none";
+
 
         keep.style.display =
           "none";
 
-        status.textContent = "";
 
-        snap.disabled = false;
+        status.textContent =
+          "";
+
+
+        snap.disabled =
+          false;
+
 
       }
     );
 
 
+
+    /* =========================
+       KEEP / UPLOAD
+    ========================= */
+
     keep.addEventListener(
       "click",
       async function() {
 
+
         if (uploading) return;
 
+
         uploading = true;
+
 
         keep.disabled = true;
 
         retake.disabled = true;
+
 
         status.textContent =
           "SAVING... ♡";
@@ -779,16 +1010,21 @@
           );
 
 
+
         try {
+
 
           const response =
             await fetch(
               SCRIPT_URL,
               {
+
                 method: "POST",
+
                 body: JSON.stringify({
                   image: image
                 })
+
               }
             );
 
@@ -797,13 +1033,16 @@
             await response.json();
 
 
+
           if (result.success) {
+
 
             status.textContent =
               "SAVED ♡";
 
 
             photoCount++;
+
 
             photoNumber.textContent =
               String(photoCount)
@@ -813,34 +1052,50 @@
             await loadAlbum();
 
 
+
             setTimeout(
               function() {
+
 
                 canvas.style.display =
                   "none";
 
+
                 video.style.display =
                   "block";
+
 
                 snap.style.display =
                   "inline-block";
 
+
                 flip.style.display =
                   "inline-block";
+
 
                 retake.style.display =
                   "none";
 
+
                 keep.style.display =
                   "none";
 
-                keep.disabled = false;
 
-                retake.disabled = false;
+                keep.disabled =
+                  false;
 
-                uploading = false;
 
-                status.textContent = "";
+                retake.disabled =
+                  false;
+
+
+                uploading =
+                  false;
+
+
+                status.textContent =
+                  "";
+
 
               },
               700
@@ -849,44 +1104,69 @@
 
           } else {
 
+
             status.textContent =
               "UPLOAD FAILED 😭";
 
-            keep.disabled = false;
 
-            retake.disabled = false;
+            keep.disabled =
+              false;
 
-            uploading = false;
+
+            retake.disabled =
+              false;
+
+
+            uploading =
+              false;
+
 
           }
 
 
         } catch (error) {
 
+
           console.error(error);
+
 
           status.textContent =
             "UPLOAD FAILED — TRY AGAIN";
 
-          keep.disabled = false;
 
-          retake.disabled = false;
+          keep.disabled =
+            false;
 
-          uploading = false;
+
+          retake.disabled =
+            false;
+
+
+          uploading =
+            false;
+
 
         }
+
 
       }
     );
 
 
+
+    /* =========================
+       LOAD ALBUM
+    ========================= */
+
     async function loadAlbum() {
+
 
       albumStatus.textContent =
         "Loading memories ♡";
 
 
       try {
+
 
         const response =
           await fetch(
@@ -900,17 +1180,24 @@
           await response.json();
 
 
+
         if (!result.success) {
+
 
           albumStatus.textContent =
             "Unable to load album.";
 
+
           return;
+
 
         }
 
 
-        albumGrid.innerHTML = "";
+
+        albumGrid.innerHTML =
+          "";
+
 
 
         if (
@@ -918,12 +1205,16 @@
           result.photos.length === 0
         ) {
 
+
           albumStatus.textContent =
             "No memories yet ♡";
 
+
           return;
 
+
         }
+
 
 
         albumStatus.textContent =
@@ -931,22 +1222,33 @@
           " memories ♡";
 
 
+
         result.photos.forEach(
           function(photo) {
 
+
             const image =
-              document.createElement("img");
+              document.createElement(
+                "img"
+              );
+
 
             image.src =
               photo.url;
 
+
             image.alt =
               "Wedding memory";
+
 
             image.loading =
               "lazy";
 
-            albumGrid.appendChild(image);
+
+            albumGrid.appendChild(
+              image
+            );
+
 
           }
         );
@@ -954,55 +1256,79 @@
 
       } catch (error) {
 
+
         console.error(error);
+
 
         albumStatus.textContent =
           "Unable to load album.";
 
+
       }
+
 
     }
 
+
+
+    /* =========================
+       OPEN ALBUM
+    ========================= */
 
     albumButton.addEventListener(
       "click",
       async function() {
 
+
         album.style.display =
           "block";
+
 
         albumButton.style.display =
           "none";
 
+
         await loadAlbum();
+
 
         album.scrollIntoView({
           behavior: "smooth"
         });
 
+
       }
     );
 
+
+
+    /* =========================
+       BACK TO CAMERA
+    ========================= */
 
     backCamera.addEventListener(
       "click",
       function() {
 
+
         album.style.display =
           "none";
 
+
         albumButton.style.display =
           "inline-block";
+
 
         window.scrollTo({
           top: 0,
           behavior: "smooth"
         });
 
+
       }
     );
+
 
   </script>
 
 </body>
-</html></html></html>
+</html></html></html></html>
