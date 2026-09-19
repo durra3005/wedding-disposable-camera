@@ -7,6 +7,7 @@
   <title>Mari Menggamit Kenangan Bersama</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -26,7 +27,10 @@
       padding: 30px 20px 50px;
     }
 
-    /* WELCOME */
+
+    /* =========================
+       WELCOME
+    ========================= */
 
     #welcome {
       min-height: 100vh;
@@ -85,7 +89,10 @@
       margin-bottom: 35px;
     }
 
-    /* BUTTON */
+
+    /* =========================
+       BUTTON
+    ========================= */
 
     button {
       font-family: Georgia, "Times New Roman", serif;
@@ -108,7 +115,10 @@
       cursor: not-allowed;
     }
 
-    /* MAIN */
+
+    /* =========================
+       MAIN
+    ========================= */
 
     #main {
       display: none;
@@ -139,7 +149,10 @@
       display: none;
     }
 
-    /* FLASH */
+
+    /* =========================
+       FLASH
+    ========================= */
 
     .flash {
       position: absolute;
@@ -155,6 +168,7 @@
     }
 
     @keyframes flashEffect {
+
       0% {
         opacity: 0.95;
       }
@@ -162,9 +176,13 @@
       100% {
         opacity: 0;
       }
+
     }
 
-    /* CONTROLS */
+
+    /* =========================
+       CAMERA CONTROLS
+    ========================= */
 
     .controls {
       margin-top: 20px;
@@ -192,11 +210,19 @@
       letter-spacing: 2px;
     }
 
-    /* GALLERY */
+
+    /* =========================
+       GALLERY BUTTON
+    ========================= */
 
     .album-button-wrapper {
       margin-top: 35px;
     }
+
+
+    /* =========================
+       GALLERY
+    ========================= */
 
     #album {
       display: none;
@@ -237,9 +263,84 @@
       margin-top: 25px;
     }
 
-    /* MOBILE */
+
+    /* =========================
+       FULLSCREEN PHOTO VIEWER
+    ========================= */
+
+    #photoViewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.94);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-y;
+    }
+
+    #photoViewer.active {
+      display: flex;
+    }
+
+    #viewerImage {
+      max-width: 94vw;
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    #closeViewer {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 32px;
+      line-height: 42px;
+      letter-spacing: 0;
+    }
+
+    #previousPhoto,
+    #nextPhoto {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 60px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+
+    #previousPhoto {
+      left: 5px;
+    }
+
+    #nextPhoto {
+      right: 5px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 380px) {
+
       .page {
         padding-left: 15px;
         padding-right: 15px;
@@ -260,13 +361,24 @@
       .arabic {
         font-size: 42px;
       }
+
+      #viewerImage {
+        max-width: 96vw;
+        max-height: 84vh;
+      }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <!-- WELCOME PAGE -->
+
+  <!-- =========================
+       WELCOME PAGE
+  ========================= -->
 
   <section id="welcome">
 
@@ -274,9 +386,11 @@
       26 · 09 · 2026
     </div>
 
+
     <div class="names">
 
       <div class="person">
+
         <div class="arabic">
           ف
         </div>
@@ -284,13 +398,17 @@
         <div class="name">
           Faris
         </div>
+
       </div>
+
 
       <div class="heart">
         ♡
       </div>
 
+
       <div class="person">
+
         <div class="arabic">
           م
         </div>
@@ -298,18 +416,22 @@
         <div class="name">
           Mira
         </div>
+
       </div>
 
     </div>
+
 
     <h1>
       Mari Menggamit Kenangan Bersama
     </h1>
 
+
     <div class="subtitle">
       Capture a little memory<br>
       from your eyes ♡
     </div>
+
 
     <button id="openCameraButton">
       OPEN CAMERA
@@ -318,13 +440,18 @@
   </section>
 
 
-  <!-- CAMERA PAGE -->
+
+  <!-- =========================
+       CAMERA PAGE
+  ========================= -->
 
   <main id="main" class="page">
+
 
     <h2 class="camera-title">
       Bingkai Mempelai
     </h2>
+
 
     <div class="camera-box">
 
@@ -334,7 +461,9 @@
         playsinline>
       </video>
 
+
       <canvas id="canvas"></canvas>
+
 
       <div
         id="flash"
@@ -352,13 +481,16 @@
         TAKE PHOTO
       </button>
 
+
       <button id="flip">
         FLIP CAMERA
       </button>
 
+
       <button id="retake">
         RETAKE
       </button>
+
 
       <button id="keep">
         UPLOAD ♡
@@ -373,10 +505,13 @@
     <!-- PHOTO COUNTER -->
 
     <div class="counter">
+
       PHOTO
+
       <span id="photoNumber">
         001
       </span>
+
     </div>
 
 
@@ -399,11 +534,14 @@
         View Gallery ♡
       </h2>
 
+
       <div id="albumStatus">
         Loading memories ♡
       </div>
 
+
       <div id="albumGrid"></div>
+
 
       <button id="backCamera">
         BACK TO CAMERA
@@ -414,69 +552,147 @@
   </main>
 
 
+
+  <!-- =========================
+       FULLSCREEN PHOTO VIEWER
+  ========================= -->
+
+  <div id="photoViewer">
+
+    <button id="closeViewer">
+      ×
+    </button>
+
+
+    <button id="previousPhoto">
+      ‹
+    </button>
+
+
+    <img
+      id="viewerImage"
+      alt="Wedding memory"
+      draggable="false">
+
+
+    <button id="nextPhoto">
+      ›
+    </button>
+
+  </div>
+
+
+
   <script>
 
-    /* GOOGLE APPS SCRIPT */
+
+    /* =========================
+       GOOGLE APPS SCRIPT
+    ========================= */
 
     const SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbxYIr46zDLHnF9EDA59pMpEVZAfPxhd_gA8YZmA36KapT-FQm-YySa4vGogaWu7q6kE/exec";
 
 
-    /* ELEMENTS */
+
+    /* =========================
+       ELEMENTS
+    ========================= */
 
     const welcome =
       document.getElementById("welcome");
 
+
     const main =
       document.getElementById("main");
+
 
     const openCameraButton =
       document.getElementById("openCameraButton");
 
+
     const video =
       document.getElementById("video");
+
 
     const canvas =
       document.getElementById("canvas");
 
+
     const snap =
       document.getElementById("snap");
+
 
     const flip =
       document.getElementById("flip");
 
+
     const retake =
       document.getElementById("retake");
+
 
     const keep =
       document.getElementById("keep");
 
+
     const flash =
       document.getElementById("flash");
+
 
     const status =
       document.getElementById("status");
 
+
     const photoNumber =
       document.getElementById("photoNumber");
+
 
     const albumButton =
       document.getElementById("albumButton");
 
+
     const album =
       document.getElementById("album");
+
 
     const albumGrid =
       document.getElementById("albumGrid");
 
+
     const albumStatus =
       document.getElementById("albumStatus");
+
 
     const backCamera =
       document.getElementById("backCamera");
 
 
-    /* CAMERA VARIABLES */
+    /* VIEWER */
+
+    const photoViewer =
+      document.getElementById("photoViewer");
+
+
+    const viewerImage =
+      document.getElementById("viewerImage");
+
+
+    const closeViewer =
+      document.getElementById("closeViewer");
+
+
+    const previousPhoto =
+      document.getElementById("previousPhoto");
+
+
+    const nextPhoto =
+      document.getElementById("nextPhoto");
+
+
+
+    /* =========================
+       CAMERA VARIABLES
+    ========================= */
 
     let currentStream = null;
 
@@ -487,9 +703,20 @@
     let uploading = false;
 
 
-    /* OPEN CAMERA */
+    /* GALLERY DATA */
+
+    let galleryPhotos = [];
+
+    let currentPhotoIndex = 0;
+
+
+
+    /* =========================
+       OPEN CAMERA
+    ========================= */
 
     async function openCamera(cameraType) {
+
 
       if (currentStream) {
 
@@ -501,11 +728,14 @@
 
           });
 
+
         currentStream = null;
+
       }
 
 
       try {
+
 
         const stream =
           await navigator.mediaDevices.getUserMedia({
@@ -521,7 +751,9 @@
 
         currentStream = stream;
 
-        video.srcObject = stream;
+
+        video.srcObject =
+          stream;
 
 
         /* MIRROR FRONT CAMERA */
@@ -544,11 +776,13 @@
 
       } catch (error) {
 
+
         console.log(
           "CAMERA ERROR:",
           error.name,
           error.message
         );
+
 
         alert(
           "Camera error: " +
@@ -560,53 +794,79 @@
     }
 
 
-    /* OPEN CAMERA BUTTON */
+
+    /* =========================
+       OPEN CAMERA BUTTON
+    ========================= */
 
     openCameraButton.addEventListener(
       "click",
       async function() {
 
-        welcome.style.display = "none";
 
-        main.style.display = "block";
+        welcome.style.display =
+          "none";
 
-        await openCamera(currentCamera);
+
+        main.style.display =
+          "block";
+
+
+        await openCamera(
+          currentCamera
+        );
+
 
       }
     );
 
 
-    /* FLIP CAMERA */
+
+    /* =========================
+       FLIP CAMERA
+    ========================= */
 
     flip.addEventListener(
       "click",
       async function() {
 
+
         if (
           currentCamera === "environment"
         ) {
 
-          currentCamera = "user";
+          currentCamera =
+            "user";
 
         } else {
 
-          currentCamera = "environment";
+          currentCamera =
+            "environment";
 
         }
 
-        await openCamera(currentCamera);
+
+        await openCamera(
+          currentCamera
+        );
+
 
       }
     );
 
 
-    /* SHUTTER SOUND */
+
+    /* =========================
+       SHUTTER SOUND
+    ========================= */
 
     function playShutterSound() {
+
 
       const AudioContext =
         window.AudioContext ||
         window.webkitAudioContext;
+
 
       if (!AudioContext) return;
 
@@ -653,7 +913,9 @@
 
       oscillator.connect(gain);
 
-      gain.connect(audio.destination);
+      gain.connect(
+        audio.destination
+      );
 
 
       oscillator.start();
@@ -665,15 +927,21 @@
     }
 
 
-    /* TAKE PHOTO */
+
+    /* =========================
+       TAKE PHOTO
+    ========================= */
 
     snap.addEventListener(
       "click",
       function() {
 
+
         if (snap.disabled) return;
 
-        snap.disabled = true;
+
+        snap.disabled =
+          true;
 
 
         /* FLASH */
@@ -682,7 +950,9 @@
           "active"
         );
 
+
         void flash.offsetWidth;
+
 
         flash.classList.add(
           "active"
@@ -697,8 +967,10 @@
         setTimeout(
           function() {
 
+
             canvas.width =
               video.videoWidth;
+
 
             canvas.height =
               video.videoHeight;
@@ -708,23 +980,28 @@
               canvas.getContext("2d");
 
 
+
             /* FRONT CAMERA MIRROR */
 
             if (
               currentCamera === "user"
             ) {
 
+
               context.save();
+
 
               context.translate(
                 canvas.width,
                 0
               );
 
+
               context.scale(
                 -1,
                 1
               );
+
 
               context.drawImage(
                 video,
@@ -733,12 +1010,14 @@
                 canvas.width,
                 canvas.height
               );
+
 
               context.restore();
 
 
             } else {
 
+
               context.drawImage(
                 video,
                 0,
@@ -747,18 +1026,25 @@
                 canvas.height
               );
 
+
             }
 
 
-            /* WEDDING STAMP */
+
+            /* =========================
+               WEDDING STAMP
+            ========================= */
 
             context.save();
 
 
-            /* INITIALS */
+            /*
+              FA + LOVE + MIM
+              Small and elegant
+            */
 
             context.font =
-              "28px 'Times New Roman'";
+              "18px 'Times New Roman'";
 
 
             context.fillStyle =
@@ -780,14 +1066,15 @@
             context.fillText(
               "ف ♡ م",
               canvas.width - 25,
-              canvas.height - 45
+              canvas.height - 43
             );
 
 
-            /* DATE */
+
+            /* SMALL DATE */
 
             context.font =
-              "12px Arial";
+              "10px Arial";
 
 
             context.fillStyle =
@@ -797,17 +1084,19 @@
             context.fillText(
               "26 · 09 · 2026",
               canvas.width - 25,
-              canvas.height - 25
+              canvas.height - 24
             );
 
 
             context.restore();
 
 
+
             /* SHOW PHOTO */
 
             video.style.display =
               "none";
+
 
             canvas.style.display =
               "block";
@@ -816,12 +1105,14 @@
             snap.style.display =
               "none";
 
+
             flip.style.display =
               "none";
 
 
             retake.style.display =
               "inline-block";
+
 
             keep.style.display =
               "inline-block";
@@ -831,7 +1122,9 @@
               "READY TO UPLOAD ♡";
 
 
-            snap.disabled = false;
+            snap.disabled =
+              false;
+
 
           },
           180
@@ -841,14 +1134,19 @@
     );
 
 
-    /* RETAKE */
+
+    /* =========================
+       RETAKE
+    ========================= */
 
     retake.addEventListener(
       "click",
       function() {
 
+
         canvas.style.display =
           "none";
+
 
         video.style.display =
           "block";
@@ -857,12 +1155,14 @@
         snap.style.display =
           "inline-block";
 
+
         flip.style.display =
           "inline-block";
 
 
         retake.style.display =
           "none";
+
 
         keep.style.display =
           "none";
@@ -872,26 +1172,37 @@
           "";
 
 
-        snap.disabled = false;
+        snap.disabled =
+          false;
+
 
       }
     );
 
 
-    /* UPLOAD */
+
+    /* =========================
+       UPLOAD
+    ========================= */
 
     keep.addEventListener(
       "click",
       async function() {
 
+
         if (uploading) return;
 
 
-        uploading = true;
+        uploading =
+          true;
 
-        keep.disabled = true;
 
-        retake.disabled = true;
+        keep.disabled =
+          true;
+
+
+        retake.disabled =
+          true;
 
 
         status.textContent =
@@ -907,15 +1218,18 @@
 
         try {
 
+
           const response =
             await fetch(
               SCRIPT_URL,
               {
+
                 method: "POST",
 
                 body: JSON.stringify({
                   image: image
                 })
+
               }
             );
 
@@ -924,7 +1238,9 @@
             await response.json();
 
 
+
           if (result.success) {
+
 
             status.textContent =
               "SAVED ♡";
@@ -941,11 +1257,14 @@
             await loadAlbum();
 
 
+
             setTimeout(
               function() {
 
+
                 canvas.style.display =
                   "none";
+
 
                 video.style.display =
                   "block";
@@ -954,6 +1273,7 @@
                 snap.style.display =
                   "inline-block";
 
+
                 flip.style.display =
                   "inline-block";
 
@@ -961,12 +1281,14 @@
                 retake.style.display =
                   "none";
 
+
                 keep.style.display =
                   "none";
 
 
                 keep.disabled =
                   false;
+
 
                 retake.disabled =
                   false;
@@ -979,12 +1301,14 @@
                 status.textContent =
                   "";
 
+
               },
               700
             );
 
 
           } else {
+
 
             status.textContent =
               "UPLOAD FAILED 😭";
@@ -993,16 +1317,20 @@
             keep.disabled =
               false;
 
+
             retake.disabled =
               false;
 
+
             uploading =
               false;
+
 
           }
 
 
         } catch (error) {
+
 
           console.error(error);
 
@@ -1014,11 +1342,14 @@
           keep.disabled =
             false;
 
+
           retake.disabled =
             false;
 
+
           uploading =
             false;
+
 
         }
 
@@ -1026,15 +1357,20 @@
     );
 
 
-    /* LOAD GALLERY */
+
+    /* =========================
+       LOAD GALLERY
+    ========================= */
 
     async function loadAlbum() {
+
 
       albumStatus.textContent =
         "Loading memories ♡";
 
 
       try {
+
 
         const response =
           await fetch(
@@ -1050,24 +1386,33 @@
 
         if (!result.success) {
 
+
           albumStatus.textContent =
             "Unable to load album.";
+
 
           return;
 
         }
 
 
-        albumGrid.innerHTML = "";
+        albumGrid.innerHTML =
+          "";
+
+
+        galleryPhotos =
+          result.photos || [];
+
 
 
         if (
-          !result.photos ||
-          result.photos.length === 0
+          galleryPhotos.length === 0
         ) {
+
 
           albumStatus.textContent =
             "No memories yet ♡";
+
 
           return;
 
@@ -1075,12 +1420,14 @@
 
 
         albumStatus.textContent =
-          result.photos.length +
+          galleryPhotos.length +
           " memories ♡";
 
 
-        result.photos.forEach(
-          function(photo) {
+
+        galleryPhotos.forEach(
+          function(photo, index) {
+
 
             const image =
               document.createElement("img");
@@ -1098,9 +1445,26 @@
               "lazy";
 
 
+            image.draggable =
+              false;
+
+
+            image.addEventListener(
+              "click",
+              function() {
+
+                openPhotoViewer(
+                  index
+                );
+
+              }
+            );
+
+
             albumGrid.appendChild(
               image
             );
+
 
           }
         );
@@ -1108,22 +1472,316 @@
 
       } catch (error) {
 
+
         console.error(error);
 
 
         albumStatus.textContent =
           "Unable to load album.";
 
+
       }
 
     }
 
 
-    /* VIEW GALLERY BUTTON */
+
+    /* =========================
+       OPEN FULLSCREEN PHOTO
+    ========================= */
+
+    function openPhotoViewer(index) {
+
+
+      if (
+        galleryPhotos.length === 0
+      ) return;
+
+
+      currentPhotoIndex =
+        index;
+
+
+      updateViewer();
+
+
+      photoViewer.classList.add(
+        "active"
+      );
+
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+
+    /* =========================
+       UPDATE VIEWER
+    ========================= */
+
+    function updateViewer() {
+
+
+      const photo =
+        galleryPhotos[
+          currentPhotoIndex
+        ];
+
+
+      if (!photo) return;
+
+
+      viewerImage.src =
+        photo.url;
+
+
+      /*
+        Hide arrows when there is
+        only one photo
+      */
+
+      if (
+        galleryPhotos.length <= 1
+      ) {
+
+
+        previousPhoto.style.display =
+          "none";
+
+
+        nextPhoto.style.display =
+          "none";
+
+
+      } else {
+
+
+        previousPhoto.style.display =
+          "block";
+
+
+        nextPhoto.style.display =
+          "block";
+
+      }
+
+    }
+
+
+
+    /* =========================
+       CLOSE VIEWER
+    ========================= */
+
+    function closePhotoViewer() {
+
+
+      photoViewer.classList.remove(
+        "active"
+      );
+
+
+      document.body.style.overflow =
+        "";
+
+
+      viewerImage.src =
+        "";
+
+    }
+
+
+    closeViewer.addEventListener(
+      "click",
+      closePhotoViewer
+    );
+
+
+
+    /* =========================
+       NEXT PHOTO
+    ========================= */
+
+    function showNextPhoto() {
+
+
+      if (
+        galleryPhotos.length <= 1
+      ) return;
+
+
+      currentPhotoIndex =
+        (
+          currentPhotoIndex + 1
+        ) %
+        galleryPhotos.length;
+
+
+      updateViewer();
+
+    }
+
+
+    nextPhoto.addEventListener(
+      "click",
+      showNextPhoto
+    );
+
+
+
+    /* =========================
+       PREVIOUS PHOTO
+    ========================= */
+
+    function showPreviousPhoto() {
+
+
+      if (
+        galleryPhotos.length <= 1
+      ) return;
+
+
+      currentPhotoIndex =
+        (
+          currentPhotoIndex - 1 +
+          galleryPhotos.length
+        ) %
+        galleryPhotos.length;
+
+
+      updateViewer();
+
+    }
+
+
+    previousPhoto.addEventListener(
+      "click",
+      showPreviousPhoto
+    );
+
+
+
+    /* =========================
+       SWIPE
+    ========================= */
+
+    let touchStartX =
+      0;
+
+
+    let touchEndX =
+      0;
+
+
+    photoViewer.addEventListener(
+      "touchstart",
+      function(event) {
+
+
+        touchStartX =
+          event.changedTouches[0].screenX;
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    photoViewer.addEventListener(
+      "touchend",
+      function(event) {
+
+
+        touchEndX =
+          event.changedTouches[0].screenX;
+
+
+        const difference =
+          touchEndX -
+          touchStartX;
+
+
+        if (
+          Math.abs(difference) < 50
+        ) return;
+
+
+        if (difference < 0) {
+
+          showNextPhoto();
+
+        } else {
+
+          showPreviousPhoto();
+
+        }
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+
+    /* =========================
+       KEYBOARD
+    ========================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+
+        if (
+          !photoViewer.classList.contains(
+            "active"
+          )
+        ) return;
+
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closePhotoViewer();
+
+        }
+
+
+        if (
+          event.key === "ArrowRight"
+        ) {
+
+          showNextPhoto();
+
+        }
+
+
+        if (
+          event.key === "ArrowLeft"
+        ) {
+
+          showPreviousPhoto();
+
+        }
+
+      }
+    );
+
+
+
+    /* =========================
+       VIEW GALLERY BUTTON
+    ========================= */
 
     albumButton.addEventListener(
       "click",
       async function() {
+
 
         album.style.display =
           "block";
@@ -1140,15 +1798,20 @@
           behavior: "smooth"
         });
 
+
       }
     );
 
 
-    /* BACK TO CAMERA */
+
+    /* =========================
+       BACK TO CAMERA
+    ========================= */
 
     backCamera.addEventListener(
       "click",
       function() {
+
 
         album.style.display =
           "none";
@@ -1163,10 +1826,12 @@
           behavior: "smooth"
         });
 
+
       }
     );
+
 
   </script>
 
 </body>
-</html></html></html></html></html></html>
+</html></html></html></html></html></html></html>
