@@ -2,1147 +2,1098 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>Our Wedding Camera</title>
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
+  <style>
 
-<title>Our Wedding Camera</title>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
+    body {
+      margin: 0;
+      background: #f7f3ed;
+      color: #3f352d;
+      font-family: Georgia, "Times New Roman", serif;
+      text-align: center;
+    }
 
-* {
-  box-sizing: border-box;
-}
+    .page {
+      width: 100%;
+      max-width: 520px;
+      margin: auto;
+      padding: 30px 20px 50px;
+    }
 
-body {
-  margin: 0;
-  background: #f7f2eb;
-  color: #3f342d;
-  font-family: Georgia, "Times New Roman", serif;
-  text-align: center;
-}
+    /* WELCOME */
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
+    #welcome {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 20px;
+    }
 
-#welcome {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  background: #f7f2eb;
-}
+    .date {
+      font-size: 15px;
+      letter-spacing: 4px;
+      margin-bottom: 25px;
+    }
 
-.welcome-content {
-  max-width: 420px;
-}
+    h1 {
+      font-size: 34px;
+      font-weight: normal;
+      margin: 0 0 12px;
+    }
 
-.welcome-small {
-  font-size: 14px;
-  letter-spacing: 4px;
-  margin-bottom: 22px;
-}
+    .subtitle {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
 
-.welcome-title {
-  font-size: 34px;
-  line-height: 1.2;
-  margin-bottom: 18px;
-}
+    button {
+      font-family: Georgia, "Times New Roman", serif;
+      border: 1px solid #6e5b4d;
+      background: transparent;
+      color: #3f352d;
+      padding: 13px 22px;
+      border-radius: 3px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
 
-.welcome-text {
-  font-size: 17px;
-  line-height: 1.7;
-  margin-bottom: 35px;
-}
+    button:active {
+      transform: scale(0.97);
+    }
 
-.open-camera {
-  border: 1px solid #3f342d;
-  background: transparent;
-  color: #3f342d;
-  padding: 14px 28px;
-  font-size: 13px;
-  letter-spacing: 2px;
-}
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
-.open-camera:active {
-  transform: scale(0.97);
-}
+    /* CAMERA */
 
-#main {
-  display: none;
-  min-height: 100vh;
-  padding: 28px 18px 50px;
-}
+    #main {
+      display: none;
+    }
 
-h1 {
-  font-size: 28px;
-  font-weight: normal;
-  margin: 10px 0 8px;
-}
+    .camera-title {
+      font-size: 24px;
+      font-weight: normal;
+      margin: 10px 0 18px;
+    }
 
-.subtitle {
-  font-size: 14px;
-  margin-bottom: 24px;
-}
+    .camera-box {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+      border-radius: 4px;
+    }
 
-.camera-box {
-  width: 100%;
-  max-width: 520px;
-  margin: auto;
-}
+    video,
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: #111;
-}
+    canvas {
+      display: none;
+    }
 
-video,
-canvas {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+    .flash {
+      position: absolute;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
 
-canvas {
-  display: none;
-}
+    .flash.active {
+      animation: flashEffect 0.18s ease-out;
+    }
 
-.flash {
-  position: absolute;
-  inset: 0;
-  background: white;
-  opacity: 0;
-  pointer-events: none;
-}
+    @keyframes flashEffect {
+      0% {
+        opacity: 0.95;
+      }
 
-.flash.active {
-  animation: cameraFlash 0.18s ease-out;
-}
+      100% {
+        opacity: 0;
+      }
+    }
 
-@keyframes cameraFlash {
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-  0% {
-    opacity: 0;
-  }
+    #retake,
+    #keep {
+      display: none;
+    }
 
-  25% {
-    opacity: 1;
-  }
+    #status {
+      min-height: 24px;
+      margin-top: 15px;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
 
-  100% {
-    opacity: 0;
-  }
+    .counter {
+      margin-top: 12px;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
 
-}
+    /* ALBUM BUTTON */
 
-.status {
-  min-height: 25px;
-  margin: 14px 0 4px;
-  font-size: 13px;
-  letter-spacing: 1px;
-}
+    .album-button-wrapper {
+      margin-top: 35px;
+    }
 
-.photo-number {
-  font-size: 12px;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
-}
+    /* ALBUM */
 
-button:not(.open-camera) {
-  display: inline-block;
-  margin: 5px 3px;
-  padding: 12px 16px;
-  border: 1px solid #3f342d;
-  background: transparent;
-  color: #3f342d;
-  font-size: 12px;
-  letter-spacing: 1px;
-}
+    #album {
+      display: none;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(63, 53, 45, 0.25);
+    }
 
-#retake,
-#keep {
-  display: none;
-}
+    .album-title {
+      font-size: 27px;
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
 
-button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
+    #albumStatus {
+      font-size: 14px;
+      margin-bottom: 22px;
+      min-height: 20px;
+    }
 
-.album-section {
-  max-width: 900px;
-  margin: 55px auto 0;
-  padding-top: 35px;
-  border-top: 1px solid rgba(63,52,45,0.25);
-}
+    #albumGrid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
 
-.album-title {
-  font-size: 25px;
-  font-weight: normal;
-  margin-bottom: 8px;
-}
+    #albumGrid img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: #e9e3db;
+      border-radius: 2px;
+    }
 
-.album-subtitle {
-  font-size: 13px;
-  margin-bottom: 22px;
-}
+    #backCamera {
+      margin-top: 25px;
+    }
 
-.album-button {
-  margin-bottom: 25px !important;
-}
+    @media (max-width: 380px) {
 
-.album {
-  display: none;
-}
+      .page {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
 
-.album-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
+      h1 {
+        font-size: 29px;
+      }
 
-.album-grid img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  background: #e8dfd5;
-}
+      .camera-title {
+        font-size: 21px;
+      }
 
-.album-status {
-  min-height: 25px;
-  font-size: 13px;
-  margin: 15px 0;
-}
+      button {
+        padding: 12px 17px;
+      }
 
-.back-camera {
-  margin-top: 25px !important;
-}
+    }
 
-@media (min-width: 700px) {
-
-  #main {
-    padding-top: 45px;
-  }
-
-  .album-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
-}
-
-</style>
-
+  </style>
 </head>
 
 
 <body>
 
+  <!-- WELCOME -->
 
-<!-- ========================= -->
-<!-- WELCOME -->
-<!-- ========================= -->
+  <section id="welcome">
 
-<div id="welcome">
-
-  <div class="welcome-content">
-
-    <div class="welcome-small">
+    <div class="date">
       26 · 09 · 2026
     </div>
 
-    <div class="welcome-title">
+    <h1>
       Our Wedding Camera
-    </div>
+    </h1>
 
-    <div class="welcome-text">
+    <div class="subtitle">
       Capture a little memory<br>
       from your eyes ♡
     </div>
 
-    <button
-      class="open-camera"
-      id="openCameraButton"
-    >
+    <button id="openCameraButton">
       OPEN CAMERA
     </button>
 
-  </div>
-
-</div>
+  </section>
 
 
-<!-- ========================= -->
-<!-- MAIN -->
-<!-- ========================= -->
+  <!-- MAIN CAMERA -->
 
-<div id="main">
+  <main id="main" class="page">
 
-  <h1>
-    Our Wedding Camera
-  </h1>
-
-  <div class="subtitle">
-    Capture a little memory from your eyes ♡
-  </div>
+    <h2 class="camera-title">
+      Our Wedding Camera
+    </h2>
 
 
-  <!-- CAMERA -->
-
-  <div class="camera-box">
-
-    <div class="video-wrapper">
+    <div class="camera-box">
 
       <video
-        id="camera"
+        id="video"
         autoplay
-        playsinline
-        muted
-      ></video>
+        playsinline>
+      </video>
 
-      <canvas id="photo"></canvas>
+      <canvas id="canvas"></canvas>
 
       <div
-        class="flash"
         id="flash"
-      ></div>
-
-    </div>
-
-
-    <div
-      class="status"
-      id="status"
-    ></div>
-
-
-    <div class="photo-number">
-
-      PHOTO
-      <span id="photoNumber">
-        001
-      </span>
-
-    </div>
-
-
-    <button id="flip">
-      ↔ FLIP CAMERA
-    </button>
-
-
-    <button id="snap">
-      📸 TAKE PHOTO
-    </button>
-
-
-    <button id="retake">
-      ↩ RETAKE
-    </button>
-
-
-    <button id="keep">
-      ♡ KEEP PHOTO
-    </button>
-
-  </div>
-
-
-  <!-- ========================= -->
-  <!-- WEDDING ALBUM -->
-  <!-- ========================= -->
-
-  <div class="album-section">
-
-    <div class="album-title">
-      WEDDING ALBUM ♡
-    </div>
-
-    <div class="album-subtitle">
-      Little memories from everyone
-    </div>
-
-    <button
-      class="album-button"
-      id="albumButton"
-    >
-      VIEW WEDDING ALBUM
-    </button>
-
-
-    <div
-      class="album"
-      id="album"
-    >
-
-      <div
-        class="album-status"
-        id="albumStatus"
-      >
-        Loading memories ♡
+        class="flash">
       </div>
 
-      <div
-        class="album-grid"
-        id="albumGrid"
-      ></div>
+    </div>
 
 
-      <button
-        class="back-camera"
-        id="backCamera"
-      >
-        ← BACK TO CAMERA
+    <div class="controls">
+
+      <button id="snap">
+        TAKE PHOTO
+      </button>
+
+      <button id="flip">
+        FLIP CAMERA
+      </button>
+
+      <button id="retake">
+        RETAKE
+      </button>
+
+      <button id="keep">
+        KEEP ♡
       </button>
 
     </div>
 
-  </div>
 
-</div>
+    <div id="status"></div>
 
 
-<script>
+    <div class="counter">
+      PHOTO <span id="photoNumber">001</span>
+    </div>
 
 
-// =====================================
-// GOOGLE APPS SCRIPT
-// =====================================
+    <div class="album-button-wrapper">
 
-const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbybxe4TYDnv9xh73jQ1UVJeSxJ-q3EmX-PTqh0tCbSXsxrd_XKVD3mFhF2-ncaWfnbm/exec";
+      <button id="albumButton">
+        WEDDING ALBUM ♡
+      </button>
 
+    </div>
 
-// =====================================
-// ELEMENTS
-// =====================================
 
-const welcome =
-  document.getElementById("welcome");
+    <!-- ALBUM -->
 
-const main =
-  document.getElementById("main");
+    <section id="album">
 
-const openCameraButton =
-  document.getElementById("openCameraButton");
+      <h2 class="album-title">
+        Wedding Album ♡
+      </h2>
 
-const video =
-  document.getElementById("camera");
+      <div id="albumStatus">
+        Loading memories ♡
+      </div>
 
-const canvas =
-  document.getElementById("photo");
+      <div id="albumGrid"></div>
 
-const flash =
-  document.getElementById("flash");
+      <button id="backCamera">
+        BACK TO CAMERA
+      </button>
 
-const flip =
-  document.getElementById("flip");
+    </section>
 
-const snap =
-  document.getElementById("snap");
+  </main>
 
-const retake =
-  document.getElementById("retake");
 
-const keep =
-  document.getElementById("keep");
+  <script>
 
-const status =
-  document.getElementById("status");
+    /* =========================
+       APPS SCRIPT URL
+    ========================= */
 
-const photoNumber =
-  document.getElementById("photoNumber");
+    const SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbxYIr46zDLHnF9EDA59pMpEVZAfPxhd_gA8YZmA36KapT-FQm-YySa4vGogaWu7q6kE/exec";
 
-const albumButton =
-  document.getElementById("albumButton");
 
-const album =
-  document.getElementById("album");
+    /* =========================
+       ELEMENTS
+    ========================= */
 
-const albumGrid =
-  document.getElementById("albumGrid");
+    const welcome =
+      document.getElementById("welcome");
 
-const albumStatus =
-  document.getElementById("albumStatus");
+    const main =
+      document.getElementById("main");
 
-const backCamera =
-  document.getElementById("backCamera");
+    const openCameraButton =
+      document.getElementById("openCameraButton");
 
+    const video =
+      document.getElementById("video");
 
-// =====================================
-// VARIABLES
-// =====================================
+    const canvas =
+      document.getElementById("canvas");
 
-let photoCount = 1;
+    const snap =
+      document.getElementById("snap");
 
-let currentStream = null;
+    const flip =
+      document.getElementById("flip");
 
-let currentCamera = "environment";
+    const retake =
+      document.getElementById("retake");
 
-let uploading = false;
+    const keep =
+      document.getElementById("keep");
 
+    const flash =
+      document.getElementById("flash");
 
-// =====================================
-// OPEN CAMERA
-// =====================================
+    const status =
+      document.getElementById("status");
 
-async function openCamera(cameraType) {
+    const photoNumber =
+      document.getElementById("photoNumber");
 
-  if (currentStream) {
+    const albumButton =
+      document.getElementById("albumButton");
 
-    currentStream
-      .getTracks()
-      .forEach(function(track) {
+    const album =
+      document.getElementById("album");
 
-        track.stop();
+    const albumGrid =
+      document.getElementById("albumGrid");
 
-      });
+    const albumStatus =
+      document.getElementById("albumStatus");
 
-    currentStream = null;
+    const backCamera =
+      document.getElementById("backCamera");
 
-  }
 
+    /* =========================
+       CAMERA VARIABLES
+    ========================= */
 
-  try {
+    let currentStream = null;
 
-    const stream =
-      await navigator.mediaDevices.getUserMedia({
+    let currentCamera = "environment";
 
-        video: {
-          facingMode: cameraType
-        },
+    let photoCount = 1;
 
-        audio: false
+    let uploading = false;
 
-      });
 
+    /* =========================
+       OPEN CAMERA
+    ========================= */
 
-    currentStream = stream;
+    async function openCamera(cameraType) {
 
-    video.srcObject = stream;
+      if (currentStream) {
 
+        currentStream
+          .getTracks()
+          .forEach(function(track) {
+            track.stop();
+          });
 
-    if (cameraType === "user") {
+        currentStream = null;
+      }
 
-      video.style.transform =
-        "scaleX(-1)";
 
-    } else {
+      try {
 
-      video.style.transform =
-        "scaleX(1)";
+        const stream =
+          await navigator.mediaDevices.getUserMedia({
 
-    }
+            video: {
+              facingMode: cameraType
+            },
 
+            audio: false
 
-    await video.play();
+          });
 
 
-  } catch (error) {
+        currentStream = stream;
 
-    console.log(
-      "CAMERA ERROR:",
-      error.name,
-      error.message
-    );
+        video.srcObject = stream;
 
-    alert(
-      "Camera error: " +
-      error.name
-    );
 
-  }
+        /* MIRROR FRONT CAMERA */
 
-}
+        if (cameraType === "user") {
 
-
-// =====================================
-// OPEN CAMERA BUTTON
-// =====================================
-
-openCameraButton.addEventListener(
-  "click",
-  async function() {
-
-    welcome.style.display = "none";
-
-    main.style.display = "block";
-
-    await openCamera(
-      currentCamera
-    );
-
-  }
-);
-
-
-// =====================================
-// FLIP CAMERA
-// =====================================
-
-flip.addEventListener(
-  "click",
-  async function() {
-
-    if (
-      currentCamera ===
-      "environment"
-    ) {
-
-      currentCamera = "user";
-
-    } else {
-
-      currentCamera = "environment";
-
-    }
-
-
-    await openCamera(
-      currentCamera
-    );
-
-  }
-);
-
-
-// =====================================
-// SHUTTER SOUND
-// =====================================
-
-function playShutterSound() {
-
-  const AudioContext =
-    window.AudioContext ||
-    window.webkitAudioContext;
-
-
-  if (!AudioContext) return;
-
-
-  const audio =
-    new AudioContext();
-
-
-  const oscillator =
-    audio.createOscillator();
-
-
-  const gain =
-    audio.createGain();
-
-
-  oscillator.type =
-    "square";
-
-
-  oscillator.frequency.setValueAtTime(
-    900,
-    audio.currentTime
-  );
-
-
-  oscillator.frequency
-    .exponentialRampToValueAtTime(
-      250,
-      audio.currentTime + 0.08
-    );
-
-
-  gain.gain.setValueAtTime(
-    0.12,
-    audio.currentTime
-  );
-
-
-  gain.gain
-    .exponentialRampToValueAtTime(
-      0.001,
-      audio.currentTime + 0.1
-    );
-
-
-  oscillator.connect(gain);
-
-  gain.connect(audio.destination);
-
-
-  oscillator.start();
-
-  oscillator.stop(
-    audio.currentTime + 0.1
-  );
-
-}
-
-
-// =====================================
-// TAKE PHOTO
-// =====================================
-
-snap.addEventListener(
-  "click",
-  function() {
-
-    if (snap.disabled) return;
-
-    snap.disabled = true;
-
-
-    flash.classList.remove(
-      "active"
-    );
-
-    void flash.offsetWidth;
-
-    flash.classList.add(
-      "active"
-    );
-
-
-    playShutterSound();
-
-
-    setTimeout(
-      function() {
-
-        canvas.width =
-          video.videoWidth;
-
-        canvas.height =
-          video.videoHeight;
-
-
-        const context =
-          canvas.getContext("2d");
-
-
-        // ORIGINAL PHOTO
-        // NO FILTER
-
-        if (
-          currentCamera === "user"
-        ) {
-
-          context.save();
-
-          context.translate(
-            canvas.width,
-            0
-          );
-
-          context.scale(
-            -1,
-            1
-          );
-
-          context.drawImage(
-            video,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
-
-          context.restore();
+          video.style.transform =
+            "scaleX(-1)";
 
         } else {
 
-          context.drawImage(
-            video,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
+          video.style.transform =
+            "scaleX(1)";
 
         }
 
 
-        // DATE STAMP
+        await video.play();
 
-        context.save();
 
-        context.font =
-          "bold 22px Arial";
+      } catch (error) {
 
-        context.fillStyle =
-          "rgba(255,255,255,0.85)";
-
-        context.textAlign =
-          "right";
-
-        context.shadowColor =
-          "rgba(0,0,0,0.5)";
-
-        context.shadowBlur =
-          3;
-
-        context.fillText(
-          "26 · 09 · 2026",
-          canvas.width - 25,
-          canvas.height - 25
+        console.log(
+          "CAMERA ERROR:",
+          error.name,
+          error.message
         );
 
-        context.restore();
+        alert(
+          "Camera error: " +
+          error.name
+        );
+
+      }
+
+    }
 
 
-        video.style.display =
-          "none";
+    /* =========================
+       OPEN CAMERA BUTTON
+    ========================= */
 
-        canvas.style.display =
-          "block";
+    openCameraButton.addEventListener(
+      "click",
+      async function() {
 
-        snap.style.display =
-          "none";
+        welcome.style.display = "none";
 
-        flip.style.display =
-          "none";
+        main.style.display = "block";
 
-        retake.style.display =
-          "inline-block";
+        await openCamera(currentCamera);
 
-        keep.style.display =
-          "inline-block";
-
-        status.textContent =
-          "READY TO KEEP ♡";
-
-        snap.disabled = false;
-
-
-      },
-      180
+      }
     );
 
-  }
-);
+
+    /* =========================
+       FLIP CAMERA
+    ========================= */
+
+    flip.addEventListener(
+      "click",
+      async function() {
+
+        if (
+          currentCamera ===
+          "environment"
+        ) {
+
+          currentCamera = "user";
+
+        } else {
+
+          currentCamera =
+            "environment";
+
+        }
+
+        await openCamera(
+          currentCamera
+        );
+
+      }
+    );
 
 
-// =====================================
-// RETAKE
-// =====================================
+    /* =========================
+       SHUTTER SOUND
+    ========================= */
 
-retake.addEventListener(
-  "click",
-  function() {
+    function playShutterSound() {
 
-    canvas.style.display =
-      "none";
+      const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
 
-    video.style.display =
-      "block";
-
-    snap.style.display =
-      "inline-block";
-
-    flip.style.display =
-      "inline-block";
-
-    retake.style.display =
-      "none";
-
-    keep.style.display =
-      "none";
-
-    status.textContent =
-      "";
-
-    snap.disabled = false;
-
-  }
-);
+      if (!AudioContext) return;
 
 
-// =====================================
-// KEEP / UPLOAD
-// =====================================
+      const audio =
+        new AudioContext();
 
-keep.addEventListener(
-  "click",
-  async function() {
+      const oscillator =
+        audio.createOscillator();
 
-    if (uploading) return;
-
-
-    uploading = true;
-
-    keep.disabled = true;
-
-    retake.disabled = true;
+      const gain =
+        audio.createGain();
 
 
-    status.textContent =
-      "SAVING... ♡";
+      oscillator.type =
+        "square";
 
 
-    const image =
-      canvas.toDataURL(
-        "image/jpeg",
-        0.8
+      oscillator.frequency.setValueAtTime(
+        900,
+        audio.currentTime
       );
 
 
-    try {
-
-      const response =
-        await fetch(
-          SCRIPT_URL,
-          {
-
-            method: "POST",
-
-            body: JSON.stringify({
-              image: image
-            })
-
-          }
+      oscillator.frequency
+        .exponentialRampToValueAtTime(
+          250,
+          audio.currentTime + 0.08
         );
 
 
-      const result =
-        await response.json();
+      gain.gain.setValueAtTime(
+        0.12,
+        audio.currentTime
+      );
 
 
-      if (result.success) {
-
-        status.textContent =
-          "SAVED ♡";
-
-
-        photoCount++;
+      gain.gain
+        .exponentialRampToValueAtTime(
+          0.001,
+          audio.currentTime + 0.1
+        );
 
 
-        photoNumber.textContent =
-          String(photoCount)
-            .padStart(3, "0");
+      oscillator.connect(gain);
+
+      gain.connect(
+        audio.destination
+      );
 
 
-        // Refresh album
+      oscillator.start();
 
-        loadAlbum();
+      oscillator.stop(
+        audio.currentTime + 0.1
+      );
+
+    }
+
+
+    /* =========================
+       TAKE PHOTO
+    ========================= */
+
+    snap.addEventListener(
+      "click",
+      function() {
+
+        if (snap.disabled) return;
+
+        snap.disabled = true;
+
+
+        /* FLASH */
+
+        flash.classList.remove(
+          "active"
+        );
+
+        void flash.offsetWidth;
+
+        flash.classList.add(
+          "active"
+        );
+
+
+        /* SOUND */
+
+        playShutterSound();
 
 
         setTimeout(
           function() {
 
-            canvas.style.display =
-              "none";
+            canvas.width =
+              video.videoWidth;
+
+            canvas.height =
+              video.videoHeight;
+
+
+            const context =
+              canvas.getContext("2d");
+
+
+            /* FRONT CAMERA */
+
+            if (
+              currentCamera ===
+              "user"
+            ) {
+
+              context.save();
+
+              context.translate(
+                canvas.width,
+                0
+              );
+
+              context.scale(
+                -1,
+                1
+              );
+
+              context.drawImage(
+                video,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+              );
+
+              context.restore();
+
+
+            } else {
+
+              /* BACK CAMERA */
+
+              context.drawImage(
+                video,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+              );
+
+            }
+
+
+            /* DATE STAMP */
+
+            context.save();
+
+            context.font =
+              "bold 22px Arial";
+
+            context.fillStyle =
+              "rgba(255,255,255,0.85)";
+
+            context.textAlign =
+              "right";
+
+            context.shadowColor =
+              "rgba(0,0,0,0.5)";
+
+            context.shadowBlur = 3;
+
+
+            context.fillText(
+              "26 · 09 · 2026",
+              canvas.width - 25,
+              canvas.height - 25
+            );
+
+
+            context.restore();
+
+
+            /* SHOW PHOTO */
 
             video.style.display =
+              "none";
+
+            canvas.style.display =
               "block";
 
             snap.style.display =
-              "inline-block";
+              "none";
 
             flip.style.display =
-              "inline-block";
+              "none";
 
             retake.style.display =
-              "none";
+              "inline-block";
 
             keep.style.display =
-              "none";
+              "inline-block";
 
-            keep.disabled = false;
-
-            retake.disabled = false;
-
-            uploading = false;
 
             status.textContent =
-              "";
+              "READY TO KEEP ♡";
+
+
+            snap.disabled = false;
 
           },
-          700
-        );
-
-
-      } else {
-
-        status.textContent =
-          "UPLOAD FAILED 😭";
-
-        keep.disabled = false;
-
-        retake.disabled = false;
-
-        uploading = false;
-
-      }
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      status.textContent =
-        "UPLOAD FAILED — TRY AGAIN";
-
-      keep.disabled = false;
-
-      retake.disabled = false;
-
-      uploading = false;
-
-    }
-
-  }
-);
-
-
-// =====================================
-// LOAD WEDDING ALBUM
-// =====================================
-
-async function loadAlbum() {
-
-  albumStatus.textContent =
-    "Loading memories ♡";
-
-
-  try {
-
-    const response =
-      await fetch(
-        SCRIPT_URL
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (
-      !result.success
-    ) {
-
-      albumStatus.textContent =
-        "Unable to load album.";
-
-      return;
-
-    }
-
-
-    albumGrid.innerHTML =
-      "";
-
-
-    if (
-      !result.photos ||
-      result.photos.length === 0
-    ) {
-
-      albumStatus.textContent =
-        "No memories yet ♡";
-
-      return;
-
-    }
-
-
-    albumStatus.textContent =
-      result.photos.length +
-      " memories ♡";
-
-
-    result.photos.forEach(
-      function(photo) {
-
-        const image =
-          document.createElement(
-            "img"
-          );
-
-
-        image.src =
-          photo.url;
-
-
-        image.alt =
-          "Wedding memory";
-
-
-        image.loading =
-          "lazy";
-
-
-        albumGrid.appendChild(
-          image
+          180
         );
 
       }
     );
 
 
-  } catch (error) {
+    /* =========================
+       RETAKE
+    ========================= */
 
-    console.error(error);
+    retake.addEventListener(
+      "click",
+      function() {
 
-    albumStatus.textContent =
-      "Unable to load album.";
+        canvas.style.display =
+          "none";
 
-  }
+        video.style.display =
+          "block";
 
-}
+        snap.style.display =
+          "inline-block";
 
+        flip.style.display =
+          "inline-block";
 
-// =====================================
-// OPEN ALBUM
-// =====================================
+        retake.style.display =
+          "none";
 
-albumButton.addEventListener(
-  "click",
-  async function() {
+        keep.style.display =
+          "none";
 
-    album.style.display =
-      "block";
+        status.textContent =
+          "";
 
-    albumButton.style.display =
-      "none";
+        snap.disabled = false;
 
-    await loadAlbum();
-
-  }
-);
-
-
-// =====================================
-// BACK TO CAMERA
-// =====================================
-
-backCamera.addEventListener(
-  "click",
-  function() {
-
-    album.style.display =
-      "none";
-
-    albumButton.style.display =
-      "inline-block";
+      }
+    );
 
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    /* =========================
+       KEEP / UPLOAD
+    ========================= */
 
-  }
-);
+    keep.addEventListener(
+      "click",
+      async function() {
 
-</script>
+        if (uploading) return;
+
+
+        uploading = true;
+
+        keep.disabled = true;
+
+        retake.disabled = true;
+
+
+        status.textContent =
+          "SAVING... ♡";
+
+
+        const image =
+          canvas.toDataURL(
+            "image/jpeg",
+            0.8
+          );
+
+
+        try {
+
+          const response =
+            await fetch(
+              SCRIPT_URL,
+              {
+                method: "POST",
+
+                body: JSON.stringify({
+                  image: image
+                })
+              }
+            );
+
+
+          const result =
+            await response.json();
+
+
+          if (result.success) {
+
+            status.textContent =
+              "SAVED ♡";
+
+
+            photoCount++;
+
+
+            photoNumber.textContent =
+              String(photoCount)
+                .padStart(3, "0");
+
+
+            /* REFRESH ALBUM */
+
+            await loadAlbum();
+
+
+            setTimeout(
+              function() {
+
+                canvas.style.display =
+                  "none";
+
+                video.style.display =
+                  "block";
+
+                snap.style.display =
+                  "inline-block";
+
+                flip.style.display =
+                  "inline-block";
+
+                retake.style.display =
+                  "none";
+
+                keep.style.display =
+                  "none";
+
+
+                keep.disabled =
+                  false;
+
+                retake.disabled =
+                  false;
+
+                uploading =
+                  false;
+
+                status.textContent =
+                  "";
+
+              },
+              700
+            );
+
+
+          } else {
+
+            status.textContent =
+              "UPLOAD FAILED 😭";
+
+            keep.disabled =
+              false;
+
+            retake.disabled =
+              false;
+
+            uploading =
+              false;
+
+          }
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          status.textContent =
+            "UPLOAD FAILED — TRY AGAIN";
+
+
+          keep.disabled =
+            false;
+
+          retake.disabled =
+            false;
+
+          uploading =
+            false;
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       LOAD WEDDING ALBUM
+    ========================= */
+
+    async function loadAlbum() {
+
+      albumStatus.textContent =
+        "Loading memories ♡";
+
+
+      try {
+
+        const response =
+          await fetch(
+            SCRIPT_URL +
+            "?t=" +
+            Date.now()
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if (!result.success) {
+
+          albumStatus.textContent =
+            "Unable to load album.";
+
+          return;
+
+        }
+
+
+        albumGrid.innerHTML =
+          "";
+
+
+        if (
+          !result.photos ||
+          result.photos.length === 0
+        ) {
+
+          albumStatus.textContent =
+            "No memories yet ♡";
+
+          return;
+
+        }
+
+
+        albumStatus.textContent =
+          result.photos.length +
+          " memories ♡";
+
+
+        result.photos.forEach(
+          function(photo) {
+
+            const image =
+              document.createElement(
+                "img"
+              );
+
+
+            image.src =
+              photo.url;
+
+
+            image.alt =
+              "Wedding memory";
+
+
+            image.loading =
+              "lazy";
+
+
+            albumGrid.appendChild(
+              image
+            );
+
+          }
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        albumStatus.textContent =
+          "Unable to load album.";
+
+      }
+
+    }
+
+
+    /* =========================
+       OPEN ALBUM
+    ========================= */
+
+    albumButton.addEventListener(
+      "click",
+      async function() {
+
+        album.style.display =
+          "block";
+
+        albumButton.style.display =
+          "none";
+
+
+        await loadAlbum();
+
+
+        album.scrollIntoView({
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+
+    /* =========================
+       BACK TO CAMERA
+    ========================= */
+
+    backCamera.addEventListener(
+      "click",
+      function() {
+
+        album.style.display =
+          "none";
+
+        albumButton.style.display =
+          "inline-block";
+
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+  </script>
 
 </body>
 
