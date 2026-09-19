@@ -230,6 +230,7 @@
       display: block;
       background: #e9e3db;
       border-radius: 2px;
+      cursor: pointer;
     }
 
     #backCamera {
@@ -324,7 +325,6 @@
     <h2 class="camera-title">
       Bingkai Mempelai
     </h2>
-
 
     <div class="camera-box">
 
@@ -750,23 +750,48 @@
             }
 
 
-            /* DATE STAMP */
+            /* WEDDING STAMP */
 
             context.save();
 
+
+            /* INITIALS */
+
             context.font =
-              "bold 22px Arial";
+              "28px 'Times New Roman'";
+
 
             context.fillStyle =
-              "rgba(255,255,255,0.85)";
+              "rgba(255,255,255,0.9)";
+
 
             context.textAlign =
               "right";
 
+
             context.shadowColor =
               "rgba(0,0,0,0.5)";
 
-            context.shadowBlur = 3;
+
+            context.shadowBlur =
+              3;
+
+
+            context.fillText(
+              "ف ♡ م",
+              canvas.width - 25,
+              canvas.height - 45
+            );
+
+
+            /* DATE */
+
+            context.font =
+              "12px Arial";
+
+
+            context.fillStyle =
+              "rgba(255,255,255,0.75)";
 
 
             context.fillText(
@@ -1144,4 +1169,4 @@
   </script>
 
 </body>
-</html></html></html></html></html>
+</html></html></html></html></html></html>
