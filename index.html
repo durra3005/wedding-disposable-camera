@@ -1,590 +1,836 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
-  <title>
-    Mari Menggamit Kenangan Bersama
-  </title>
+<title>Our Wedding Camera</title>
 
 
-  <!-- =========================
-       ARABIC FONT
-  ========================== -->
+<!-- AMIRI ARABIC FONT -->
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
 
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
-    rel="stylesheet"
-  >
+<link
+  href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+  rel="stylesheet"
+>
 
 
-  <style>
+<style>
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
 
-    body {
-      margin: 0;
-      background: #f7f3ed;
-      color: #3f352d;
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-      text-align: center;
-    }
+body {
 
+  margin: 0;
 
-    .page {
-      width: 100%;
-      max-width: 520px;
-      margin: auto;
-      padding: 30px 20px 50px;
-    }
+  min-height: 100vh;
 
+  background:
+    #f7f2ea;
 
-    /* =========================
-       WELCOME
-    ========================== */
+  color:
+    #3c3028;
 
-    #welcome {
-      min-height: 100vh;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-      display: flex;
+  text-align:
+    center;
 
-      flex-direction: column;
+}
 
-      justify-content: center;
 
-      align-items: center;
+.screen {
 
-      padding: 30px 20px;
-    }
+  min-height: 100vh;
 
+  display:
+    flex;
 
-    .date {
-      font-size: 15px;
-      letter-spacing: 4px;
-      margin-bottom: 30px;
-    }
+  flex-direction:
+    column;
 
+  align-items:
+    center;
 
-    .names {
-      display: flex;
+  justify-content:
+    center;
 
-      align-items: center;
+  padding:
+    28px 20px;
 
-      justify-content: center;
+}
 
-      gap: 24px;
 
-      margin-bottom: 30px;
-    }
+#welcome {
 
+  background:
+    #f7f2ea;
 
-    .person {
-      text-align: center;
-      min-width: 55px;
-    }
+}
 
 
-    .arabic {
-      font-family:
-        "Times New Roman",
-        serif;
+.date {
 
-      font-size: 46px;
+  font-size:
+    13px;
 
-      line-height: 1;
+  letter-spacing:
+    4px;
 
-      margin-bottom: 8px;
-    }
+  margin-bottom:
+    28px;
 
+  color:
+    #806f60;
 
-    .name {
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
+}
 
 
-    .heart {
-      font-size: 21px;
-      margin-top: -12px;
-    }
+.names {
 
+  display:
+    flex;
 
-    h1 {
-      font-size: 34px;
+  justify-content:
+    center;
 
-      font-weight: normal;
+  align-items:
+    flex-end;
 
-      margin:
-        0
-        0
-        12px;
-    }
+  gap:
+    28px;
 
+  margin-bottom:
+    25px;
 
-    .subtitle {
-      font-size: 16px;
+}
 
-      line-height: 1.6;
 
-      margin-bottom: 35px;
-    }
+.name-side {
 
+  display:
+    flex;
 
-    /* =========================
-       BUTTONS
-    ========================== */
+  flex-direction:
+    column;
 
-    button {
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+  align-items:
+    center;
 
-      border:
-        1px solid
-        #6e5b4d;
+}
 
-      background:
-        transparent;
 
-      color:
-        #3f352d;
+.arabic {
 
-      padding:
-        13px 22px;
+  font-family:
+    "Times New Roman",
+    serif;
 
-      border-radius: 3px;
+  font-size:
+    46px;
 
-      font-size: 14px;
+  line-height:
+    1;
 
-      letter-spacing: 1px;
+}
 
-      cursor: pointer;
-    }
 
+.person-name {
 
-    button:active {
-      transform: scale(0.97);
-    }
+  font-size:
+    13px;
 
+  margin-top:
+    7px;
 
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+  letter-spacing:
+    2px;
 
+}
 
-    #main {
-      display: none;
-    }
 
+.heart {
 
-    /* =========================
-       CAMERA
-    ========================== */
+  font-size:
+    16px;
 
-    .camera-title {
-      font-size: 24px;
+  margin-bottom:
+    16px;
 
-      font-weight: normal;
+}
 
-      margin:
-        10px
-        0
-        18px;
-    }
 
+h1 {
 
-    .camera-box {
-      position: relative;
+  font-size:
+    28px;
 
-      width: 100%;
+  font-weight:
+    normal;
 
-      overflow: hidden;
+  letter-spacing:
+    1px;
 
-      background: #000;
+  margin:
+    0 0 12px;
 
-      border-radius: 4px;
-    }
+}
 
 
-    video,
-    canvas {
-      display: block;
+.subtitle {
 
-      width: 100%;
+  font-size:
+    14px;
 
-      height: auto;
-    }
+  color:
+    #806f60;
 
+  margin-bottom:
+    32px;
 
-    canvas {
-      display: none;
-    }
+}
 
 
-    .flash {
-      position: absolute;
+button {
 
-      inset: 0;
+  border:
+    1px solid #8d7967;
 
-      background: white;
+  background:
+    transparent;
 
-      opacity: 0;
+  color:
+    #4b3c31;
 
-      pointer-events: none;
+  padding:
+    12px 22px;
 
-      z-index: 5;
-    }
+  font-family:
+    Georgia,
+    serif;
 
+  letter-spacing:
+    1.5px;
 
-    .flash.active {
-      animation:
-        flashEffect
-        0.18s
-        ease-out;
-    }
+  font-size:
+    12px;
 
+  cursor:
+    pointer;
 
-    @keyframes flashEffect {
+  margin:
+    5px;
 
-      0% {
-        opacity: 0.95;
-      }
+}
 
-      100% {
-        opacity: 0;
-      }
 
-    }
+button:hover {
 
+  background:
+    rgba(120,100,80,0.08);
 
-    /* =========================
-       CONTROLS
-    ========================== */
+}
 
-    .controls {
-      margin-top: 20px;
 
-      display: flex;
+#cameraScreen {
 
-      justify-content: center;
+  display:
+    none;
 
-      gap: 10px;
+  justify-content:
+    flex-start;
 
-      flex-wrap: wrap;
-    }
+  padding-top:
+    25px;
 
+}
 
-    #retake,
-    #keep {
-      display: none;
-    }
 
+.camera-wrapper {
 
-    /* Hidden gallery input */
+  width:
+    100%;
 
-    #galleryInput {
-      display: none;
-    }
+  max-width:
+    500px;
 
+  position:
+    relative;
 
-    .gallery-upload-wrapper {
-      margin-top: 10px;
-    }
+}
 
 
-    /* =========================
-       STATUS
-    ========================== */
+#video,
+#canvas {
 
-    #status {
-      min-height: 24px;
+  width:
+    100%;
 
-      margin-top: 15px;
+  max-height:
+    68vh;
 
-      font-size: 14px;
+  object-fit:
+    contain;
 
-      letter-spacing: 1px;
-    }
+  background:
+    #222;
 
+}
 
-    .counter {
-      margin-top: 12px;
 
-      font-size: 13px;
+#canvas {
 
-      letter-spacing: 2px;
-    }
+  display:
+    none;
 
+}
 
-    /* =========================
-       VIEW GALLERY
-    ========================== */
 
-    .album-button-wrapper {
-      margin-top: 35px;
-    }
+#flash {
 
+  position:
+    fixed;
 
-    #album {
-      display: none;
+  inset:
+    0;
 
-      margin-top: 50px;
+  background:
+    white;
 
-      padding-top: 30px;
+  opacity:
+    0;
 
-      border-top:
-        1px solid
-        rgba(
-          63,
-          53,
-          45,
-          0.25
-        );
-    }
+  pointer-events:
+    none;
 
+  z-index:
+    999;
 
-    .album-title {
-      font-size: 27px;
+}
 
-      font-weight: normal;
 
-      margin-bottom: 8px;
-    }
+.flash-animation {
 
+  animation:
+    cameraFlash 0.35s ease;
 
-    #albumStatus {
-      font-size: 14px;
+}
 
-      margin-bottom: 22px;
 
-      min-height: 20px;
-    }
+@keyframes cameraFlash {
 
+  0% {
+    opacity: 0;
+  }
 
-    #albumGrid {
-      display: grid;
+  20% {
+    opacity: 0.95;
+  }
 
-      grid-template-columns:
-        repeat(
-          2,
-          1fr
-        );
+  100% {
+    opacity: 0;
+  }
 
-      gap: 8px;
-    }
+}
 
 
-    #albumGrid img {
-      width: 100%;
+.camera-buttons {
 
-      aspect-ratio: 1 / 1;
+  margin-top:
+    15px;
 
-      object-fit: cover;
+}
 
-      display: block;
 
-      background:
-        #e9e3db;
+#status {
 
-      border-radius: 2px;
+  min-height:
+    20px;
 
-      cursor: pointer;
-    }
+  margin:
+    12px 0;
 
+  font-size:
+    12px;
 
-    #backCamera {
-      margin-top: 25px;
-    }
+  letter-spacing:
+    1px;
 
+  color:
+    #806f60;
 
-    /* =========================
-       FULLSCREEN VIEWER
-    ========================== */
+}
 
-    #photoViewer {
-      display: none;
 
-      position: fixed;
+#galleryInput {
 
-      inset: 0;
+  display:
+    none;
 
-      background:
-        rgba(
-          0,
-          0,
-          0,
-          0.94
-        );
+}
 
-      z-index: 9999;
 
-      align-items: center;
+/* MESSAGE FORM */
 
-      justify-content: center;
+#messageBox {
 
-      touch-action: pan-y;
-    }
+  display:
+    none;
 
+  width:
+    100%;
 
-    #photoViewer.active {
-      display: flex;
-    }
+  max-width:
+    430px;
 
+  padding:
+    30px 22px;
 
-    #viewerImage {
-      max-width: 94vw;
+}
 
-      max-height: 88vh;
 
-      width: auto;
+.message-title {
 
-      height: auto;
+  font-size:
+    24px;
 
-      object-fit: contain;
+  font-weight:
+    normal;
 
-      user-select: none;
+  margin-bottom:
+    8px;
 
-      -webkit-user-select: none;
+}
 
-      -webkit-touch-callout: none;
-    }
 
+.message-subtitle {
 
-    #closeViewer {
-      position: absolute;
+  font-size:
+    13px;
 
-      top: 18px;
+  color:
+    #806f60;
 
-      right: 18px;
+  margin-bottom:
+    25px;
 
-      width: 42px;
+}
 
-      height: 42px;
 
-      padding: 0;
+.message-preview {
 
-      border: none;
+  width:
+    100%;
 
-      background: transparent;
+  max-height:
+    250px;
 
-      color: white;
+  object-fit:
+    contain;
 
-      font-family: Arial, sans-serif;
+  margin-bottom:
+    25px;
 
-      font-size: 32px;
+}
 
-      line-height: 42px;
 
-      letter-spacing: 0;
-    }
+.field {
 
+  text-align:
+    left;
 
-    #previousPhoto,
-    #nextPhoto {
-      position: absolute;
+  margin-bottom:
+    17px;
 
-      top: 50%;
+}
 
-      transform:
-        translateY(-50%);
 
-      width: 44px;
+.field label {
 
-      height: 60px;
+  display:
+    block;
 
-      padding: 0;
+  font-size:
+    12px;
 
-      border: none;
+  letter-spacing:
+    1px;
 
-      background: transparent;
+  margin-bottom:
+    7px;
 
-      color: white;
+}
 
-      font-family: Arial, sans-serif;
 
-      font-size: 32px;
+.required {
 
-      letter-spacing: 0;
-    }
+  color:
+    #9b6258;
 
+}
 
-    #previousPhoto {
-      left: 5px;
-    }
 
+input,
+textarea {
 
-    #nextPhoto {
-      right: 5px;
-    }
+  width:
+    100%;
 
+  border:
+    1px solid #b9aa9c;
 
-    /* =========================
-       SMALL SCREEN
-    ========================== */
+  background:
+    rgba(255,255,255,0.45);
 
-    @media (max-width: 380px) {
+  padding:
+    12px;
 
-      .page {
-        padding-left: 15px;
-        padding-right: 15px;
-      }
+  font-family:
+    Georgia,
+    serif;
 
+  font-size:
+    14px;
 
-      h1 {
-        font-size: 29px;
-      }
+  color:
+    #3c3028;
 
+  outline:
+    none;
 
-      .camera-title {
-        font-size: 21px;
-      }
+}
 
 
-      button {
-        padding:
-          12px 17px;
-      }
+textarea {
 
+  min-height:
+    100px;
 
-      .arabic {
-        font-size: 42px;
-      }
+  resize:
+    vertical;
 
+}
 
-      #viewerImage {
-        max-width: 96vw;
 
-        max-height: 84vh;
-      }
+input:focus,
+textarea:focus {
 
-    }
+  border-color:
+    #806f60;
 
-  </style>
+}
+
+
+#errorMessage {
+
+  display:
+    none;
+
+  color:
+    #9b6258;
+
+  font-size:
+    12px;
+
+  margin:
+    5px 0 12px;
+
+}
+
+
+/* GALLERY */
+
+#galleryScreen {
+
+  display:
+    none;
+
+  justify-content:
+    flex-start;
+
+  padding-top:
+    35px;
+
+}
+
+
+.gallery-title {
+
+  font-size:
+    26px;
+
+  font-weight:
+    normal;
+
+  margin-bottom:
+    7px;
+
+}
+
+
+.gallery-subtitle {
+
+  font-size:
+    12px;
+
+  color:
+    #806f60;
+
+  margin-bottom:
+    25px;
+
+}
+
+
+#galleryGrid {
+
+  width:
+    100%;
+
+  max-width:
+    700px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap:
+    10px;
+
+}
+
+
+.gallery-item {
+
+  background:
+    #eee6dc;
+
+  padding:
+    7px;
+
+}
+
+
+.gallery-item img {
+
+  width:
+    100%;
+
+  aspect-ratio:
+    1 / 1;
+
+  object-fit:
+    cover;
+
+  display:
+    block;
+
+  cursor:
+    pointer;
+
+}
+
+
+.guest-name {
+
+  font-size:
+    13px;
+
+  margin-top:
+    9px;
+
+  letter-spacing:
+    0.5px;
+
+}
+
+
+.guest-message {
+
+  font-size:
+    12px;
+
+  line-height:
+    1.5;
+
+  color:
+    #806f60;
+
+  margin:
+    5px 2px 7px;
+
+}
+
+
+.gallery-empty {
+
+  grid-column:
+    1 / -1;
+
+  padding:
+    50px 20px;
+
+  color:
+    #806f60;
+
+  font-size:
+    13px;
+
+}
+
+
+/* FULLSCREEN VIEWER */
+
+#viewer {
+
+  display:
+    none;
+
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  background:
+    rgba(20,17,14,0.96);
+
+  z-index:
+    1000;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+}
+
+
+#viewerImage {
+
+  max-width:
+    92vw;
+
+  max-height:
+    88vh;
+
+  object-fit:
+    contain;
+
+}
+
+
+.viewer-close {
+
+  position:
+    absolute;
+
+  top:
+    18px;
+
+  right:
+    20px;
+
+  color:
+    white;
+
+  font-size:
+    30px;
+
+  cursor:
+    pointer;
+
+}
+
+
+.viewer-arrow {
+
+  position:
+    absolute;
+
+  top:
+    50%;
+
+  transform:
+    translateY(-50%);
+
+  color:
+    white;
+
+  font-size:
+    38px;
+
+  cursor:
+    pointer;
+
+  padding:
+    20px;
+
+}
+
+
+#viewerPrev {
+
+  left:
+    0;
+
+}
+
+
+#viewerNext {
+
+  right:
+    0;
+
+}
+
+
+@media (max-width: 500px) {
+
+  h1 {
+
+    font-size:
+      24px;
+
+  }
+
+  #galleryGrid {
+
+    gap:
+      7px;
+
+  }
+
+}
+
+</style>
 
 </head>
 
@@ -592,12 +838,12 @@
 <body>
 
 
-<!-- =========================
-     WELCOME PAGE
-========================= -->
+<!-- WELCOME -->
 
-<section id="welcome">
-
+<section
+  id="welcome"
+  class="screen"
+>
 
   <div class="date">
     26 · 09 · 2026
@@ -606,14 +852,13 @@
 
   <div class="names">
 
-
-    <div class="person">
+    <div class="name-side">
 
       <div class="arabic">
         ف
       </div>
 
-      <div class="name">
+      <div class="person-name">
         Faris
       </div>
 
@@ -625,18 +870,17 @@
     </div>
 
 
-    <div class="person">
+    <div class="name-side">
 
       <div class="arabic">
         م
       </div>
 
-      <div class="name">
+      <div class="person-name">
         Mira
       </div>
 
     </div>
-
 
   </div>
 
@@ -647,69 +891,43 @@
 
 
   <div class="subtitle">
-
-    Capture a little memory<br>
-
-    from your eyes ♡
-
+    Capture a little memory from your eyes ♡
   </div>
 
 
-  <button id="openCameraButton">
+  <button id="openCamera">
     OPEN CAMERA
   </button>
-
 
 </section>
 
 
 
-<!-- =========================
-     MAIN
-========================= -->
+<!-- CAMERA -->
 
-<main
-  id="main"
-  class="page"
+<section
+  id="cameraScreen"
+  class="screen"
 >
 
-
-  <h2 class="camera-title">
-    Bingkai Mempelai
-  </h2>
-
-
-  <!-- CAMERA -->
-
-  <div class="camera-box">
-
+  <div class="camera-wrapper">
 
     <video
       id="video"
       autoplay
-      playsinline>
-    </video>
+      playsinline
+    ></video>
 
 
-    <canvas
-      id="canvas">
-    </canvas>
-
-
-    <div
-      id="flash"
-      class="flash">
-    </div>
-
+    <canvas id="canvas"></canvas>
 
   </div>
 
 
+  <div id="status"></div>
 
-  <!-- CAMERA BUTTONS -->
 
-  <div class="controls">
-
+  <div class="camera-buttons">
 
     <button id="snap">
       TAKE PHOTO
@@ -721,134 +939,186 @@
     </button>
 
 
-    <button id="retake">
+    <button
+      id="retake"
+      style="display:none;"
+    >
       RETAKE
     </button>
 
 
-    <button id="keep">
+    <button
+      id="keep"
+      style="display:none;"
+    >
       UPLOAD ♡
     </button>
 
 
-  </div>
-
-
-
-  <!-- GALLERY UPLOAD -->
-
-  <div class="gallery-upload-wrapper">
-
-
-    <input
-      type="file"
-      id="galleryInput"
-      accept="image/*"
-    >
-
-
-    <button
-      id="galleryButton">
+    <button id="galleryButton">
       UPLOAD FROM GALLERY ♡
     </button>
 
 
-  </div>
-
-
-
-  <!-- STATUS -->
-
-  <div id="status"></div>
-
-
-
-  <!-- COUNTER -->
-
-  <div class="counter">
-
-    PHOTO
-
-    <span id="photoNumber">
-      001
-    </span>
-
-  </div>
-
-
-
-  <!-- VIEW GALLERY -->
-
-  <div class="album-button-wrapper">
-
-    <button id="albumButton">
+    <button id="viewGallery">
       VIEW GALLERY ♡
     </button>
 
   </div>
 
 
+  <input
+    type="file"
+    id="galleryInput"
+    accept="image/*"
+  >
 
-  <!-- =========================
-       GALLERY
-  ========================== -->
-
-  <section id="album">
-
-
-    <h2 class="album-title">
-      View Gallery ♡
-    </h2>
+</section>
 
 
-    <div id="albumStatus">
-      Loading memories ♡
-    </div>
+
+<!-- MESSAGE -->
+
+<section
+  id="messageBox"
+  class="screen"
+>
+
+  <div class="message-title">
+    Titipkan Sepatah Dua Kata
+  </div>
 
 
-    <div id="albumGrid"></div>
+  <div class="message-subtitle">
+    Tinggalkan sedikit kenangan buat Faris & Mira ♡
+  </div>
 
+
+  <img
+    id="messagePreview"
+    class="message-preview"
+  >
+
+
+  <div class="field">
+
+    <label>
+      NAMA
+      <span class="required">*</span>
+    </label>
+
+    <input
+      id="guestName"
+      type="text"
+      placeholder="Tulis nama anda"
+      maxlength="80"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label>
+      UCAPAN
+    </label>
+
+    <textarea
+      id="guestMessage"
+      placeholder="Tulis ucapan buat Faris & Mira..."
+      maxlength="500"
+    ></textarea>
+
+  </div>
+
+
+  <div id="errorMessage">
+    Sila masukkan nama anda ♡
+  </div>
+
+
+  <button id="sendMessage">
+    KIRIM UCAPAN ♡
+  </button>
+
+
+  <button id="skipMessage">
+    SKIP
+  </button>
+
+</section>
+
+
+
+<!-- GALLERY -->
+
+<section
+  id="galleryScreen"
+  class="screen"
+>
+
+  <div class="gallery-title">
+    Bingkai Kenangan
+  </div>
+
+
+  <div class="gallery-subtitle">
+    Coretan kenangan buat selamanya ♡
+  </div>
+
+
+  <div id="galleryGrid"></div>
+
+
+  <div>
 
     <button id="backCamera">
       BACK TO CAMERA
     </button>
 
+  </div>
 
-  </section>
-
-
-</main>
+</section>
 
 
 
-<!-- =========================
-     FULLSCREEN PHOTO VIEWER
-========================= -->
+<!-- FLASH -->
 
-<div id="photoViewer">
+<div id="flash"></div>
 
 
-  <button id="closeViewer">
+
+<!-- VIEWER -->
+
+<div id="viewer">
+
+  <div
+    id="viewerClose"
+    class="viewer-close"
+  >
     ×
-  </button>
+  </div>
 
 
-  <button id="previousPhoto">
+  <div
+    id="viewerPrev"
+    class="viewer-arrow"
+  >
     ‹
-  </button>
+  </div>
 
 
   <img
     id="viewerImage"
-    alt="Wedding memory"
-    draggable="false"
   >
 
 
-  <button id="nextPhoto">
+  <div
+    id="viewerNext"
+    class="viewer-arrow"
+  >
     ›
-  </button>
-
+  </div>
 
 </div>
 
@@ -857,197 +1127,130 @@
 <script>
 
 
-/* =========================
-   GOOGLE APPS SCRIPT
-========================= */
+/* =========================================
+   SETTINGS
+========================================= */
+
 
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxYIr46zDLHnF9EDA59pMpEVZAfPxhd_gA8YZmA36KapT-FQm-YySa4vGogaWu7q6kE/exec";
 
 
-
-/* =========================
+/* =========================================
    ELEMENTS
-========================= */
+========================================= */
+
 
 const welcome =
-  document.getElementById(
-    "welcome"
-  );
+  document.getElementById("welcome");
 
+const cameraScreen =
+  document.getElementById("cameraScreen");
 
-const main =
-  document.getElementById(
-    "main"
-  );
+const messageBox =
+  document.getElementById("messageBox");
 
+const galleryScreen =
+  document.getElementById("galleryScreen");
 
-const openCameraButton =
-  document.getElementById(
-    "openCameraButton"
-  );
-
+const openCamera =
+  document.getElementById("openCamera");
 
 const video =
-  document.getElementById(
-    "video"
-  );
-
+  document.getElementById("video");
 
 const canvas =
-  document.getElementById(
-    "canvas"
-  );
-
+  document.getElementById("canvas");
 
 const snap =
-  document.getElementById(
-    "snap"
-  );
-
+  document.getElementById("snap");
 
 const flip =
-  document.getElementById(
-    "flip"
-  );
-
+  document.getElementById("flip");
 
 const retake =
-  document.getElementById(
-    "retake"
-  );
-
+  document.getElementById("retake");
 
 const keep =
-  document.getElementById(
-    "keep"
-  );
-
-
-const flash =
-  document.getElementById(
-    "flash"
-  );
-
-
-const status =
-  document.getElementById(
-    "status"
-  );
-
-
-const photoNumber =
-  document.getElementById(
-    "photoNumber"
-  );
-
-
-const galleryInput =
-  document.getElementById(
-    "galleryInput"
-  );
-
+  document.getElementById("keep");
 
 const galleryButton =
-  document.getElementById(
-    "galleryButton"
-  );
+  document.getElementById("galleryButton");
 
+const galleryInput =
+  document.getElementById("galleryInput");
 
-const albumButton =
-  document.getElementById(
-    "albumButton"
-  );
-
-
-const album =
-  document.getElementById(
-    "album"
-  );
-
-
-const albumGrid =
-  document.getElementById(
-    "albumGrid"
-  );
-
-
-const albumStatus =
-  document.getElementById(
-    "albumStatus"
-  );
-
+const viewGallery =
+  document.getElementById("viewGallery");
 
 const backCamera =
-  document.getElementById(
-    "backCamera"
-  );
+  document.getElementById("backCamera");
 
+const status =
+  document.getElementById("status");
 
-const photoViewer =
-  document.getElementById(
-    "photoViewer"
-  );
+const flash =
+  document.getElementById("flash");
 
+const messagePreview =
+  document.getElementById("messagePreview");
+
+const guestName =
+  document.getElementById("guestName");
+
+const guestMessage =
+  document.getElementById("guestMessage");
+
+const sendMessage =
+  document.getElementById("sendMessage");
+
+const skipMessage =
+  document.getElementById("skipMessage");
+
+const errorMessage =
+  document.getElementById("errorMessage");
+
+const galleryGrid =
+  document.getElementById("galleryGrid");
+
+const viewer =
+  document.getElementById("viewer");
 
 const viewerImage =
-  document.getElementById(
-    "viewerImage"
-  );
+  document.getElementById("viewerImage");
+
+const viewerClose =
+  document.getElementById("viewerClose");
+
+const viewerPrev =
+  document.getElementById("viewerPrev");
+
+const viewerNext =
+  document.getElementById("viewerNext");
 
 
-const closeViewer =
-  document.getElementById(
-    "closeViewer"
-  );
-
-
-const previousPhoto =
-  document.getElementById(
-    "previousPhoto"
-  );
-
-
-const nextPhoto =
-  document.getElementById(
-    "nextPhoto"
-  );
-
-
-
-/* =========================
+/* =========================================
    VARIABLES
-========================= */
-
-let currentStream =
-  null;
+========================================= */
 
 
-let currentCamera =
-  "environment";
+let stream = null;
+
+let usingFrontCamera = false;
+
+let currentPhotoId = null;
+
+let galleryPhotos = [];
+
+let currentViewerIndex = 0;
+
+let uploadFinished = false;
 
 
-let photoCount =
-  1;
+/* =========================================
+   ARABIC FONT
+========================================= */
 
-
-let uploading =
-  false;
-
-
-let galleryPhotos =
-  [];
-
-
-let currentPhotoIndex =
-  0;
-
-
-
-/* =========================
-   MAKE SURE ARABIC FONT
-   IS LOADED
-========================= */
 
 async function loadArabicFont() {
 
@@ -1069,289 +1272,31 @@ async function loadArabicFont() {
 }
 
 
+/* =========================================
+   WEDDING STAMP
+========================================= */
 
-/* =========================
-   CAMERA
-========================= */
 
-async function openCamera(
-  cameraType
-) {
-
-
-  if (currentStream) {
-
-    currentStream
-      .getTracks()
-      .forEach(
-        function(track) {
-
-          track.stop();
-
-        }
-      );
-
-
-    currentStream =
-      null;
-
-  }
-
-
-  try {
-
-
-    const stream =
-      await navigator
-        .mediaDevices
-        .getUserMedia({
-
-          video: {
-            facingMode:
-              cameraType
-          },
-
-          audio: false
-
-        });
-
-
-    currentStream =
-      stream;
-
-
-    video.srcObject =
-      stream;
-
-
-    if (
-      cameraType ===
-      "user"
-    ) {
-
-      video.style.transform =
-        "scaleX(-1)";
-
-    } else {
-
-      video.style.transform =
-        "scaleX(1)";
-
-    }
-
-
-    await video.play();
-
-
-  } catch (error) {
-
-
-    console.log(
-      "CAMERA ERROR:",
-      error.name,
-      error.message
-    );
-
-
-    alert(
-      "Camera error: " +
-      error.name
-    );
-
-
-  }
-
-}
-
-
-
-/* =========================
-   OPEN CAMERA
-========================= */
-
-openCameraButton.addEventListener(
-  "click",
-  async function() {
-
-
-    await loadArabicFont();
-
-
-    welcome.style.display =
-      "none";
-
-
-    main.style.display =
-      "block";
-
-
-    await openCamera(
-      currentCamera
-    );
-
-
-  }
-);
-
-
-
-/* =========================
-   FLIP CAMERA
-========================= */
-
-flip.addEventListener(
-  "click",
-  async function() {
-
-
-    if (
-      currentCamera ===
-      "environment"
-    ) {
-
-      currentCamera =
-        "user";
-
-    } else {
-
-      currentCamera =
-        "environment";
-
-    }
-
-
-    await openCamera(
-      currentCamera
-    );
-
-
-  }
-);
-
-
-
-/* =========================
-   SHUTTER SOUND
-========================= */
-
-function playShutterSound() {
-
-
-  const AudioContext =
-    window.AudioContext ||
-    window.webkitAudioContext;
-
-
-  if (!AudioContext)
-    return;
-
-
-  const audio =
-    new AudioContext();
-
-
-  const oscillator =
-    audio.createOscillator();
-
-
-  const gain =
-    audio.createGain();
-
-
-  oscillator.type =
-    "square";
-
-
-  oscillator.frequency
-    .setValueAtTime(
-      900,
-      audio.currentTime
-    );
-
-
-  oscillator.frequency
-    .exponentialRampToValueAtTime(
-      250,
-      audio.currentTime +
-      0.08
-    );
-
-
-  gain.gain.setValueAtTime(
-    0.12,
-    audio.currentTime
-  );
-
-
-  gain.gain
-    .exponentialRampToValueAtTime(
-      0.001,
-      audio.currentTime +
-      0.1
-    );
-
-
-  oscillator.connect(
-    gain
-  );
-
-
-  gain.connect(
-    audio.destination
-  );
-
-
-  oscillator.start();
-
-
-  oscillator.stop(
-    audio.currentTime +
-    0.1
-  );
-
-}
-
-
-
-/* =========================
-   ADD WEDDING STAMP
-========================= */
-
-function addWeddingStamp(
-  context
-) {
-
+function addWeddingStamp(context) {
 
   context.save();
 
-
-  context.textAlign =
-    "right";
-
-
-  /* WHITE */
+  context.textAlign = "right";
 
   context.fillStyle =
     "rgba(255,255,255,0.94)";
 
-
   context.shadowColor =
     "rgba(0,0,0,0.5)";
-
 
   context.shadowBlur =
     3;
 
 
-
-  /* =========================
-     FA
-     TRUE ARABIC FONT
-  ========================== */
+  /* FA */
 
   context.font =
     "28px 'Amiri', serif";
-
 
   context.fillText(
     "ف",
@@ -1360,14 +1305,10 @@ function addWeddingStamp(
   );
 
 
-
-  /* =========================
-     SMALL LOVE
-  ========================== */
+  /* LOVE */
 
   context.font =
     "11px Georgia, serif";
-
 
   context.fillText(
     "♡",
@@ -1376,15 +1317,10 @@ function addWeddingStamp(
   );
 
 
-
-  /* =========================
-     MIM
-     TRUE ARABIC FONT
-  ========================== */
+  /* MIM */
 
   context.font =
     "28px 'Amiri', serif";
-
 
   context.fillText(
     "م",
@@ -1393,18 +1329,13 @@ function addWeddingStamp(
   );
 
 
-
-  /* =========================
-     VINTAGE DATE
-  ========================== */
+  /* VINTAGE DATE */
 
   context.font =
     "8px 'Times New Roman', serif";
 
-
   context.fillStyle =
     "rgba(255,255,255,0.72)";
-
 
   context.fillText(
     "26 · 09 · 2026",
@@ -1418,28 +1349,225 @@ function addWeddingStamp(
 }
 
 
+/* =========================================
+   CAMERA
+========================================= */
 
-/* =========================
+
+async function startCamera() {
+
+  await loadArabicFont();
+
+
+  if (stream) {
+
+    stream
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+  }
+
+
+  try {
+
+    stream =
+      await navigator.mediaDevices.getUserMedia({
+
+        video: {
+
+          facingMode:
+            usingFrontCamera
+              ? "user"
+              : "environment"
+
+        },
+
+        audio:
+          false
+
+      });
+
+
+    video.srcObject =
+      stream;
+
+
+    video.style.display =
+      "block";
+
+    canvas.style.display =
+      "none";
+
+
+    snap.style.display =
+      "inline-block";
+
+    flip.style.display =
+      "inline-block";
+
+    retake.style.display =
+      "none";
+
+    keep.style.display =
+      "none";
+
+    galleryButton.style.display =
+      "inline-block";
+
+
+    status.textContent =
+      "";
+
+
+    if (usingFrontCamera) {
+
+      video.style.transform =
+        "scaleX(-1)";
+
+    } else {
+
+      video.style.transform =
+        "scaleX(1)";
+
+    }
+
+
+  } catch (error) {
+
+    status.textContent =
+      "Unable to access camera ♡";
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =========================================
+   OPEN CAMERA
+========================================= */
+
+
+openCamera.addEventListener(
+  "click",
+  async function() {
+
+    welcome.style.display =
+      "none";
+
+    galleryScreen.style.display =
+      "none";
+
+    messageBox.style.display =
+      "none";
+
+    cameraScreen.style.display =
+      "flex";
+
+    await startCamera();
+
+  }
+);
+
+
+/* =========================================
+   FLIP CAMERA
+========================================= */
+
+
+flip.addEventListener(
+  "click",
+  async function() {
+
+    usingFrontCamera =
+      !usingFrontCamera;
+
+    await startCamera();
+
+  }
+);
+
+
+/* =========================================
+   SHUTTER SOUND
+========================================= */
+
+
+function playShutterSound() {
+
+  try {
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    const audioContext =
+      new AudioContext();
+
+    const oscillator =
+      audioContext.createOscillator();
+
+    const gain =
+      audioContext.createGain();
+
+
+    oscillator.type =
+      "square";
+
+    oscillator.frequency.value =
+      120;
+
+
+    gain.gain.setValueAtTime(
+      0.15,
+      audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + 0.12
+    );
+
+
+    oscillator.connect(gain);
+
+    gain.connect(
+      audioContext.destination
+    );
+
+
+    oscillator.start();
+
+    oscillator.stop(
+      audioContext.currentTime + 0.12
+    );
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}
+
+
+/* =========================================
    TAKE PHOTO
-========================= */
+========================================= */
+
 
 snap.addEventListener(
   "click",
   function() {
 
+    playShutterSound();
 
-    if (snap.disabled)
-      return;
-
-
-    snap.disabled =
-      true;
-
-
-    /* FLASH */
 
     flash.classList.remove(
-      "active"
+      "flash-animation"
     );
 
 
@@ -1447,145 +1575,89 @@ snap.addEventListener(
 
 
     flash.classList.add(
-      "active"
+      "flash-animation"
     );
 
 
-    /* SOUND */
+    canvas.width =
+      video.videoWidth;
 
-    playShutterSound();
-
-
-    setTimeout(
-      async function() {
+    canvas.height =
+      video.videoHeight;
 
 
-        /* MAKE SURE FONT
-           IS LOADED */
-
-        await loadArabicFont();
+    const context =
+      canvas.getContext("2d");
 
 
-        canvas.width =
-          video.videoWidth;
+    context.save();
 
 
-        canvas.height =
-          video.videoHeight;
+    if (usingFrontCamera) {
+
+      context.translate(
+        canvas.width,
+        0
+      );
+
+      context.scale(
+        -1,
+        1
+      );
+
+    }
 
 
-        const context =
-          canvas.getContext(
-            "2d"
-          );
-
-
-        /* FRONT CAMERA */
-
-        if (
-          currentCamera ===
-          "user"
-        ) {
-
-
-          context.save();
-
-
-          context.translate(
-            canvas.width,
-            0
-          );
-
-
-          context.scale(
-            -1,
-            1
-          );
-
-
-          context.drawImage(
-            video,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
-
-
-          context.restore();
-
-
-        } else {
-
-
-          context.drawImage(
-            video,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
-
-        }
-
-
-        /* STAMP */
-
-        addWeddingStamp(
-          context
-        );
-
-
-        /* SHOW PHOTO */
-
-        video.style.display =
-          "none";
-
-
-        canvas.style.display =
-          "block";
-
-
-        snap.style.display =
-          "none";
-
-
-        flip.style.display =
-          "none";
-
-
-        galleryButton.style.display =
-          "none";
-
-
-        retake.style.display =
-          "inline-block";
-
-
-        keep.style.display =
-          "inline-block";
-
-
-        status.textContent =
-          "READY TO UPLOAD ♡";
-
-
-        snap.disabled =
-          false;
-
-
-      },
-      180
+    context.drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
     );
+
+
+    context.restore();
+
+
+    addWeddingStamp(context);
+
+
+    video.style.display =
+      "none";
+
+    canvas.style.display =
+      "block";
+
+
+    snap.style.display =
+      "none";
+
+    flip.style.display =
+      "none";
+
+    galleryButton.style.display =
+      "none";
+
+
+    retake.style.display =
+      "inline-block";
+
+    keep.style.display =
+      "inline-block";
+
+
+    status.textContent =
+      "READY TO UPLOAD ♡";
 
   }
 );
 
 
+/* =========================================
+   GALLERY PHOTO INPUT
+========================================= */
 
-/* =========================
-   UPLOAD FROM PHONE GALLERY
-========================= */
 
 galleryButton.addEventListener(
   "click",
@@ -1597,18 +1669,14 @@ galleryButton.addEventListener(
 );
 
 
-
 galleryInput.addEventListener(
   "change",
   async function(event) {
 
-
     const file =
       event.target.files[0];
 
-
-    if (!file)
-      return;
+    if (!file) return;
 
 
     await loadArabicFont();
@@ -1621,7 +1689,6 @@ galleryInput.addEventListener(
     reader.onload =
       function(e) {
 
-
         const image =
           new Image();
 
@@ -1629,24 +1696,16 @@ galleryInput.addEventListener(
         image.onload =
           function() {
 
-
-            /* SET CANVAS */
-
             canvas.width =
               image.naturalWidth;
-
 
             canvas.height =
               image.naturalHeight;
 
 
             const context =
-              canvas.getContext(
-                "2d"
-              );
+              canvas.getContext("2d");
 
-
-            /* DRAW ORIGINAL PHOTO */
 
             context.drawImage(
               image,
@@ -1657,18 +1716,11 @@ galleryInput.addEventListener(
             );
 
 
-            /* ADD STAMP */
+            addWeddingStamp(context);
 
-            addWeddingStamp(
-              context
-            );
-
-
-            /* HIDE CAMERA */
 
             video.style.display =
               "none";
-
 
             canvas.style.display =
               "block";
@@ -1677,10 +1729,8 @@ galleryInput.addEventListener(
             snap.style.display =
               "none";
 
-
             flip.style.display =
               "none";
-
 
             galleryButton.style.display =
               "none";
@@ -1689,14 +1739,12 @@ galleryInput.addEventListener(
             retake.style.display =
               "inline-block";
 
-
             keep.style.display =
               "inline-block";
 
 
             status.textContent =
               "READY TO UPLOAD ♡";
-
 
           };
 
@@ -1707,12 +1755,8 @@ galleryInput.addEventListener(
       };
 
 
-    reader.readAsDataURL(
-      file
-    );
+    reader.readAsDataURL(file);
 
-
-    /* RESET INPUT */
 
     galleryInput.value =
       "";
@@ -1721,94 +1765,64 @@ galleryInput.addEventListener(
 );
 
 
-
-/* =========================
+/* =========================================
    RETAKE
-========================= */
+========================================= */
+
 
 retake.addEventListener(
   "click",
-  function() {
+  async function() {
 
+    currentPhotoId =
+      null;
 
-    canvas.style.display =
-      "none";
-
-
-    video.style.display =
-      "block";
-
-
-    snap.style.display =
-      "inline-block";
-
-
-    flip.style.display =
-      "inline-block";
-
-
-    galleryButton.style.display =
-      "inline-block";
-
-
-    retake.style.display =
-      "none";
-
-
-    keep.style.display =
-      "none";
-
-
-    status.textContent =
-      "";
-
-
-    snap.disabled =
+    uploadFinished =
       false;
 
+    await startCamera();
 
   }
 );
 
 
-
-/* =========================
+/* =========================================
    UPLOAD PHOTO
-========================= */
+========================================= */
+
 
 keep.addEventListener(
   "click",
   async function() {
 
-
-    if (uploading)
-      return;
+    if (uploadFinished) return;
 
 
-    uploading =
+    uploadFinished =
       true;
 
 
     keep.disabled =
       true;
 
-
     retake.disabled =
       true;
+
+    galleryButton.style.display =
+      "none";
 
 
     status.textContent =
       "SAVING... ♡";
 
 
-    const image =
-      canvas.toDataURL(
-        "image/jpeg",
-        0.8
-      );
-
-
     try {
+
+      const image =
+        canvas.toDataURL(
+          "image/jpeg",
+          0.92
+        );
 
 
       const response =
@@ -1816,11 +1830,15 @@ keep.addEventListener(
           SCRIPT_URL,
           {
 
-            method: "POST",
+            method:
+              "POST",
 
             body:
               JSON.stringify({
-                image: image
+
+                image:
+                  image
+
               })
 
           }
@@ -1831,127 +1849,69 @@ keep.addEventListener(
         await response.json();
 
 
-      if (
-        result.success
-      ) {
+      if (!result.success) {
 
-
-        status.textContent =
-          "SAVED ♡";
-
-
-        photoCount++;
-
-
-        photoNumber.textContent =
-          String(
-            photoCount
-          ).padStart(
-            3,
-            "0"
-          );
-
-
-        await loadAlbum();
-
-
-        setTimeout(
-          function() {
-
-
-            canvas.style.display =
-              "none";
-
-
-            video.style.display =
-              "block";
-
-
-            snap.style.display =
-              "inline-block";
-
-
-            flip.style.display =
-              "inline-block";
-
-
-            galleryButton.style.display =
-              "inline-block";
-
-
-            retake.style.display =
-              "none";
-
-
-            keep.style.display =
-              "none";
-
-
-            keep.disabled =
-              false;
-
-
-            retake.disabled =
-              false;
-
-
-            uploading =
-              false;
-
-
-            status.textContent =
-              "";
-
-
-          },
-          700
+        throw new Error(
+          result.error ||
+          "Upload failed"
         );
-
-
-      } else {
-
-
-        status.textContent =
-          "UPLOAD FAILED 😭";
-
-
-        keep.disabled =
-          false;
-
-
-        retake.disabled =
-          false;
-
-
-        uploading =
-          false;
 
       }
 
 
-    } catch (error) {
-
-
-      console.error(
-        error
-      );
+      currentPhotoId =
+        result.id;
 
 
       status.textContent =
-        "UPLOAD FAILED — TRY AGAIN";
+        "SAVED ♡";
 
+
+      /*
+        SHOW MESSAGE FORM
+      */
+
+      messagePreview.src =
+        image;
+
+
+      guestName.value =
+        "";
+
+      guestMessage.value =
+        "";
+
+      errorMessage.style.display =
+        "none";
+
+
+      cameraScreen.style.display =
+        "none";
+
+      messageBox.style.display =
+        "flex";
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      uploadFinished =
+        false;
 
       keep.disabled =
         false;
-
 
       retake.disabled =
         false;
 
 
-      uploading =
-        false;
+      status.textContent =
+        "UPLOAD FAILED ♡";
 
+      galleryButton.style.display =
+        "inline-block";
 
     }
 
@@ -1959,26 +1919,201 @@ keep.addEventListener(
 );
 
 
+/* =========================================
+   SEND NAME + MESSAGE
+========================================= */
 
-/* =========================
+
+sendMessage.addEventListener(
+  "click",
+  async function() {
+
+    const name =
+      guestName.value.trim();
+
+    const message =
+      guestMessage.value.trim();
+
+
+    if (!name) {
+
+      errorMessage.style.display =
+        "block";
+
+      guestName.focus();
+
+      return;
+
+    }
+
+
+    errorMessage.style.display =
+      "none";
+
+
+    sendMessage.disabled =
+      true;
+
+    sendMessage.textContent =
+      "SAVING... ♡";
+
+
+    try {
+
+      const response =
+        await fetch(
+          SCRIPT_URL,
+          {
+
+            method:
+              "POST",
+
+            body:
+              JSON.stringify({
+
+                action:
+                  "updateMessage",
+
+                id:
+                  currentPhotoId,
+
+                name:
+                  name,
+
+                message:
+                  message
+
+              })
+
+          }
+        );
+
+
+      const result =
+        await response.json();
+
+
+      if (!result.success) {
+
+        throw new Error(
+          result.error ||
+          "Message failed"
+        );
+
+      }
+
+
+      messageBox.style.display =
+        "none";
+
+      cameraScreen.style.display =
+        "flex";
+
+
+      status.textContent =
+        "YOUR MEMORY IS SAVED ♡";
+
+
+      sendMessage.disabled =
+        false;
+
+      sendMessage.textContent =
+        "KIRIM UCAPAN ♡";
+
+
+      keep.disabled =
+        false;
+
+      retake.disabled =
+        false;
+
+
+      currentPhotoId =
+        null;
+
+      uploadFinished =
+        false;
+
+
+      await startCamera();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      sendMessage.disabled =
+        false;
+
+      sendMessage.textContent =
+        "KIRIM UCAPAN ♡";
+
+
+      errorMessage.textContent =
+        "Something went wrong. Please try again ♡";
+
+      errorMessage.style.display =
+        "block";
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   SKIP MESSAGE
+========================================= */
+
+
+skipMessage.addEventListener(
+  "click",
+  async function() {
+
+    messageBox.style.display =
+      "none";
+
+    cameraScreen.style.display =
+      "flex";
+
+
+    currentPhotoId =
+      null;
+
+    uploadFinished =
+      false;
+
+
+    keep.disabled =
+      false;
+
+    retake.disabled =
+      false;
+
+
+    await startCamera();
+
+  }
+);
+
+
+/* =========================================
    LOAD GALLERY
-========================= */
-
-async function loadAlbum() {
+========================================= */
 
 
-  albumStatus.textContent =
-    "Loading memories ♡";
+async function loadGallery() {
+
+  galleryGrid.innerHTML =
+    '<div class="gallery-empty">Loading memories ♡</div>';
 
 
   try {
 
-
     const response =
       await fetch(
-        SCRIPT_URL +
-        "?t=" +
-        Date.now()
+        SCRIPT_URL + "?t=" + Date.now()
       );
 
 
@@ -1986,96 +2121,133 @@ async function loadAlbum() {
       await response.json();
 
 
-    if (
-      !result.success
-    ) {
+    if (!result.success) {
 
-
-      albumStatus.textContent =
-        "Unable to load album.";
-
-
-      return;
+      throw new Error(
+        result.error ||
+        "Unable to load gallery"
+      );
 
     }
-
-
-    albumGrid.innerHTML =
-      "";
 
 
     galleryPhotos =
-      result.photos ||
-      [];
+      result.photos || [];
+
+
+    galleryGrid.innerHTML =
+      "";
 
 
     if (
-      galleryPhotos.length ===
-      0
+      galleryPhotos.length === 0
     ) {
 
-
-      albumStatus.textContent =
-        "No memories yet ♡";
-
+      galleryGrid.innerHTML =
+        '<div class="gallery-empty">No memories yet ♡</div>';
 
       return;
 
     }
 
 
-    albumStatus.textContent =
-      galleryPhotos.length +
-      " memories ♡";
-
-
     galleryPhotos.forEach(
-      function(
-        photo,
-        index
-      ) {
+      function(photo, index) {
+
+        const item =
+          document.createElement("div");
+
+
+        item.className =
+          "gallery-item";
 
 
         const image =
-          document.createElement(
-            "img"
-          );
+          document.createElement("img");
 
 
         image.src =
           photo.url;
 
 
-        image.alt =
-          "Wedding memory";
-
-
         image.loading =
           "lazy";
-
-
-        image.draggable =
-          false;
 
 
         image.addEventListener(
           "click",
           function() {
 
-
-            openPhotoViewer(
-              index
-            );
-
+            openViewer(index);
 
           }
         );
 
 
-        albumGrid.appendChild(
+        item.appendChild(
           image
         );
 
+
+        /*
+          SHOW NAME
+        */
+
+        if (photo.name) {
+
+          const name =
+            document.createElement(
+              "div"
+            );
+
+
+          name.className =
+            "guest-name";
+
+
+          name.textContent =
+            photo.name;
+
+
+          item.appendChild(
+            name
+          );
+
+        }
+
+
+        /*
+          SHOW MESSAGE
+        */
+
+        if (photo.message) {
+
+          const message =
+            document.createElement(
+              "div"
+            );
+
+
+          message.className =
+            "guest-message";
+
+
+          message.textContent =
+            "“" +
+            photo.message +
+            "”";
+
+
+          item.appendChild(
+            message
+          );
+
+        }
+
+
+        galleryGrid.appendChild(
+          item
+        );
 
       }
     );
@@ -2083,209 +2255,167 @@ async function loadAlbum() {
 
   } catch (error) {
 
-
-    console.error(
-      error
-    );
+    console.error(error);
 
 
-    albumStatus.textContent =
-      "Unable to load album.";
-
+    galleryGrid.innerHTML =
+      '<div class="gallery-empty">Unable to load gallery ♡</div>';
 
   }
 
 }
 
 
+/* =========================================
+   VIEW GALLERY
+========================================= */
 
-/* =========================
-   OPEN FULLSCREEN PHOTO
-========================= */
 
-function openPhotoViewer(
-  index
-) {
+viewGallery.addEventListener(
+  "click",
+  async function() {
 
+    cameraScreen.style.display =
+      "none";
+
+    messageBox.style.display =
+      "none";
+
+    galleryScreen.style.display =
+      "flex";
+
+
+    await loadGallery();
+
+  }
+);
+
+
+/* =========================================
+   BACK TO CAMERA
+========================================= */
+
+
+backCamera.addEventListener(
+  "click",
+  async function() {
+
+    galleryScreen.style.display =
+      "none";
+
+    cameraScreen.style.display =
+      "flex";
+
+
+    await startCamera();
+
+  }
+);
+
+
+/* =========================================
+   FULLSCREEN VIEWER
+========================================= */
+
+
+function openViewer(index) {
 
   if (
-    galleryPhotos.length ===
-    0
-  )
-    return;
+    !galleryPhotos[index]
+  ) return;
 
 
-  currentPhotoIndex =
+  currentViewerIndex =
     index;
 
 
-  updateViewer();
-
-
-  photoViewer.classList.add(
-    "active"
-  );
-
-
-  document.body.style.overflow =
-    "hidden";
-
-}
-
-
-
-/* =========================
-   UPDATE VIEWER
-========================= */
-
-function updateViewer() {
-
-
-  const photo =
-    galleryPhotos[
-      currentPhotoIndex
-    ];
-
-
-  if (!photo)
-    return;
-
-
   viewerImage.src =
-    photo.url;
+    galleryPhotos[index].url;
 
 
-  if (
-    galleryPhotos.length <=
-    1
-  ) {
-
-
-    previousPhoto.style.display =
-      "none";
-
-
-    nextPhoto.style.display =
-      "none";
-
-
-  } else {
-
-
-    previousPhoto.style.display =
-      "block";
-
-
-    nextPhoto.style.display =
-      "block";
-
-  }
+  viewer.style.display =
+    "flex";
 
 }
 
 
+function closeViewer() {
 
-/* =========================
-   CLOSE VIEWER
-========================= */
-
-function closePhotoViewer() {
-
-
-  photoViewer.classList.remove(
-    "active"
-  );
-
-
-  document.body.style.overflow =
-    "";
-
-
-  viewerImage.src =
-    "";
+  viewer.style.display =
+    "none";
 
 }
 
 
-closeViewer.addEventListener(
-  "click",
-  closePhotoViewer
-);
-
-
-
-/* =========================
-   NEXT PHOTO
-========================= */
-
-function showNextPhoto() {
-
+function showPrevious() {
 
   if (
-    galleryPhotos.length <=
-    1
-  )
-    return;
+    galleryPhotos.length === 0
+  ) return;
 
 
-  currentPhotoIndex =
+  currentViewerIndex =
     (
-      currentPhotoIndex +
-      1
-    ) %
-    galleryPhotos.length;
-
-
-  updateViewer();
-
-}
-
-
-nextPhoto.addEventListener(
-  "click",
-  showNextPhoto
-);
-
-
-
-/* =========================
-   PREVIOUS PHOTO
-========================= */
-
-function showPreviousPhoto() {
-
-
-  if (
-    galleryPhotos.length <=
-    1
-  )
-    return;
-
-
-  currentPhotoIndex =
-    (
-      currentPhotoIndex -
+      currentViewerIndex -
       1 +
       galleryPhotos.length
     ) %
     galleryPhotos.length;
 
 
-  updateViewer();
+  viewerImage.src =
+    galleryPhotos[
+      currentViewerIndex
+    ].url;
 
 }
 
 
-previousPhoto.addEventListener(
+function showNext() {
+
+  if (
+    galleryPhotos.length === 0
+  ) return;
+
+
+  currentViewerIndex =
+    (
+      currentViewerIndex +
+      1
+    ) %
+    galleryPhotos.length;
+
+
+  viewerImage.src =
+    galleryPhotos[
+      currentViewerIndex
+    ].url;
+
+}
+
+
+viewerClose.addEventListener(
   "click",
-  showPreviousPhoto
+  closeViewer
 );
 
 
+viewerPrev.addEventListener(
+  "click",
+  showPrevious
+);
 
-/* =========================
+
+viewerNext.addEventListener(
+  "click",
+  showNext
+);
+
+
+/* =========================================
    SWIPE
-========================= */
+========================================= */
+
 
 let touchStartX =
   0;
@@ -2295,31 +2425,23 @@ let touchEndX =
   0;
 
 
-photoViewer.addEventListener(
+viewer.addEventListener(
   "touchstart",
   function(event) {
 
-
     touchStartX =
-      event.changedTouches[0]
-        .screenX;
+      event.changedTouches[0].screenX;
 
-
-  },
-  {
-    passive: true
   }
 );
 
 
-photoViewer.addEventListener(
+viewer.addEventListener(
   "touchend",
   function(event) {
 
-
     touchEndX =
-      event.changedTouches[0]
-        .screenX;
+      event.changedTouches[0].screenX;
 
 
     const difference =
@@ -2328,155 +2450,48 @@ photoViewer.addEventListener(
 
 
     if (
-      Math.abs(
-        difference
-      ) < 50
-    )
-      return;
+      Math.abs(difference) < 50
+    ) return;
 
 
-    if (
-      difference < 0
-    ) {
+    if (difference > 0) {
 
-
-      showNextPhoto();
-
+      showPrevious();
 
     } else {
 
-
-      showPreviousPhoto();
+      showNext();
 
     }
 
-
-  },
-  {
-    passive: true
   }
 );
 
 
+/* =========================================
+   CLOSE VIEWER WHEN BACKGROUND CLICKED
+========================================= */
 
-/* =========================
-   KEYBOARD
-========================= */
 
-document.addEventListener(
-  "keydown",
+viewer.addEventListener(
+  "click",
   function(event) {
 
-
     if (
-      !photoViewer.classList.contains(
-        "active"
-      )
-    )
-      return;
-
-
-    if (
-      event.key ===
-      "Escape"
+      event.target === viewer
     ) {
 
-
-      closePhotoViewer();
+      closeViewer();
 
     }
 
-
-    if (
-      event.key ===
-      "ArrowRight"
-    ) {
-
-
-      showNextPhoto();
-
-    }
-
-
-    if (
-      event.key ===
-      "ArrowLeft"
-    ) {
-
-
-      showPreviousPhoto();
-
-    }
-
-
   }
 );
-
-
-
-/* =========================
-   VIEW GALLERY
-========================= */
-
-albumButton.addEventListener(
-  "click",
-  async function() {
-
-
-    album.style.display =
-      "block";
-
-
-    albumButton.style.display =
-      "none";
-
-
-    await loadAlbum();
-
-
-    album.scrollIntoView({
-      behavior:
-        "smooth"
-    });
-
-
-  }
-);
-
-
-
-/* =========================
-   BACK TO CAMERA
-========================= */
-
-backCamera.addEventListener(
-  "click",
-  function() {
-
-
-    album.style.display =
-      "none";
-
-
-    albumButton.style.display =
-      "inline-block";
-
-
-    window.scrollTo({
-
-      top: 0,
-
-      behavior:
-        "smooth"
-
-    });
-
-
-  }
-);
-
 
 </script>
 
+</body>
+
+</html>
 </body>
 </html></html></html></html></html></html></html></html></html></html>
