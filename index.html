@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -366,8 +365,9 @@ button:disabled {
 }
 
 
-#galleryInput,
-#videoGalleryInput {
+/* ONE MEDIA INPUT */
+
+#mediaGalleryInput {
 
   display: none;
 
@@ -932,7 +932,7 @@ textarea:focus {
     </button>
 
 
-    <!-- PHOTO CONTROLS -->
+    <!-- PHOTO RETAKE -->
 
     <button
       id="retake"
@@ -950,15 +950,10 @@ textarea:focus {
     </button>
 
 
-    <button id="galleryButton">
-      UPLOAD FROM GALLERY ♡
-    </button>
+    <!-- ONE BUTTON FOR PHOTO + VIDEO -->
 
-
-    <!-- VIDEO GALLERY -->
-
-    <button id="videoGalleryButton">
-      UPLOAD VIDEO FROM GALLERY ♡
+    <button id="mediaGalleryButton">
+      UPLOAD PHOTO &amp; VIDEO ♡
     </button>
 
 
@@ -969,17 +964,12 @@ textarea:focus {
   </div>
 
 
-  <input
-    type="file"
-    id="galleryInput"
-    accept="image/*"
-  >
-
+  <!-- ONE INPUT ONLY -->
 
   <input
     type="file"
-    id="videoGalleryInput"
-    accept="video/*"
+    id="mediaGalleryInput"
+    accept="image/*,video/*"
   >
 
 </section>
@@ -1216,17 +1206,15 @@ const retake =
 const keep =
   document.getElementById("keep");
 
-const galleryButton =
-  document.getElementById("galleryButton");
+const mediaGalleryButton =
+  document.getElementById(
+    "mediaGalleryButton"
+  );
 
-const videoGalleryButton =
-  document.getElementById("videoGalleryButton");
-
-const galleryInput =
-  document.getElementById("galleryInput");
-
-const videoGalleryInput =
-  document.getElementById("videoGalleryInput");
+const mediaGalleryInput =
+  document.getElementById(
+    "mediaGalleryInput"
+  );
 
 const viewGallery =
   document.getElementById("viewGallery");
@@ -1241,49 +1229,75 @@ const flash =
   document.getElementById("flash");
 
 const recordingTimer =
-  document.getElementById("recordingTimer");
+  document.getElementById(
+    "recordingTimer"
+  );
 
 const messagePreview =
-  document.getElementById("messagePreview");
+  document.getElementById(
+    "messagePreview"
+  );
 
 const messageVideoPreview =
-  document.getElementById("messageVideoPreview");
+  document.getElementById(
+    "messageVideoPreview"
+  );
 
 const guestName =
   document.getElementById("guestName");
 
 const guestMessage =
-  document.getElementById("guestMessage");
+  document.getElementById(
+    "guestMessage"
+  );
 
 const sendMessage =
-  document.getElementById("sendMessage");
+  document.getElementById(
+    "sendMessage"
+  );
 
 const skipMessage =
-  document.getElementById("skipMessage");
+  document.getElementById(
+    "skipMessage"
+  );
 
 const errorMessage =
-  document.getElementById("errorMessage");
+  document.getElementById(
+    "errorMessage"
+  );
 
 const galleryGrid =
-  document.getElementById("galleryGrid");
+  document.getElementById(
+    "galleryGrid"
+  );
 
 const viewer =
   document.getElementById("viewer");
 
 const viewerImage =
-  document.getElementById("viewerImage");
+  document.getElementById(
+    "viewerImage"
+  );
 
 const viewerVideo =
-  document.getElementById("viewerVideo");
+  document.getElementById(
+    "viewerVideo"
+  );
 
 const viewerClose =
-  document.getElementById("viewerClose");
+  document.getElementById(
+    "viewerClose"
+  );
 
 const viewerPrev =
-  document.getElementById("viewerPrev");
+  document.getElementById(
+    "viewerPrev"
+  );
 
 const viewerNext =
-  document.getElementById("viewerNext");
+  document.getElementById(
+    "viewerNext"
+  );
 
 
 /* =========================================
@@ -1422,7 +1436,6 @@ async function startCamera() {
 
   await loadArabicFont();
 
-
   stopRecordingStream();
 
 
@@ -1491,10 +1504,7 @@ async function startCamera() {
     keep.style.display =
       "none";
 
-    galleryButton.style.display =
-      "inline-block";
-
-    videoGalleryButton.style.display =
+    mediaGalleryButton.style.display =
       "inline-block";
 
 
@@ -1724,10 +1734,7 @@ snap.addEventListener(
     recordVideo.style.display =
       "none";
 
-    galleryButton.style.display =
-      "none";
-
-    videoGalleryButton.style.display =
+    mediaGalleryButton.style.display =
       "none";
 
 
@@ -1750,21 +1757,26 @@ snap.addEventListener(
 
 
 /* =========================================
-   PHOTO GALLERY INPUT
+   ONE PHOTO + VIDEO GALLERY BUTTON
 ========================================= */
 
 
-galleryButton.addEventListener(
+mediaGalleryButton.addEventListener(
   "click",
   function() {
 
-    galleryInput.click();
+    mediaGalleryInput.click();
 
   }
 );
 
 
-galleryInput.addEventListener(
+/* =========================================
+   MEDIA GALLERY INPUT
+========================================= */
+
+
+mediaGalleryInput.addEventListener(
   "change",
   async function(event) {
 
@@ -1774,96 +1786,298 @@ galleryInput.addEventListener(
     if (!file) return;
 
 
-    await loadArabicFont();
+    /*
+      PHOTO
+    */
+
+    if (
+      file.type.startsWith(
+        "image/"
+      )
+    ) {
+
+      await loadArabicFont();
 
 
-    const reader =
-      new FileReader();
+      const reader =
+        new FileReader();
 
 
-    reader.onload =
-      function(e) {
+      reader.onload =
+        function(e) {
 
-        const image =
-          new Image();
-
-
-        image.onload =
-          function() {
-
-            canvas.width =
-              image.naturalWidth;
-
-            canvas.height =
-              image.naturalHeight;
+          const image =
+            new Image();
 
 
-            const context =
-              canvas.getContext("2d");
+          image.onload =
+            function() {
+
+              canvas.width =
+                image.naturalWidth;
+
+              canvas.height =
+                image.naturalHeight;
 
 
-            context.drawImage(
-              image,
-              0,
-              0,
-              canvas.width,
-              canvas.height
+              const context =
+                canvas.getContext(
+                  "2d"
+                );
+
+
+              context.drawImage(
+                image,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+              );
+
+
+              addWeddingStamp(
+                context
+              );
+
+
+              video.style.display =
+                "none";
+
+              canvas.style.display =
+                "block";
+
+              recordingPreview.style.display =
+                "none";
+
+
+              snap.style.display =
+                "none";
+
+              flip.style.display =
+                "none";
+
+              recordVideo.style.display =
+                "none";
+
+              mediaGalleryButton.style.display =
+                "none";
+
+
+              retake.style.display =
+                "inline-block";
+
+              keep.style.display =
+                "inline-block";
+
+
+              status.textContent =
+                "READY TO UPLOAD ♡";
+
+
+              currentMediaType =
+                "image";
+
+            };
+
+
+          image.src =
+            e.target.result;
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+
+      mediaGalleryInput.value =
+        "";
+
+      return;
+
+    }
+
+
+    /*
+      VIDEO
+    */
+
+    if (
+      file.type.startsWith(
+        "video/"
+      )
+    ) {
+
+      status.textContent =
+        "CHECKING VIDEO... ♡";
+
+
+      if (
+        file.size >
+        MAX_VIDEO_SIZE
+      ) {
+
+        status.textContent =
+          "Video is too large. Maximum 50 MB ♡";
+
+        mediaGalleryInput.value =
+          "";
+
+        return;
+
+      }
+
+
+      const objectUrl =
+        URL.createObjectURL(
+          file
+        );
+
+
+      const checker =
+        document.createElement(
+          "video"
+        );
+
+
+      checker.preload =
+        "metadata";
+
+      checker.src =
+        objectUrl;
+
+
+      checker.onloadedmetadata =
+        function() {
+
+          const duration =
+            checker.duration;
+
+
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+
+          if (
+            !isFinite(duration)
+          ) {
+
+            status.textContent =
+              "Unable to read video length ♡";
+
+            mediaGalleryInput.value =
+              "";
+
+            return;
+
+          }
+
+
+          if (
+            duration >
+            MAX_VIDEO_SECONDS + 0.05
+          ) {
+
+            status.textContent =
+              "Video is longer than 10 seconds ♡";
+
+            mediaGalleryInput.value =
+              "";
+
+            return;
+
+          }
+
+
+          recordedBlob =
+            file;
+
+
+          currentVideoUrl =
+            URL.createObjectURL(
+              recordedBlob
             );
 
 
-            addWeddingStamp(context);
+          recordingPreview.src =
+            currentVideoUrl;
 
 
-            video.style.display =
-              "none";
+          video.style.display =
+            "none";
 
-            canvas.style.display =
-              "block";
+          canvas.style.display =
+            "none";
 
-
-            snap.style.display =
-              "none";
-
-            flip.style.display =
-              "none";
-
-            recordVideo.style.display =
-              "none";
-
-            galleryButton.style.display =
-              "none";
-
-            videoGalleryButton.style.display =
-              "none";
+          recordingPreview.style.display =
+            "block";
 
 
-            retake.style.display =
-              "inline-block";
+          snap.style.display =
+            "none";
 
-            keep.style.display =
-              "inline-block";
+          flip.style.display =
+            "none";
 
+          recordVideo.style.display =
+            "none";
 
-            status.textContent =
-              "READY TO UPLOAD ♡";
+          stopRecording.style.display =
+            "none";
 
-
-            currentMediaType =
-              "image";
-
-          };
-
-
-        image.src =
-          e.target.result;
-
-      };
+          mediaGalleryButton.style.display =
+            "none";
 
 
-    reader.readAsDataURL(file);
+          keepVideo.style.display =
+            "inline-block";
 
 
-    galleryInput.value =
+          recordingTimer.textContent =
+            "00:" +
+            String(
+              Math.floor(duration)
+            ).padStart(
+              2,
+              "0"
+            );
+
+
+          status.textContent =
+            "VIDEO READY ♡";
+
+
+          currentMediaType =
+            "video";
+
+        };
+
+
+      checker.onerror =
+        function() {
+
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+          status.textContent =
+            "Unable to read this video ♡";
+
+        };
+
+
+      mediaGalleryInput.value =
+        "";
+
+      return;
+
+    }
+
+
+    status.textContent =
+      "Please choose a photo or video ♡";
+
+    mediaGalleryInput.value =
       "";
 
   }
@@ -1895,8 +2109,11 @@ function getSupportedMimeType() {
   ) {
 
     if (
+      window.MediaRecorder &&
       MediaRecorder.isTypeSupported &&
-      MediaRecorder.isTypeSupported(type)
+      MediaRecorder.isTypeSupported(
+        type
+      )
     ) {
 
       return type;
@@ -1949,6 +2166,12 @@ recordVideo.addEventListener(
 
           },
 
+          /*
+            AUDIO = TRUE
+            This records the microphone
+            together with the video.
+          */
+
           audio: true
 
         });
@@ -1987,7 +2210,6 @@ recordVideo.addEventListener(
 
       recordedChunks =
         [];
-
 
       recordedBlob =
         null;
@@ -2105,10 +2327,7 @@ recordVideo.addEventListener(
           recordVideo.style.display =
             "none";
 
-          galleryButton.style.display =
-            "none";
-
-          videoGalleryButton.style.display =
+          mediaGalleryButton.style.display =
             "none";
 
           stopRecording.style.display =
@@ -2120,6 +2339,7 @@ recordVideo.addEventListener(
 
           status.textContent =
             "VIDEO READY ♡";
+
 
           recordingTimer.textContent =
             "00:10 MAX";
@@ -2149,10 +2369,7 @@ recordVideo.addEventListener(
       flip.style.display =
         "none";
 
-      galleryButton.style.display =
-        "none";
-
-      videoGalleryButton.style.display =
+      mediaGalleryButton.style.display =
         "none";
 
       stopRecording.style.display =
@@ -2299,214 +2516,6 @@ function stopRecordingStream() {
   }
 
 }
-
-
-/* =========================================
-   VIDEO GALLERY INPUT
-========================================= */
-
-
-videoGalleryButton.addEventListener(
-  "click",
-  function() {
-
-    videoGalleryInput.click();
-
-  }
-);
-
-
-videoGalleryInput.addEventListener(
-  "change",
-  async function(event) {
-
-    const file =
-      event.target.files[0];
-
-    if (!file) return;
-
-
-    status.textContent =
-      "CHECKING VIDEO... ♡";
-
-
-    if (
-      !file.type.startsWith(
-        "video/"
-      )
-    ) {
-
-      status.textContent =
-        "Please choose a video file ♡";
-
-      videoGalleryInput.value =
-        "";
-
-      return;
-
-    }
-
-
-    if (
-      file.size >
-      MAX_VIDEO_SIZE
-    ) {
-
-      status.textContent =
-        "Video is too large. Maximum 50 MB ♡";
-
-      videoGalleryInput.value =
-        "";
-
-      return;
-
-    }
-
-
-    const objectUrl =
-      URL.createObjectURL(file);
-
-
-    const checker =
-      document.createElement(
-        "video"
-      );
-
-
-    checker.preload =
-      "metadata";
-
-
-    checker.src =
-      objectUrl;
-
-
-    checker.onloadedmetadata =
-      function() {
-
-        const duration =
-          checker.duration;
-
-
-        URL.revokeObjectURL(
-          objectUrl
-        );
-
-
-        if (
-          !isFinite(duration)
-        ) {
-
-          status.textContent =
-            "Unable to read video length ♡";
-
-          videoGalleryInput.value =
-            "";
-
-          return;
-
-        }
-
-
-        if (
-          duration >
-          MAX_VIDEO_SECONDS + 0.05
-        ) {
-
-          status.textContent =
-            "Video is longer than 10 seconds ♡";
-
-          videoGalleryInput.value =
-            "";
-
-          return;
-
-        }
-
-
-        recordedBlob =
-          file;
-
-        currentVideoUrl =
-          URL.createObjectURL(
-            recordedBlob
-          );
-
-
-        recordingPreview.src =
-          currentVideoUrl;
-
-
-        video.style.display =
-          "none";
-
-        canvas.style.display =
-          "none";
-
-        recordingPreview.style.display =
-          "block";
-
-
-        snap.style.display =
-          "none";
-
-        flip.style.display =
-          "none";
-
-        recordVideo.style.display =
-          "none";
-
-        stopRecording.style.display =
-          "none";
-
-        keepVideo.style.display =
-          "inline-block";
-
-        galleryButton.style.display =
-          "none";
-
-        videoGalleryButton.style.display =
-          "none";
-
-
-        recordingTimer.textContent =
-          "00:" +
-          String(
-            Math.floor(duration)
-          ).padStart(
-            2,
-            "0"
-          );
-
-
-        status.textContent =
-          "VIDEO READY ♡";
-
-
-        currentMediaType =
-          "video";
-
-      };
-
-
-    checker.onerror =
-      function() {
-
-        URL.revokeObjectURL(
-          objectUrl
-        );
-
-        status.textContent =
-          "Unable to read this video ♡";
-
-      };
-
-
-    videoGalleryInput.value =
-      "";
-
-  }
-);
 
 
 /* =========================================
@@ -2713,7 +2722,7 @@ keep.addEventListener(
     retake.disabled =
       true;
 
-    galleryButton.style.display =
+    mediaGalleryButton.style.display =
       "none";
 
 
@@ -2819,7 +2828,7 @@ keep.addEventListener(
       status.textContent =
         "UPLOAD FAILED ♡";
 
-      galleryButton.style.display =
+      mediaGalleryButton.style.display =
         "inline-block";
 
     }
@@ -3092,6 +3101,10 @@ async function loadGallery() {
           "gallery-item";
 
 
+        /*
+          VIDEO
+        */
+
         if (
           photo.type === "video"
         ) {
@@ -3149,7 +3162,14 @@ async function loadGallery() {
           );
 
 
-        } else {
+        }
+
+
+        /*
+          PHOTO
+        */
+
+        else {
 
           const image =
             document.createElement(
@@ -3182,6 +3202,10 @@ async function loadGallery() {
         }
 
 
+        /*
+          NAME
+        */
+
         if (photo.name) {
 
           const name =
@@ -3204,6 +3228,10 @@ async function loadGallery() {
 
         }
 
+
+        /*
+          MESSAGE
+        */
 
         if (photo.message) {
 
@@ -3509,4 +3537,5 @@ viewer.addEventListener(
 
 </body>
 
+</html>
 </html></html></html></html></html></html></html></html></html></html></html>
