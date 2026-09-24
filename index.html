@@ -217,7 +217,7 @@ button:disabled {
 }
 
 
-/* ONE MEDIA INPUT */
+/* MEDIA INPUT */
 
 #mediaGalleryInput {
   display: none;
@@ -337,20 +337,15 @@ textarea:focus {
 }
 
 .gallery-item img,
-.gallery-item video,
 .gallery-video-frame {
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
   display: block;
 }
 
 .gallery-item img {
+  object-fit: cover;
   cursor: pointer;
-}
-
-.gallery-item video {
-  background: #222;
 }
 
 .gallery-video-frame {
@@ -398,18 +393,19 @@ textarea:focus {
   justify-content: center;
 }
 
-#viewerImage,
-#viewerVideo {
+#viewerImage {
   max-width: 92vw;
   max-height: 88vh;
   object-fit: contain;
 }
 
 #viewerVideo {
-  width: 92vw;
-  height: 80vh;
-  border: none;
   display: none;
+  width: 92vw;
+  height: 82vh;
+  max-width: 92vw;
+  max-height: 88vh;
+  border: none;
 }
 
 .viewer-close {
@@ -1083,7 +1079,20 @@ async function startCamera() {
           facingMode:
             usingFrontCamera
               ? "user"
-              : "environment"
+              : "environment",
+
+          width: {
+            ideal: 1920
+          },
+
+          height: {
+            ideal: 1080
+          },
+
+          frameRate: {
+            ideal: 30,
+            max: 30
+          }
 
         },
 
@@ -1697,11 +1706,32 @@ recordVideo.addEventListener(
             facingMode:
               usingFrontCamera
                 ? "user"
-                : "environment"
+                : "environment",
+
+            width: {
+              ideal: 1920
+            },
+
+            height: {
+              ideal: 1080
+            },
+
+            frameRate: {
+              ideal: 30,
+              max: 30
+            }
 
           },
 
-          audio: true
+          audio: {
+
+            echoCancellation: true,
+
+            noiseSuppression: true,
+
+            autoGainControl: true
+
+          }
 
         });
 
@@ -1729,6 +1759,11 @@ recordVideo.addEventListener(
 
       }
 
+
+      /* =========================================
+         HIGH QUALITY VIDEO
+      ========================================= */
+
       const mimeType =
         getSupportedMimeType();
 
@@ -1738,34 +1773,45 @@ recordVideo.addEventListener(
       recordedBlob =
         null;
 
-      const options =
-        mimeType
-          ? {
-              mimeType:
-                mimeType,
+      let options = {
 
-              videoBitsPerSecond:
-                1500000,
+        videoBitsPerSecond:
+          6000000,
 
-              audioBitsPerSecond:
-                96000
-            }
+        audioBitsPerSecond:
+          128000
 
-          : {
+      };
 
-              videoBitsPerSecond:
-                1500000,
+      if (mimeType) {
 
-              audioBitsPerSecond:
-                96000
+        options.mimeType =
+          mimeType;
 
-            };
+      }
 
-      mediaRecorder =
-        new MediaRecorder(
-          recordingStream,
-          options
+      try {
+
+        mediaRecorder =
+          new MediaRecorder(
+            recordingStream,
+            options
+          );
+
+      } catch (error) {
+
+        console.log(
+          "High quality recorder fallback:",
+          error
         );
+
+        mediaRecorder =
+          new MediaRecorder(
+            recordingStream
+          );
+
+      }
+
 
       mediaRecorder.ondataavailable =
         function(event) {
@@ -1782,6 +1828,7 @@ recordVideo.addEventListener(
           }
 
         };
+
 
       mediaRecorder.onstop =
         function() {
@@ -1859,6 +1906,7 @@ recordVideo.addEventListener(
             "video";
 
         };
+
 
       mediaRecorder.start(250);
 
@@ -2527,9 +2575,7 @@ async function loadGallery() {
           "gallery-item";
 
 
-        /* =========================================
-           VIDEO
-        ========================================= */
+        /* VIDEO */
 
         if (
           photo.type === "video"
@@ -2590,9 +2636,7 @@ async function loadGallery() {
         }
 
 
-        /* =========================================
-           PHOTO
-        ========================================= */
+        /* PHOTO */
 
         else {
 
@@ -2925,7 +2969,7 @@ viewer.addEventListener(
 
 
 /* =========================================
-   CLOSE VIEWER
+   CLOSE VIEWER BY BACKGROUND
 ========================================= */
 
 viewer.addEventListener(
@@ -2947,6 +2991,7 @@ viewer.addEventListener(
 
 </body>
 
+</html>
 </html>
 </html>
 </html></html></html></html></html></html></html></html></html></html></html>
