@@ -12,9 +12,6 @@
 
 <title>Our Wedding Camera</title>
 
-
-<!-- AMIRI ARABIC FONT -->
-
 <link
   rel="preconnect"
   href="https://fonts.googleapis.com"
@@ -31,298 +28,164 @@
   rel="stylesheet"
 >
 
-
 <style>
 
 * {
   box-sizing: border-box;
 }
 
-
 body {
-
   margin: 0;
-
   min-height: 100vh;
-
   background: #f7f2ea;
-
   color: #3c3028;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
+  font-family: Georgia, "Times New Roman", serif;
   text-align: center;
-
 }
-
 
 .screen {
-
   min-height: 100vh;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   padding: 28px 20px;
-
 }
-
 
 #welcome {
-
   background: #f7f2ea;
-
 }
-
 
 .date {
-
   font-size: 13px;
-
   letter-spacing: 4px;
-
   margin-bottom: 28px;
-
   color: #806f60;
-
 }
-
 
 .names {
-
   display: flex;
-
   justify-content: center;
-
   align-items: flex-end;
-
   gap: 28px;
-
   margin-bottom: 25px;
-
 }
-
 
 .name-side {
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
 }
-
 
 .arabic {
-
-  font-family:
-    "Amiri",
-    "Times New Roman",
-    serif;
-
+  font-family: "Amiri", "Times New Roman", serif;
   font-size: 46px;
-
   line-height: 1;
-
 }
-
 
 .person-name {
-
   font-size: 13px;
-
   margin-top: 7px;
-
   letter-spacing: 2px;
-
 }
-
 
 .heart {
-
   font-size: 16px;
-
   margin-bottom: 16px;
-
 }
-
 
 h1 {
-
   font-size: 28px;
-
   font-weight: normal;
-
   letter-spacing: 1px;
-
   margin: 0 0 12px;
-
 }
-
 
 .subtitle {
-
   font-size: 14px;
-
   color: #806f60;
-
   margin-bottom: 32px;
-
 }
-
 
 button {
-
   border: 1px solid #8d7967;
-
   background: transparent;
-
   color: #4b3c31;
-
   padding: 12px 22px;
-
-  font-family:
-    Georgia,
-    serif;
-
+  font-family: Georgia, serif;
   letter-spacing: 1.5px;
-
   font-size: 12px;
-
   cursor: pointer;
-
   margin: 5px;
-
 }
-
 
 button:hover {
-
-  background:
-    rgba(120,100,80,0.08);
-
+  background: rgba(120,100,80,0.08);
 }
 
-
 button:disabled {
-
   opacity: 0.5;
-
   cursor: not-allowed;
-
 }
 
 
 /* CAMERA */
 
 #cameraScreen {
-
   display: none;
-
   justify-content: flex-start;
-
   padding-top: 25px;
-
 }
-
 
 .camera-wrapper {
-
   width: 100%;
-
   max-width: 500px;
-
   position: relative;
-
 }
-
 
 #video,
 #canvas {
-
   width: 100%;
-
   max-height: 68vh;
-
   object-fit: contain;
-
   background: #222;
-
 }
 
-
 #canvas {
-
   display: none;
-
 }
 
 
 /* RECORDING PREVIEW */
 
 #recordingPreview {
-
   display: none;
-
   width: 100%;
-
   max-height: 68vh;
-
   object-fit: contain;
-
   background: #222;
-
 }
-
 
 .recording-timer {
-
   min-height: 25px;
-
   margin-top: 8px;
-
   font-size: 14px;
-
   letter-spacing: 2px;
-
   color: #9b6258;
-
 }
-
 
 #flash {
-
   position: fixed;
-
   inset: 0;
-
   background: white;
-
   opacity: 0;
-
   pointer-events: none;
-
   z-index: 999;
-
 }
-
 
 .flash-animation {
-
-  animation:
-    cameraFlash 0.35s ease;
-
+  animation: cameraFlash 0.35s ease;
 }
-
 
 @keyframes cameraFlash {
 
@@ -340,442 +203,262 @@ button:disabled {
 
 }
 
-
 .camera-buttons {
-
   margin-top: 15px;
-
   max-width: 500px;
-
 }
 
-
 #status {
-
   min-height: 20px;
-
   margin: 12px 0;
-
   font-size: 12px;
-
   letter-spacing: 1px;
-
   color: #806f60;
-
 }
 
 
 /* ONE MEDIA INPUT */
 
 #mediaGalleryInput {
-
   display: none;
-
 }
 
 
 /* MESSAGE FORM */
 
 #messageBox {
-
   display: none;
-
   width: 100%;
-
   max-width: 430px;
-
   padding: 30px 22px;
-
 }
-
 
 .message-title {
-
   font-size: 24px;
-
   font-weight: normal;
-
   margin-bottom: 8px;
-
 }
-
 
 .message-subtitle {
-
   font-size: 13px;
-
   color: #806f60;
-
   margin-bottom: 25px;
-
 }
-
 
 .message-preview {
-
   width: 100%;
-
   max-height: 250px;
-
   object-fit: contain;
-
   margin-bottom: 25px;
-
   background: #222;
-
 }
-
 
 #messageVideoPreview {
-
   display: none;
-
 }
-
 
 .field {
-
   text-align: left;
-
   margin-bottom: 17px;
-
 }
-
 
 .field label {
-
   display: block;
-
   font-size: 12px;
-
   letter-spacing: 1px;
-
   margin-bottom: 7px;
-
 }
-
 
 .required {
-
   color: #9b6258;
-
 }
-
 
 input,
 textarea {
-
   width: 100%;
-
   border: 1px solid #b9aa9c;
-
-  background:
-    rgba(255,255,255,0.45);
-
+  background: rgba(255,255,255,0.45);
   padding: 12px;
-
-  font-family:
-    Georgia,
-    serif;
-
+  font-family: Georgia, serif;
   font-size: 14px;
-
   color: #3c3028;
-
   outline: none;
-
 }
-
 
 textarea {
-
   min-height: 100px;
-
   resize: vertical;
-
 }
-
 
 input:focus,
 textarea:focus {
-
   border-color: #806f60;
-
 }
 
-
 #errorMessage {
-
   display: none;
-
   color: #9b6258;
-
   font-size: 12px;
-
   margin: 5px 0 12px;
-
 }
 
 
 /* GALLERY */
 
 #galleryScreen {
-
   display: none;
-
   justify-content: flex-start;
-
   padding-top: 35px;
-
 }
-
 
 .gallery-title {
-
   font-size: 26px;
-
   font-weight: normal;
-
   margin-bottom: 7px;
-
 }
-
 
 .gallery-subtitle {
-
   font-size: 12px;
-
   color: #806f60;
-
   margin-bottom: 25px;
-
 }
-
 
 #galleryGrid {
-
   width: 100%;
-
   max-width: 700px;
-
   display: grid;
-
-  grid-template-columns:
-    repeat(2, 1fr);
-
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-
 }
-
 
 .gallery-item {
-
   background: #eee6dc;
-
   padding: 7px;
-
 }
-
 
 .gallery-item img,
-.gallery-item video {
-
+.gallery-item video,
+.gallery-video-frame {
   width: 100%;
-
   aspect-ratio: 1 / 1;
-
   object-fit: cover;
-
   display: block;
-
-  cursor: pointer;
-
 }
 
+.gallery-item img {
+  cursor: pointer;
+}
 
 .gallery-item video {
-
   background: #222;
-
 }
 
+.gallery-video-frame {
+  border: none;
+  background: #222;
+}
 
 .video-label {
-
   font-size: 10px;
-
   letter-spacing: 1.5px;
-
   color: #806f60;
-
   margin-top: 6px;
-
 }
-
 
 .guest-name {
-
   font-size: 13px;
-
   margin-top: 9px;
-
   letter-spacing: 0.5px;
-
 }
-
 
 .guest-message {
-
   font-size: 12px;
-
   line-height: 1.5;
-
   color: #806f60;
-
   margin: 5px 2px 7px;
-
 }
 
-
 .gallery-empty {
-
   grid-column: 1 / -1;
-
   padding: 50px 20px;
-
   color: #806f60;
-
   font-size: 13px;
-
 }
 
 
 /* FULLSCREEN VIEWER */
 
 #viewer {
-
   display: none;
-
   position: fixed;
-
   inset: 0;
-
-  background:
-    rgba(20,17,14,0.96);
-
+  background: rgba(20,17,14,0.96);
   z-index: 1000;
-
   align-items: center;
-
   justify-content: center;
-
 }
-
 
 #viewerImage,
 #viewerVideo {
-
   max-width: 92vw;
-
   max-height: 88vh;
-
   object-fit: contain;
-
 }
-
 
 #viewerVideo {
-
+  width: 92vw;
+  height: 80vh;
+  border: none;
   display: none;
-
 }
-
 
 .viewer-close {
-
   position: absolute;
-
   top: 18px;
-
   right: 20px;
-
   color: white;
-
   font-size: 30px;
-
   cursor: pointer;
-
   z-index: 1002;
-
 }
-
 
 .viewer-arrow {
-
   position: absolute;
-
   top: 50%;
-
   transform: translateY(-50%);
-
   color: white;
-
   font-size: 38px;
-
   cursor: pointer;
-
   padding: 20px;
-
   z-index: 1002;
-
 }
-
 
 #viewerPrev {
-
   left: 0;
-
 }
-
 
 #viewerNext {
-
   right: 0;
-
 }
-
 
 .bingkai-mempelai {
-
   text-align: center;
-
   margin-bottom: 12px;
-
   color: #5a493a;
-
   font-family: Georgia, serif;
-
   font-size: 16px;
-
   font-style: italic;
-
   letter-spacing: 2px;
-
 }
-
 
 @media (max-width: 500px) {
 
   h1 {
-
     font-size: 24px;
-
   }
 
   #galleryGrid {
-
     gap: 7px;
-
   }
 
 }
@@ -783,7 +466,6 @@ textarea:focus {
 </style>
 
 </head>
-
 
 <body>
 
@@ -799,7 +481,6 @@ textarea:focus {
     26 · 09 · 2026
   </div>
 
-
   <div class="names">
 
     <div class="name-side">
@@ -814,11 +495,9 @@ textarea:focus {
 
     </div>
 
-
     <div class="heart">
       ♡
     </div>
-
 
     <div class="name-side">
 
@@ -834,16 +513,13 @@ textarea:focus {
 
   </div>
 
-
   <h1>
     Mari Menggamit Kenangan Bersama
   </h1>
 
-
   <div class="subtitle">
     Capture a little memory from your eyes ♡
   </div>
-
 
   <button id="openCamera">
     OPEN CAMERA
@@ -864,7 +540,6 @@ textarea:focus {
     Bingkai Mempelai
   </div>
 
-
   <div class="camera-wrapper">
 
     <video
@@ -873,9 +548,7 @@ textarea:focus {
       playsinline
     ></video>
 
-
     <canvas id="canvas"></canvas>
-
 
     <video
       id="recordingPreview"
@@ -885,36 +558,26 @@ textarea:focus {
 
   </div>
 
-
   <div
     id="recordingTimer"
     class="recording-timer"
   ></div>
 
-
   <div id="status"></div>
 
-
   <div class="camera-buttons">
-
-    <!-- PHOTO -->
 
     <button id="snap">
       TAKE PHOTO
     </button>
 
-
     <button id="flip">
       FLIP CAMERA
     </button>
 
-
-    <!-- VIDEO -->
-
     <button id="recordVideo">
       RECORD VIDEO
     </button>
-
 
     <button
       id="stopRecording"
@@ -923,16 +586,12 @@ textarea:focus {
       STOP RECORDING
     </button>
 
-
     <button
       id="keepVideo"
       style="display:none;"
     >
       UPLOAD VIDEO ♡
     </button>
-
-
-    <!-- PHOTO RETAKE -->
 
     <button
       id="retake"
@@ -941,7 +600,6 @@ textarea:focus {
       RETAKE
     </button>
 
-
     <button
       id="keep"
       style="display:none;"
@@ -949,22 +607,15 @@ textarea:focus {
       UPLOAD ♡
     </button>
 
-
-    <!-- ONE BUTTON FOR PHOTO + VIDEO -->
-
     <button id="mediaGalleryButton">
       UPLOAD PHOTO &amp; VIDEO ♡
     </button>
-
 
     <button id="viewGallery">
       VIEW GALLERY ♡
     </button>
 
   </div>
-
-
-  <!-- ONE INPUT ONLY -->
 
   <input
     type="file"
@@ -987,17 +638,14 @@ textarea:focus {
     Titipkan Sepatah Dua Kata
   </div>
 
-
   <div class="message-subtitle">
     Tinggalkan sedikit kenangan buat Faris & Mira ♡
   </div>
-
 
   <img
     id="messagePreview"
     class="message-preview"
   >
-
 
   <video
     id="messageVideoPreview"
@@ -1005,7 +653,6 @@ textarea:focus {
     controls
     playsinline
   ></video>
-
 
   <div class="field">
 
@@ -1023,7 +670,6 @@ textarea:focus {
 
   </div>
 
-
   <div class="field">
 
     <label>
@@ -1038,16 +684,13 @@ textarea:focus {
 
   </div>
 
-
   <div id="errorMessage">
     Sila masukkan nama anda ♡
   </div>
 
-
   <button id="sendMessage">
     KIRIM UCAPAN ♡
   </button>
-
 
   <button id="skipMessage">
     SKIP
@@ -1068,14 +711,11 @@ textarea:focus {
     Bingkai Kenangan
   </div>
 
-
   <div class="gallery-subtitle">
     Coretan kenangan buat selamanya ♡
   </div>
 
-
   <div id="galleryGrid"></div>
-
 
   <div>
 
@@ -1106,7 +746,6 @@ textarea:focus {
     ×
   </div>
 
-
   <div
     id="viewerPrev"
     class="viewer-arrow"
@@ -1114,18 +753,16 @@ textarea:focus {
     ‹
   </div>
 
-
   <img
     id="viewerImage"
   >
 
-
-  <video
+  <iframe
     id="viewerVideo"
-    controls
-    playsinline
-  ></video>
-
+    allow="autoplay"
+    allowfullscreen
+    frameborder="0"
+  ></iframe>
 
   <div
     id="viewerNext"
@@ -1145,10 +782,8 @@ textarea:focus {
    SETTINGS
 ========================================= */
 
-
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxYIr46zDLHnF9EDA59pMpEVZAfPxhd_gA8YZmA36KapT-FQm-YySa4vGogaWu7q6kE/exec";
-
 
 const MAX_VIDEO_SECONDS = 10;
 
@@ -1159,7 +794,6 @@ const MAX_VIDEO_SIZE =
 /* =========================================
    ELEMENTS
 ========================================= */
-
 
 const welcome =
   document.getElementById("welcome");
@@ -1304,7 +938,6 @@ const viewerNext =
    VARIABLES
 ========================================= */
 
-
 let stream = null;
 
 let recordingStream = null;
@@ -1338,7 +971,6 @@ let currentVideoUrl = null;
    ARABIC FONT
 ========================================= */
 
-
 async function loadArabicFont() {
 
   try {
@@ -1363,7 +995,6 @@ async function loadArabicFont() {
    WEDDING STAMP
 ========================================= */
 
-
 function addWeddingStamp(context) {
 
   context.save();
@@ -1378,7 +1009,6 @@ function addWeddingStamp(context) {
 
   context.shadowBlur = 3;
 
-
   context.font =
     "28px 'Amiri', serif";
 
@@ -1387,7 +1017,6 @@ function addWeddingStamp(context) {
     canvas.width - 58,
     canvas.height - 43
   );
-
 
   context.font =
     "11px Georgia, serif";
@@ -1398,7 +1027,6 @@ function addWeddingStamp(context) {
     canvas.height - 43
   );
 
-
   context.font =
     "28px 'Amiri', serif";
 
@@ -1407,7 +1035,6 @@ function addWeddingStamp(context) {
     canvas.width - 25,
     canvas.height - 43
   );
-
 
   context.font =
     "8px 'Times New Roman', serif";
@@ -1421,7 +1048,6 @@ function addWeddingStamp(context) {
     canvas.height - 24
   );
 
-
   context.restore();
 
 }
@@ -1431,13 +1057,11 @@ function addWeddingStamp(context) {
    CAMERA
 ========================================= */
 
-
 async function startCamera() {
 
   await loadArabicFont();
 
   stopRecordingStream();
-
 
   if (stream) {
 
@@ -1448,7 +1072,6 @@ async function startCamera() {
       );
 
   }
-
 
   try {
 
@@ -1468,10 +1091,8 @@ async function startCamera() {
 
       });
 
-
     video.srcObject =
       stream;
-
 
     video.style.display =
       "block";
@@ -1481,7 +1102,6 @@ async function startCamera() {
 
     recordingPreview.style.display =
       "none";
-
 
     snap.style.display =
       "inline-block";
@@ -1507,14 +1127,11 @@ async function startCamera() {
     mediaGalleryButton.style.display =
       "inline-block";
 
-
     recordingTimer.textContent =
       "";
 
-
     status.textContent =
       "";
-
 
     if (usingFrontCamera) {
 
@@ -1527,7 +1144,6 @@ async function startCamera() {
         "scaleX(1)";
 
     }
-
 
   } catch (error) {
 
@@ -1544,7 +1160,6 @@ async function startCamera() {
 /* =========================================
    OPEN CAMERA
 ========================================= */
-
 
 openCamera.addEventListener(
   "click",
@@ -1572,7 +1187,6 @@ openCamera.addEventListener(
    FLIP CAMERA
 ========================================= */
 
-
 flip.addEventListener(
   "click",
   async function() {
@@ -1589,7 +1203,6 @@ flip.addEventListener(
 /* =========================================
    SHUTTER SOUND
 ========================================= */
-
 
 function playShutterSound() {
 
@@ -1608,13 +1221,11 @@ function playShutterSound() {
     const gain =
       audioContext.createGain();
 
-
     oscillator.type =
       "square";
 
     oscillator.frequency.value =
       120;
-
 
     gain.gain.setValueAtTime(
       0.15,
@@ -1626,13 +1237,11 @@ function playShutterSound() {
       audioContext.currentTime + 0.12
     );
 
-
     oscillator.connect(gain);
 
     gain.connect(
       audioContext.destination
     );
-
 
     oscillator.start();
 
@@ -1653,26 +1262,21 @@ function playShutterSound() {
    TAKE PHOTO
 ========================================= */
 
-
 snap.addEventListener(
   "click",
   function() {
 
     playShutterSound();
 
-
     flash.classList.remove(
       "flash-animation"
     );
 
-
     void flash.offsetWidth;
-
 
     flash.classList.add(
       "flash-animation"
     );
-
 
     canvas.width =
       video.videoWidth;
@@ -1680,13 +1284,10 @@ snap.addEventListener(
     canvas.height =
       video.videoHeight;
 
-
     const context =
       canvas.getContext("2d");
 
-
     context.save();
-
 
     if (usingFrontCamera) {
 
@@ -1702,7 +1303,6 @@ snap.addEventListener(
 
     }
 
-
     context.drawImage(
       video,
       0,
@@ -1711,19 +1311,15 @@ snap.addEventListener(
       canvas.height
     );
 
-
     context.restore();
 
-
     addWeddingStamp(context);
-
 
     video.style.display =
       "none";
 
     canvas.style.display =
       "block";
-
 
     snap.style.display =
       "none";
@@ -1737,17 +1333,14 @@ snap.addEventListener(
     mediaGalleryButton.style.display =
       "none";
 
-
     retake.style.display =
       "inline-block";
 
     keep.style.display =
       "inline-block";
 
-
     status.textContent =
       "READY TO UPLOAD ♡";
-
 
     currentMediaType =
       "image";
@@ -1759,7 +1352,6 @@ snap.addEventListener(
 /* =========================================
    ONE PHOTO + VIDEO GALLERY BUTTON
 ========================================= */
-
 
 mediaGalleryButton.addEventListener(
   "click",
@@ -1775,7 +1367,6 @@ mediaGalleryButton.addEventListener(
    MEDIA GALLERY INPUT
 ========================================= */
 
-
 mediaGalleryInput.addEventListener(
   "change",
   async function(event) {
@@ -1786,29 +1377,22 @@ mediaGalleryInput.addEventListener(
     if (!file) return;
 
 
-    /*
-      PHOTO
-    */
+    /* PHOTO */
 
     if (
-      file.type.startsWith(
-        "image/"
-      )
+      file.type.startsWith("image/")
     ) {
 
       await loadArabicFont();
 
-
       const reader =
         new FileReader();
-
 
       reader.onload =
         function(e) {
 
           const image =
             new Image();
-
 
           image.onload =
             function() {
@@ -1819,12 +1403,8 @@ mediaGalleryInput.addEventListener(
               canvas.height =
                 image.naturalHeight;
 
-
               const context =
-                canvas.getContext(
-                  "2d"
-                );
-
+                canvas.getContext("2d");
 
               context.drawImage(
                 image,
@@ -1834,11 +1414,9 @@ mediaGalleryInput.addEventListener(
                 canvas.height
               );
 
-
               addWeddingStamp(
                 context
               );
-
 
               video.style.display =
                 "none";
@@ -1848,7 +1426,6 @@ mediaGalleryInput.addEventListener(
 
               recordingPreview.style.display =
                 "none";
-
 
               snap.style.display =
                 "none";
@@ -1862,32 +1439,26 @@ mediaGalleryInput.addEventListener(
               mediaGalleryButton.style.display =
                 "none";
 
-
               retake.style.display =
                 "inline-block";
 
               keep.style.display =
                 "inline-block";
 
-
               status.textContent =
                 "READY TO UPLOAD ♡";
-
 
               currentMediaType =
                 "image";
 
             };
 
-
           image.src =
             e.target.result;
 
         };
 
-
       reader.readAsDataURL(file);
-
 
       mediaGalleryInput.value =
         "";
@@ -1897,19 +1468,14 @@ mediaGalleryInput.addEventListener(
     }
 
 
-    /*
-      VIDEO
-    */
+    /* VIDEO */
 
     if (
-      file.type.startsWith(
-        "video/"
-      )
+      file.type.startsWith("video/")
     ) {
 
       status.textContent =
         "CHECKING VIDEO... ♡";
-
 
       if (
         file.size >
@@ -1926,18 +1492,11 @@ mediaGalleryInput.addEventListener(
 
       }
 
-
       const objectUrl =
-        URL.createObjectURL(
-          file
-        );
-
+        URL.createObjectURL(file);
 
       const checker =
-        document.createElement(
-          "video"
-        );
-
+        document.createElement("video");
 
       checker.preload =
         "metadata";
@@ -1945,18 +1504,15 @@ mediaGalleryInput.addEventListener(
       checker.src =
         objectUrl;
 
-
       checker.onloadedmetadata =
         function() {
 
           const duration =
             checker.duration;
 
-
           URL.revokeObjectURL(
             objectUrl
           );
-
 
           if (
             !isFinite(duration)
@@ -1971,7 +1527,6 @@ mediaGalleryInput.addEventListener(
             return;
 
           }
-
 
           if (
             duration >
@@ -1988,20 +1543,16 @@ mediaGalleryInput.addEventListener(
 
           }
 
-
           recordedBlob =
             file;
-
 
           currentVideoUrl =
             URL.createObjectURL(
               recordedBlob
             );
 
-
           recordingPreview.src =
             currentVideoUrl;
-
 
           video.style.display =
             "none";
@@ -2011,7 +1562,6 @@ mediaGalleryInput.addEventListener(
 
           recordingPreview.style.display =
             "block";
-
 
           snap.style.display =
             "none";
@@ -2028,10 +1578,8 @@ mediaGalleryInput.addEventListener(
           mediaGalleryButton.style.display =
             "none";
 
-
           keepVideo.style.display =
             "inline-block";
-
 
           recordingTimer.textContent =
             "00:" +
@@ -2042,16 +1590,13 @@ mediaGalleryInput.addEventListener(
               "0"
             );
 
-
           status.textContent =
             "VIDEO READY ♡";
-
 
           currentMediaType =
             "video";
 
         };
-
 
       checker.onerror =
         function() {
@@ -2065,14 +1610,12 @@ mediaGalleryInput.addEventListener(
 
         };
 
-
       mediaGalleryInput.value =
         "";
 
       return;
 
     }
-
 
     status.textContent =
       "Please choose a photo or video ♡";
@@ -2088,7 +1631,6 @@ mediaGalleryInput.addEventListener(
    VIDEO MIME TYPE
 ========================================= */
 
-
 function getSupportedMimeType() {
 
   const types = [
@@ -2103,7 +1645,6 @@ function getSupportedMimeType() {
 
   ];
 
-
   for (
     const type of types
   ) {
@@ -2111,9 +1652,7 @@ function getSupportedMimeType() {
     if (
       window.MediaRecorder &&
       MediaRecorder.isTypeSupported &&
-      MediaRecorder.isTypeSupported(
-        type
-      )
+      MediaRecorder.isTypeSupported(type)
     ) {
 
       return type;
@@ -2121,7 +1660,6 @@ function getSupportedMimeType() {
     }
 
   }
-
 
   return "";
 
@@ -2131,7 +1669,6 @@ function getSupportedMimeType() {
 /* =========================================
    RECORD VIDEO
 ========================================= */
-
 
 recordVideo.addEventListener(
   "click",
@@ -2148,11 +1685,9 @@ recordVideo.addEventListener(
 
     }
 
-
     try {
 
       stopRecordingStream();
-
 
       recordingStream =
         await navigator.mediaDevices.getUserMedia({
@@ -2166,20 +1701,12 @@ recordVideo.addEventListener(
 
           },
 
-          /*
-            AUDIO = TRUE
-            This records the microphone
-            together with the video.
-          */
-
           audio: true
 
         });
 
-
       video.srcObject =
         recordingStream;
-
 
       video.style.display =
         "block";
@@ -2189,7 +1716,6 @@ recordVideo.addEventListener(
 
       recordingPreview.style.display =
         "none";
-
 
       if (usingFrontCamera) {
 
@@ -2203,17 +1729,14 @@ recordVideo.addEventListener(
 
       }
 
-
       const mimeType =
         getSupportedMimeType();
-
 
       recordedChunks =
         [];
 
       recordedBlob =
         null;
-
 
       const options =
         mimeType
@@ -2238,13 +1761,11 @@ recordVideo.addEventListener(
 
             };
 
-
       mediaRecorder =
         new MediaRecorder(
           recordingStream,
           options
         );
-
 
       mediaRecorder.ondataavailable =
         function(event) {
@@ -2262,7 +1783,6 @@ recordVideo.addEventListener(
 
         };
 
-
       mediaRecorder.onstop =
         function() {
 
@@ -2270,7 +1790,6 @@ recordVideo.addEventListener(
             mediaRecorder.mimeType ||
             mimeType ||
             "video/webm";
-
 
           recordedBlob =
             new Blob(
@@ -2281,9 +1800,7 @@ recordVideo.addEventListener(
               }
             );
 
-
           stopRecordingStream();
-
 
           if (
             recordedBlob.size >
@@ -2300,23 +1817,19 @@ recordVideo.addEventListener(
 
           }
 
-
           currentVideoUrl =
             URL.createObjectURL(
               recordedBlob
             );
 
-
           recordingPreview.src =
             currentVideoUrl;
-
 
           video.style.display =
             "none";
 
           recordingPreview.style.display =
             "block";
-
 
           snap.style.display =
             "none";
@@ -2336,29 +1849,21 @@ recordVideo.addEventListener(
           keepVideo.style.display =
             "inline-block";
 
-
           status.textContent =
             "VIDEO READY ♡";
 
-
           recordingTimer.textContent =
             "00:10 MAX";
-
 
           currentMediaType =
             "video";
 
         };
 
-
-      mediaRecorder.start(
-        250
-      );
-
+      mediaRecorder.start(250);
 
       recordingSeconds =
         0;
-
 
       recordVideo.style.display =
         "none";
@@ -2378,13 +1883,10 @@ recordVideo.addEventListener(
       keepVideo.style.display =
         "none";
 
-
       status.textContent =
         "RECORDING ♡";
 
-
       updateRecordingTimer();
-
 
       recordingInterval =
         setInterval(
@@ -2392,9 +1894,7 @@ recordVideo.addEventListener(
 
             recordingSeconds++;
 
-
             updateRecordingTimer();
-
 
             if (
               recordingSeconds >=
@@ -2408,7 +1908,6 @@ recordVideo.addEventListener(
           },
           1000
         );
-
 
     } catch (error) {
 
@@ -2429,7 +1928,6 @@ recordVideo.addEventListener(
    RECORDING TIMER
 ========================================= */
 
-
 function updateRecordingTimer() {
 
   const seconds =
@@ -2437,7 +1935,6 @@ function updateRecordingTimer() {
       recordingSeconds,
       MAX_VIDEO_SECONDS
     );
-
 
   recordingTimer.textContent =
     "00:" +
@@ -2453,7 +1950,6 @@ function updateRecordingTimer() {
    STOP RECORDING
 ========================================= */
 
-
 stopRecording.addEventListener(
   "click",
   function() {
@@ -2462,7 +1958,6 @@ stopRecording.addEventListener(
 
   }
 );
-
 
 function stopVideoRecording() {
 
@@ -2479,11 +1974,9 @@ function stopVideoRecording() {
 
   }
 
-
   if (
     mediaRecorder &&
-    mediaRecorder.state !==
-      "inactive"
+    mediaRecorder.state !== "inactive"
   ) {
 
     mediaRecorder.stop();
@@ -2496,7 +1989,6 @@ function stopVideoRecording() {
 /* =========================================
    STOP RECORDING STREAM
 ========================================= */
-
 
 function stopRecordingStream() {
 
@@ -2522,7 +2014,6 @@ function stopRecordingStream() {
    UPLOAD VIDEO
 ========================================= */
 
-
 keepVideo.addEventListener(
   "click",
   async function() {
@@ -2536,24 +2027,19 @@ keepVideo.addEventListener(
 
     }
 
-
     uploadFinished =
       true;
-
 
     keepVideo.disabled =
       true;
 
-
     status.textContent =
       "SAVING VIDEO... ♡";
-
 
     try {
 
       const reader =
         new FileReader();
-
 
       const dataUrl =
         await new Promise(
@@ -2568,7 +2054,6 @@ keepVideo.addEventListener(
 
               };
 
-
             reader.onerror =
               function() {
 
@@ -2578,14 +2063,12 @@ keepVideo.addEventListener(
 
               };
 
-
             reader.readAsDataURL(
               recordedBlob
             );
 
           }
         );
-
 
       const response =
         await fetch(
@@ -2606,10 +2089,8 @@ keepVideo.addEventListener(
           }
         );
 
-
       const result =
         await response.json();
-
 
       if (
         !result.success
@@ -2622,10 +2103,8 @@ keepVideo.addEventListener(
 
       }
 
-
       currentPhotoId =
         result.id;
-
 
       messageVideoPreview.src =
         currentVideoUrl;
@@ -2636,7 +2115,6 @@ keepVideo.addEventListener(
       messagePreview.style.display =
         "none";
 
-
       guestName.value =
         "";
 
@@ -2646,29 +2124,24 @@ keepVideo.addEventListener(
       errorMessage.style.display =
         "none";
 
-
       cameraScreen.style.display =
         "none";
 
       messageBox.style.display =
         "flex";
 
-
       status.textContent =
         "SAVED ♡";
-
 
     } catch (error) {
 
       console.error(error);
-
 
       uploadFinished =
         false;
 
       keepVideo.disabled =
         false;
-
 
       status.textContent =
         "VIDEO UPLOAD FAILED ♡";
@@ -2682,7 +2155,6 @@ keepVideo.addEventListener(
 /* =========================================
    RETAKE
 ========================================= */
-
 
 retake.addEventListener(
   "click",
@@ -2704,17 +2176,14 @@ retake.addEventListener(
    UPLOAD PHOTO
 ========================================= */
 
-
 keep.addEventListener(
   "click",
   async function() {
 
     if (uploadFinished) return;
 
-
     uploadFinished =
       true;
-
 
     keep.disabled =
       true;
@@ -2725,10 +2194,8 @@ keep.addEventListener(
     mediaGalleryButton.style.display =
       "none";
 
-
     status.textContent =
       "SAVING... ♡";
-
 
     try {
 
@@ -2737,7 +2204,6 @@ keep.addEventListener(
           "image/jpeg",
           0.92
         );
-
 
       const response =
         await fetch(
@@ -2758,10 +2224,8 @@ keep.addEventListener(
           }
         );
 
-
       const result =
         await response.json();
-
 
       if (
         !result.success
@@ -2774,14 +2238,11 @@ keep.addEventListener(
 
       }
 
-
       currentPhotoId =
         result.id;
 
-
       status.textContent =
         "SAVED ♡";
-
 
       messagePreview.src =
         image;
@@ -2792,7 +2253,6 @@ keep.addEventListener(
       messageVideoPreview.style.display =
         "none";
 
-
       guestName.value =
         "";
 
@@ -2802,18 +2262,15 @@ keep.addEventListener(
       errorMessage.style.display =
         "none";
 
-
       cameraScreen.style.display =
         "none";
 
       messageBox.style.display =
         "flex";
 
-
     } catch (error) {
 
       console.error(error);
-
 
       uploadFinished =
         false;
@@ -2823,7 +2280,6 @@ keep.addEventListener(
 
       retake.disabled =
         false;
-
 
       status.textContent =
         "UPLOAD FAILED ♡";
@@ -2841,7 +2297,6 @@ keep.addEventListener(
    SEND NAME + MESSAGE
 ========================================= */
 
-
 sendMessage.addEventListener(
   "click",
   async function() {
@@ -2851,7 +2306,6 @@ sendMessage.addEventListener(
 
     const message =
       guestMessage.value.trim();
-
 
     if (!name) {
 
@@ -2864,17 +2318,14 @@ sendMessage.addEventListener(
 
     }
 
-
     errorMessage.style.display =
       "none";
-
 
     sendMessage.disabled =
       true;
 
     sendMessage.textContent =
       "SAVING... ♡";
-
 
     try {
 
@@ -2906,10 +2357,8 @@ sendMessage.addEventListener(
           }
         );
 
-
       const result =
         await response.json();
-
 
       if (
         !result.success
@@ -2922,20 +2371,17 @@ sendMessage.addEventListener(
 
       }
 
-
       messageBox.style.display =
         "none";
 
       cameraScreen.style.display =
         "flex";
 
-
       sendMessage.disabled =
         false;
 
       sendMessage.textContent =
         "KIRIM UCAPAN ♡";
-
 
       keep.disabled =
         false;
@@ -2946,7 +2392,6 @@ sendMessage.addEventListener(
       keepVideo.disabled =
         false;
 
-
       currentPhotoId =
         null;
 
@@ -2956,25 +2401,20 @@ sendMessage.addEventListener(
       recordedBlob =
         null;
 
-
       await startCamera();
-
 
       status.textContent =
         "YOUR MEMORY IS SAVED ♡";
 
-
     } catch (error) {
 
       console.error(error);
-
 
       sendMessage.disabled =
         false;
 
       sendMessage.textContent =
         "KIRIM UCAPAN ♡";
-
 
       errorMessage.textContent =
         "Something went wrong. Please try again ♡";
@@ -2992,7 +2432,6 @@ sendMessage.addEventListener(
    SKIP MESSAGE
 ========================================= */
 
-
 skipMessage.addEventListener(
   "click",
   async function() {
@@ -3003,13 +2442,11 @@ skipMessage.addEventListener(
     cameraScreen.style.display =
       "flex";
 
-
     currentPhotoId =
       null;
 
     uploadFinished =
       false;
-
 
     keep.disabled =
       false;
@@ -3020,10 +2457,8 @@ skipMessage.addEventListener(
     keepVideo.disabled =
       false;
 
-
     recordedBlob =
       null;
-
 
     await startCamera();
 
@@ -3035,12 +2470,10 @@ skipMessage.addEventListener(
    LOAD GALLERY
 ========================================= */
 
-
 async function loadGallery() {
 
   galleryGrid.innerHTML =
     '<div class="gallery-empty">Loading memories ♡</div>';
-
 
   try {
 
@@ -3051,10 +2484,8 @@ async function loadGallery() {
         Date.now()
       );
 
-
     const result =
       await response.json();
-
 
     if (
       !result.success
@@ -3067,14 +2498,11 @@ async function loadGallery() {
 
     }
 
-
     galleryPhotos =
       result.photos || [];
 
-
     galleryGrid.innerHTML =
       "";
-
 
     if (
       galleryPhotos.length === 0
@@ -3087,7 +2515,6 @@ async function loadGallery() {
 
     }
 
-
     galleryPhotos.forEach(
       function(photo, index) {
 
@@ -3096,50 +2523,52 @@ async function loadGallery() {
             "div"
           );
 
-
         item.className =
           "gallery-item";
 
 
-        /*
-          VIDEO
-        */
+        /* =========================================
+           VIDEO
+        ========================================= */
 
         if (
           photo.type === "video"
         ) {
 
-          const vid =
+          const videoFrame =
             document.createElement(
-              "video"
+              "iframe"
             );
 
+          videoFrame.className =
+            "gallery-video-frame";
 
-          vid.src =
-            photo.url;
+          videoFrame.src =
+            photo.preview ||
+            (
+              "https://drive.google.com/file/d/" +
+              photo.id +
+              "/preview"
+            );
 
-          vid.controls =
+          videoFrame.allow =
+            "autoplay";
+
+          videoFrame.allowFullscreen =
             true;
 
-          vid.playsInline =
-            true;
-
-          vid.preload =
-            "metadata";
-
-
-          vid.addEventListener(
-            "click",
-            function(event) {
-
-              event.stopPropagation();
-
-            }
+          videoFrame.setAttribute(
+            "frameborder",
+            "0"
           );
 
+          videoFrame.setAttribute(
+            "loading",
+            "lazy"
+          );
 
           item.appendChild(
-            vid
+            videoFrame
           );
 
 
@@ -3148,26 +2577,22 @@ async function loadGallery() {
               "div"
             );
 
-
           label.className =
             "video-label";
 
-
           label.textContent =
             "VIDEO ♡";
-
 
           item.appendChild(
             label
           );
 
-
         }
 
 
-        /*
-          PHOTO
-        */
+        /* =========================================
+           PHOTO
+        ========================================= */
 
         else {
 
@@ -3176,14 +2601,11 @@ async function loadGallery() {
               "img"
             );
 
-
           image.src =
             photo.url;
 
-
           image.loading =
             "lazy";
-
 
           image.addEventListener(
             "click",
@@ -3194,7 +2616,6 @@ async function loadGallery() {
             }
           );
 
-
           item.appendChild(
             image
           );
@@ -3202,25 +2623,22 @@ async function loadGallery() {
         }
 
 
-        /*
-          NAME
-        */
+        /* NAME */
 
-        if (photo.name) {
+        if (
+          photo.name
+        ) {
 
           const name =
             document.createElement(
               "div"
             );
 
-
           name.className =
             "guest-name";
 
-
           name.textContent =
             photo.name;
-
 
           item.appendChild(
             name
@@ -3229,34 +2647,30 @@ async function loadGallery() {
         }
 
 
-        /*
-          MESSAGE
-        */
+        /* MESSAGE */
 
-        if (photo.message) {
+        if (
+          photo.message
+        ) {
 
           const message =
             document.createElement(
               "div"
             );
 
-
           message.className =
             "guest-message";
-
 
           message.textContent =
             "“" +
             photo.message +
             "”";
 
-
           item.appendChild(
             message
           );
 
         }
-
 
         galleryGrid.appendChild(
           item
@@ -3270,7 +2684,6 @@ async function loadGallery() {
 
     console.error(error);
 
-
     galleryGrid.innerHTML =
       '<div class="gallery-empty">Unable to load gallery ♡</div>';
 
@@ -3282,7 +2695,6 @@ async function loadGallery() {
 /* =========================================
    VIEW GALLERY
 ========================================= */
-
 
 viewGallery.addEventListener(
   "click",
@@ -3297,7 +2709,6 @@ viewGallery.addEventListener(
     galleryScreen.style.display =
       "flex";
 
-
     await loadGallery();
 
   }
@@ -3307,7 +2718,6 @@ viewGallery.addEventListener(
 /* =========================================
    BACK TO CAMERA
 ========================================= */
-
 
 backCamera.addEventListener(
   "click",
@@ -3319,7 +2729,6 @@ backCamera.addEventListener(
     cameraScreen.style.display =
       "flex";
 
-
     await startCamera();
 
   }
@@ -3330,21 +2739,17 @@ backCamera.addEventListener(
    FULLSCREEN VIEWER
 ========================================= */
 
-
 function openViewer(index) {
 
   if (
     !galleryPhotos[index]
   ) return;
 
-
   currentViewerIndex =
     index;
 
-
   const item =
     galleryPhotos[index];
-
 
   viewerImage.style.display =
     "none";
@@ -3358,11 +2763,15 @@ function openViewer(index) {
   ) {
 
     viewerVideo.src =
-      item.url;
+      item.preview ||
+      (
+        "https://drive.google.com/file/d/" +
+        item.id +
+        "/preview"
+      );
 
     viewerVideo.style.display =
       "block";
-
 
   } else {
 
@@ -3374,16 +2783,17 @@ function openViewer(index) {
 
   }
 
-
   viewer.style.display =
     "flex";
 
 }
 
 
-function closeViewer() {
+/* =========================================
+   CLOSE VIEWER
+========================================= */
 
-  viewerVideo.pause();
+function closeViewer() {
 
   viewerVideo.src =
     "";
@@ -3394,12 +2804,15 @@ function closeViewer() {
 }
 
 
+/* =========================================
+   PREVIOUS
+========================================= */
+
 function showPrevious() {
 
   if (
     galleryPhotos.length === 0
   ) return;
-
 
   currentViewerIndex =
     (
@@ -3409,7 +2822,6 @@ function showPrevious() {
     ) %
     galleryPhotos.length;
 
-
   openViewer(
     currentViewerIndex
   );
@@ -3417,12 +2829,15 @@ function showPrevious() {
 }
 
 
+/* =========================================
+   NEXT
+========================================= */
+
 function showNext() {
 
   if (
     galleryPhotos.length === 0
   ) return;
-
 
   currentViewerIndex =
     (
@@ -3431,7 +2846,6 @@ function showNext() {
     ) %
     galleryPhotos.length;
 
-
   openViewer(
     currentViewerIndex
   );
@@ -3439,17 +2853,19 @@ function showNext() {
 }
 
 
+/* =========================================
+   VIEWER BUTTONS
+========================================= */
+
 viewerClose.addEventListener(
   "click",
   closeViewer
 );
 
-
 viewerPrev.addEventListener(
   "click",
   showPrevious
 );
-
 
 viewerNext.addEventListener(
   "click",
@@ -3461,14 +2877,11 @@ viewerNext.addEventListener(
    SWIPE
 ========================================= */
 
-
 let touchStartX =
   0;
 
-
 let touchEndX =
   0;
-
 
 viewer.addEventListener(
   "touchstart",
@@ -3480,7 +2893,6 @@ viewer.addEventListener(
   }
 );
 
-
 viewer.addEventListener(
   "touchend",
   function(event) {
@@ -3488,18 +2900,17 @@ viewer.addEventListener(
     touchEndX =
       event.changedTouches[0].screenX;
 
-
     const difference =
       touchEndX -
       touchStartX;
-
 
     if (
       Math.abs(difference) < 50
     ) return;
 
-
-    if (difference > 0) {
+    if (
+      difference > 0
+    ) {
 
       showPrevious();
 
@@ -3516,7 +2927,6 @@ viewer.addEventListener(
 /* =========================================
    CLOSE VIEWER
 ========================================= */
-
 
 viewer.addEventListener(
   "click",
@@ -3537,5 +2947,6 @@ viewer.addEventListener(
 
 </body>
 
+</html>
 </html>
 </html></html></html></html></html></html></html></html></html></html></html>
